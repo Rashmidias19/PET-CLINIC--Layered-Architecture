@@ -3,6 +3,7 @@ package Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -27,6 +28,8 @@ public class LoginFormController {
             stage.setTitle("Item Form");
             stage.centerOnScreen();
             stage.show();
+        }else{
+            new Alert(Alert.AlertType.ERROR, "Not a existing user!").show();
         }
     }
 
