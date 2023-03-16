@@ -12,9 +12,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginFormController">
+<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginFormController">
    <children>
-      <ImageView fx:id="loginPane" fitHeight="525.0" fitWidth="776.0">
+      <ImageView fitHeight="525.0" fitWidth="776.0">
          <image>
             <Image url="@hero.jpg" />
          </image>
@@ -52,7 +52,7 @@
             </Label>
             <Button fx:id="btnLogin" layoutX="112.0" layoutY="295.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="32.0" prefWidth="101.0" style="-fx-background-color: black;" text="Login">
                <cursor>
-                  <Cursor fx:constant="NW_RESIZE" />
+                  <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
             <TextField fx:id="txtUserName" layoutX="23.0" layoutY="148.0" prefHeight="26.0" prefWidth="275.0" />
