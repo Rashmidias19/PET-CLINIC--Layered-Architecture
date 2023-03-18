@@ -7,10 +7,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PetManagementFormController">
    <children>
-      <AnchorPane layoutX="-12.0" layoutY="-7.0" prefHeight="525.0" prefWidth="200.0" style="-fx-background-color: #00695c;">
+      <AnchorPane layoutX="-11.0" prefHeight="525.0" prefWidth="200.0" style="-fx-background-color: #00695c;">
          <children>
             <Label layoutX="23.0" layoutY="14.0" prefHeight="46.0" prefWidth="177.0" text="VETCLOUD">
                <font>

@@ -26,7 +26,7 @@
                   </RadialGradient>
                </textFill>
             </Label>
-            <Button fx:id="btnPets" layoutX="32.0" layoutY="83.0" mnemonicParsing="false" onAction="#petsbtnOnAction" prefHeight="29.0" prefWidth="74.0" style="-fx-background-color: #00695c;" text="PETS" textFill="WHITE">
+            <Button fx:id="btnPets" layoutX="41.0" layoutY="83.0" mnemonicParsing="false" onAction="#petsbtnOnAction" prefHeight="29.0" prefWidth="47.0" style="-fx-background-color: #00695c;" text="PETS" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>

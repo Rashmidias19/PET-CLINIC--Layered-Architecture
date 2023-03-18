@@ -11,6 +11,7 @@ import java.io.IOException;
 public class PetManagementFormController {
     public AnchorPane dashboardPane;
     public void petbtnOnAction(ActionEvent event) {
+
     }
 
     public void customerbtnOnAction(ActionEvent event) {
@@ -42,7 +43,12 @@ public class PetManagementFormController {
         stage.show();
     }
 
-    public void petViewbtnOnAction(ActionEvent event) {
+    public void petViewbtnOnAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetViewForm.fxml"))));
+        stage.setTitle("Item Form");
+        stage.centerOnScreen();
+        stage.show();
     }
 
     public void petUpdatebtnOnAction(ActionEvent event) {
