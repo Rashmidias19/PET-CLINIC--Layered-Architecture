@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class PetUpdateFormController {
+public class DeleteFormController {
     public AnchorPane dashboardPane;
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
@@ -39,6 +39,6 @@ public class PetUpdateFormController {
     public void logoutbtnOnAction(ActionEvent event) {
     }
 
-    public void searchbtnOnAction(ActionEvent event) {
+    public void deletebtnOnAction(ActionEvent event) {
     }
 }

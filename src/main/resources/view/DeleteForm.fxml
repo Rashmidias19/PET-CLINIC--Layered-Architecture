@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +8,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PetUpdateFormController">
+<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DeleteFormController">
    <children>
       <AnchorPane prefHeight="525.0" prefWidth="200.0" style="-fx-background-color: #00695c;">
          <children>
@@ -69,84 +67,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <Label layoutX="216.0" layoutY="126.0" prefHeight="20.0" prefWidth="47.0" text="Name :">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="216.0" layoutY="161.0" prefHeight="19.0" prefWidth="63.0" text="Species :">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <ComboBox layoutX="279.0" layoutY="158.0" prefHeight="20.0" prefWidth="131.0" />
-      <Label layoutX="216.0" layoutY="192.0" prefHeight="17.0" prefWidth="47.0" text="Breed :">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="216.0" layoutY="223.0" prefHeight="17.0" prefWidth="47.0" text="Sex :">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="216.0" layoutY="254.0" prefHeight="19.0" prefWidth="88.0" text="Date Of Birth :">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="216.0" layoutY="94.0" prefHeight="20.0" prefWidth="47.0" text="PetID :">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="216.0" layoutY="289.0" prefHeight="17.0" prefWidth="55.0" text="Color :">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="216.0" layoutY="320.0" prefHeight="19.0" prefWidth="122.0" text="Special Characters :">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="216.0" layoutY="348.0" prefHeight="19.0" prefWidth="109.0" text="Health Remarks :">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="216.0" layoutY="379.0" prefHeight="19.0" prefWidth="109.0" text="Owners' Name :">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="216.0" layoutY="406.0" prefHeight="19.0" prefWidth="109.0" text="Contact Number :">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="216.0" layoutY="436.0" prefHeight="19.0" prefWidth="47.0" text="Email :">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Button layoutX="655.0" layoutY="471.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="81.0" style="-fx-background-color: #00695c;" text="Update">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Button>
-      <DatePicker layoutX="301.0" layoutY="251.0" />
-      <TextField layoutX="279.0" layoutY="92.0" />
-      <TextField layoutX="279.0" layoutY="124.0" />
-      <TextField layoutX="279.0" layoutY="286.0" />
-      <TextField layoutX="279.0" layoutY="220.0" />
-      <TextField layoutX="279.0" layoutY="189.0" />
-      <TextField layoutX="336.0" layoutY="317.0" />
-      <TextField layoutX="325.0" layoutY="345.0" />
-      <TextField layoutX="325.0" layoutY="376.0" />
-      <TextField layoutX="325.0" layoutY="403.0" />
-      <TextField layoutX="279.0" layoutY="433.0" />
-      <Label layoutX="221.0" layoutY="31.0" prefHeight="32.0" prefWidth="100.0" style="-fx-background-color: #00695c;" text="  PET ID :">
+      <Label layoutX="264.0" layoutY="206.0" prefHeight="32.0" prefWidth="71.0" style="-fx-background-color: #00695c;" text="   ID :">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
@@ -159,8 +80,8 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <TextField layoutX="335.0" layoutY="31.0" prefHeight="32.0" prefWidth="165.0" />
-      <Button fx:id="btnSearch" layoutX="540.0" layoutY="31.0" mnemonicParsing="false" onAction="#searchbtnOnAction" prefHeight="32.0" prefWidth="88.0" style="-fx-background-color: #00695c;" text="Search">
+      <TextField layoutX="367.0" layoutY="206.0" prefHeight="32.0" prefWidth="165.0" />
+      <Button fx:id="btnDelete" layoutX="580.0" layoutY="206.0" mnemonicParsing="false" onAction="#deletebtnOnAction" prefHeight="32.0" prefWidth="88.0" style="-fx-background-color: #00695c;" text="Delete">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
