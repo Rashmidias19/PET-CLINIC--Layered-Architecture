@@ -7,7 +7,6 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DashboardFormController">
    <children>
       <AnchorPane prefHeight="525.0" prefWidth="200.0" style="-fx-background-color: #00695c;">
@@ -31,37 +30,37 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button layoutX="32.0" layoutY="144.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #00695c;" text="CUSTOMERS" textFill="WHITE">
+            <Button fx:id="btnCustomer" layoutX="32.0" layoutY="144.0" mnemonicParsing="false" onAction="#customerbtnOnAction" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #00695c;" text="CUSTOMERS" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button layoutX="32.0" layoutY="256.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #00695c;" text="EMPLOYEES" textFill="WHITE">
+            <Button fx:id="btnEmployees" layoutX="32.0" layoutY="256.0" mnemonicParsing="false" onAction="#employeebtnOnAction" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #00695c;" text="EMPLOYEES" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button layoutX="32.0" layoutY="310.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="103.0" style="-fx-background-color: #00695c;" text="SUPPLIES" textFill="WHITE">
+            <Button fx:id="btnSupplies" layoutX="32.0" layoutY="310.0" mnemonicParsing="false" onAction="#suppliesbtnOnAction" prefHeight="29.0" prefWidth="103.0" style="-fx-background-color: #00695c;" text="SUPPLIES" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button layoutX="32.0" layoutY="362.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="94.0" style="-fx-background-color: #00695c;" text="BILLING" textFill="WHITE">
+            <Button fx:id="btnBilling" layoutX="32.0" layoutY="362.0" mnemonicParsing="false" onAction="#billingbtnOnAction" prefHeight="29.0" prefWidth="94.0" style="-fx-background-color: #00695c;" text="BILLING" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button layoutX="32.0" layoutY="415.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="110.0" style="-fx-background-color: #00695c;" text="IN-HOUSE" textFill="WHITE">
+            <Button fx:id="btnInhouse" layoutX="32.0" layoutY="415.0" mnemonicParsing="false" onAction="#inhousebtnOnAction" prefHeight="29.0" prefWidth="110.0" style="-fx-background-color: #00695c;" text="IN-HOUSE" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button layoutX="32.0" layoutY="473.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="103.0" style="-fx-background-color: #00695c;" text="LOGOUT" textFill="WHITE">
+            <Button fx:id="btnLogout" layoutX="32.0" layoutY="473.0" mnemonicParsing="false" onAction="#logoutbtnOnAction" prefHeight="29.0" prefWidth="103.0" style="-fx-background-color: #00695c;" text="LOGOUT" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button layoutX="32.0" layoutY="198.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="87.0" style="-fx-background-color: #00695c;" text="USERS" textFill="WHITE">
+            <Button fx:id="btnUsers" layoutX="32.0" layoutY="198.0" mnemonicParsing="false" onAction="#usersbtnOnAction" prefHeight="29.0" prefWidth="87.0" style="-fx-background-color: #00695c;" text="USERS" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>

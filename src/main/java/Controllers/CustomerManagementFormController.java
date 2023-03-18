@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CustomerRegisterFormController {
+public class CustomerManagementFormController {
     public AnchorPane dashboardPane;
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
@@ -18,12 +18,7 @@ public class CustomerRegisterFormController {
         stage.show();
     }
 
-    public void customerbtnOnAction(ActionEvent event) throws IOException {
-        Stage stage = (Stage) dashboardPane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerManagementForm.fxml"))));
-        stage.setTitle("Item Form");
-        stage.centerOnScreen();
-        stage.show();
+    public void customerbtnOnAction(ActionEvent event) {
     }
 
     public void usersbtnOnAction(ActionEvent event) {
@@ -44,6 +39,20 @@ public class CustomerRegisterFormController {
     public void logoutbtnOnAction(ActionEvent event) {
     }
 
-    public void savebtnOnAction(ActionEvent event) {
+    public void customerRegisterbtnOnAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerRegisterForm.fxml"))));
+        stage.setTitle("Item Form");
+        stage.centerOnScreen();
+        stage.show();
+    }
+
+    public void customerViewbtnOnAction(ActionEvent event) {
+    }
+
+    public void customerUpdatebtnOnAction(ActionEvent event) {
+    }
+
+    public void petDeletebtnOnAction(ActionEvent event) {
     }
 }

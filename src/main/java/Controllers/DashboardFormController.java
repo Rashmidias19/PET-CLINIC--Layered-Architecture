@@ -20,7 +20,12 @@ public class DashboardFormController {
         stage.show();
     }
 
-    public void customerbtnOnAction(ActionEvent event) {
+    public void customerbtnOnAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerManagementForm.fxml"))));
+        stage.setTitle("Item Form");
+        stage.centerOnScreen();
+        stage.show();
     }
 
     public void usersbtnOnAction(ActionEvent event) {
@@ -39,5 +44,8 @@ public class DashboardFormController {
     }
 
     public void logoutbtnOnAction(ActionEvent event) {
+    }
+
+    public void employeebtnOnAction(ActionEvent event) {
     }
 }
