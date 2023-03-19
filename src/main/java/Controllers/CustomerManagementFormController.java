@@ -21,7 +21,12 @@ public class CustomerManagementFormController {
     public void customerbtnOnAction(ActionEvent event) {
     }
 
-    public void usersbtnOnAction(ActionEvent event) {
+    public void usersbtnOnAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserManagementForm.fxml"))));
+        stage.setTitle("Item Form");
+        stage.centerOnScreen();
+        stage.show();
     }
 
     public void employeebtnOnAction(ActionEvent event) {
@@ -47,12 +52,27 @@ public class CustomerManagementFormController {
         stage.show();
     }
 
-    public void customerViewbtnOnAction(ActionEvent event) {
+    public void customerViewbtnOnAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerViewForm.fxml"))));
+        stage.setTitle("Item Form");
+        stage.centerOnScreen();
+        stage.show();
     }
 
-    public void customerUpdatebtnOnAction(ActionEvent event) {
+    public void customerUpdatebtnOnAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerUpdateForm.fxml"))));
+        stage.setTitle("Item Form");
+        stage.centerOnScreen();
+        stage.show();
     }
 
-    public void petDeletebtnOnAction(ActionEvent event) {
+    public void customerDeletebtnOnAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DeleteForm.fxml"))));
+        stage.setTitle("Item Form");
+        stage.centerOnScreen();
+        stage.show();
     }
 }

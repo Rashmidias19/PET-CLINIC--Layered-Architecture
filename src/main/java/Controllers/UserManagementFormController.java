@@ -8,9 +8,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class PetManagementFormController {
+public class UserManagementFormController {
     public AnchorPane dashboardPane;
-    public void petbtnOnAction(ActionEvent event) {
+    public void petbtnOnAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetManagementForm.fxml"))));
+        stage.setTitle("Item Form");
+        stage.centerOnScreen();
+        stage.show();
     }
 
     public void customerbtnOnAction(ActionEvent event) throws IOException {
@@ -21,12 +26,7 @@ public class PetManagementFormController {
         stage.show();
     }
 
-    public void usersbtnOnAction(ActionEvent event) throws IOException {
-        Stage stage = (Stage) dashboardPane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserManagementForm.fxml"))));
-        stage.setTitle("Item Form");
-        stage.centerOnScreen();
-        stage.show();
+    public void usersbtnOnAction(ActionEvent event) {
     }
 
     public void employeebtnOnAction(ActionEvent event) {
@@ -44,37 +44,35 @@ public class PetManagementFormController {
     public void logoutbtnOnAction(ActionEvent event) {
     }
 
-    public void petRegisterbtnOnAction(ActionEvent event) throws IOException {
+    public void userAddbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetRegisterForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserAddForm.fxml"))));
         stage.setTitle("Item Form");
         stage.centerOnScreen();
         stage.show();
     }
 
-    public void petViewbtnOnAction(ActionEvent event) throws IOException {
+    public void userViewbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetViewForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserViewForm.fxml"))));
         stage.setTitle("Item Form");
         stage.centerOnScreen();
         stage.show();
     }
 
-    public void petUpdatebtnOnAction(ActionEvent event) throws IOException {
+    public void userUpdatebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetUpdateForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserUpdateForm.fxml"))));
         stage.setTitle("Item Form");
         stage.centerOnScreen();
         stage.show();
     }
 
-    public void petDeletebtnOnAction(ActionEvent event) throws IOException {
+    public void userDeletebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DeleteForm.fxml"))));
         stage.setTitle("Item Form");
         stage.centerOnScreen();
         stage.show();
     }
-
-
 }

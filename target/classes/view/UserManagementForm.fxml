@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerManagementFormController">
+<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserManagementFormController">
    <children>
       <AnchorPane layoutX="-11.0" prefHeight="525.0" prefWidth="200.0" style="-fx-background-color: #00695c;">
          <children>
@@ -66,22 +66,22 @@
             </Button>
          </children>
       </AnchorPane>
-      <Button fx:id="btnCustomerRegister" layoutX="234.0" layoutY="34.0" mnemonicParsing="false" onAction="#customerRegisterbtnOnAction" prefHeight="71.0" prefWidth="498.0" style="-fx-background-color: #00695c;" text="REGISTER CUSTOMERS" textFill="WHITE">
+      <Button fx:id="btnUserAdd" layoutX="234.0" layoutY="34.0" mnemonicParsing="false" onAction="#userAddbtnOnAction" prefHeight="71.0" prefWidth="498.0" style="-fx-background-color: #00695c;" text="ADD USERS" textFill="WHITE">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="btnCustomerView" layoutX="234.0" layoutY="158.0" mnemonicParsing="false" onAction="#customerViewbtnOnAction" prefHeight="71.0" prefWidth="498.0" style="-fx-background-color: #00695c;" text="VIEW CUSTOMERS" textFill="WHITE">
+      <Button fx:id="btnUserView" layoutX="234.0" layoutY="158.0" mnemonicParsing="false" onAction="#userViewbtnOnAction" prefHeight="71.0" prefWidth="498.0" style="-fx-background-color: #00695c;" text="VIEW USERS" textFill="WHITE">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="btnCustomerUpdate" layoutX="234.0" layoutY="278.0" mnemonicParsing="false" onAction="#customerUpdatebtnOnAction" prefHeight="71.0" prefWidth="498.0" style="-fx-background-color: #00695c;" text="UPDATE CUSTOMERS" textFill="WHITE">
+      <Button fx:id="btnUserUpdate" layoutX="234.0" layoutY="278.0" mnemonicParsing="false" onAction="#userUpdatebtnOnAction" prefHeight="71.0" prefWidth="498.0" style="-fx-background-color: #00695c;" text="UPDATE USERS" textFill="WHITE">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="btnCustomerDelete" layoutX="234.0" layoutY="404.0" mnemonicParsing="false" onAction="#customerDeletebtnOnAction" prefHeight="71.0" prefWidth="498.0" style="-fx-background-color: #00695c;" text="DELETE CUSTOMERS" textFill="WHITE">
+      <Button fx:id="btnUserDelete" layoutX="234.0" layoutY="404.0" mnemonicParsing="false" onAction="#userDeletebtnOnAction" prefHeight="71.0" prefWidth="498.0" style="-fx-background-color: #00695c;" text="DELETE USERS" textFill="WHITE">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
