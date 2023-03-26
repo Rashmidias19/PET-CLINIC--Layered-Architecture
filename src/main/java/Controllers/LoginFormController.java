@@ -22,15 +22,15 @@ public class LoginFormController {
 
     public void loginButtonOnAction(ActionEvent event) throws IOException {
 
-        if(txtUserName.getText().equals("Rashmi19") && txtPassword.getText().equals("1234")){
+       // if(txtUserName.getText().equals("Rashmi19") && txtPassword.getText().equals("1234")){
             Stage stage = (Stage) dashboardPane.getScene().getWindow();
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DashboardForm.fxml"))));
             stage.setTitle("Item Form");
             stage.centerOnScreen();
             stage.show();
-        }else{
-            new Alert(Alert.AlertType.ERROR, "Not a existing user!").show();
-        }
+       // }else{
+       //     new Alert(Alert.AlertType.ERROR, "Not a existing user!").show();
+      //  }*/
     }
 
     public void registerButtonOnAction(ActionEvent event) {

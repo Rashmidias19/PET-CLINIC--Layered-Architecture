@@ -16,7 +16,7 @@
    <children>
       <ImageView fitHeight="525.0" fitWidth="776.0">
          <image>
-            <Image url="@hero.jpg" />
+            <Image url="@../img/hero.jpg" />
          </image>
          <effect>
             <Glow level="0.0" />
