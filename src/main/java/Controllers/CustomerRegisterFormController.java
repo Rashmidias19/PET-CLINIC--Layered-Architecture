@@ -35,8 +35,6 @@ public class CustomerRegisterFormController {
     @FXML
     private TextField txtName;
 
-    @FXML
-    private JFXComboBox<String> cmbTitle;
 
     @FXML
     private TextField txtNIC;
@@ -51,10 +49,16 @@ public class CustomerRegisterFormController {
     private TextField txtEmail;
 
     @FXML
-    private JFXComboBox<String> cmbGender;
+    private TextField txtGender;
 
     @FXML
-    private DatePicker Date;
+    private TextField Date;
+
+    @FXML
+    private TextField txtTitle;
+
+
+
 
 
 
@@ -125,35 +129,39 @@ public class CustomerRegisterFormController {
     @FXML
     public void savebtnOnAction(ActionEvent event) throws SQLException {
         String CustomerID=txtID.getText();
-        String CustTitle=cmbTitle.getValue();
+        String CustTitle=txtTitle.getText();
         String CustName=txtName.getText();
         String NIC=txtNIC.getText();
-        LocalDate DOB=Date.getValue();
+        String DOB=Date.getText();
         int age=Integer.parseInt(txtAge.getText());
-        String Gender=cmbGender.getValue();
+        String Gender=txtGender.getText();
         String contact=txtContact.getText();
         String email=txtEmail.getText();
         String address=txtAddress.getText();
 
         try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "UPDATE Customer SET CustTitle= ?, CustName= ?, NIC = ?, DOB= ?, age= ?, Gender = ?, " +
-                    "contact = ?, email =?, address = ? WHERE CustID = ?";
+            String sql = "INSERT INTO Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email, address)" +
+                    "VALUES(?, ?, ?, ?,?,?,?,?,?,?)";
             PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, CustTitle);
-            pstm.setString(2, CustName);
-            pstm.setString(3, NIC);
-            pstm.setDate(4, java.sql.Date.valueOf(DOB));
-            pstm.setInt(5,age);
-            pstm.setString(6,Gender);
-            pstm.setString(7,contact);
-            pstm.setString(8,email);
-            pstm.setString(9,address);
-            pstm.setString(10,CustomerID);
+            pstm.setString(1,CustomerID);
+            pstm.setString(2, CustTitle);
+            pstm.setString(3, CustName);
+            pstm.setString(4, NIC);
+            pstm.setString(5, DOB);
+            pstm.setInt(6,age);
+            pstm.setString(7,Gender);
+            pstm.setString(8,contact);
+            pstm.setString(9,email);
+            pstm.setString(10,address);
 
-            boolean isUpdated = pstm.executeUpdate() > 0;
-            if (isUpdated) {
-                new Alert(Alert.AlertType.CONFIRMATION, "yes! updated!!").show();
+
+            int affectedRows = pstm.executeUpdate();
+            if (affectedRows > 0) {
+                new Alert(Alert.AlertType.CONFIRMATION,
+                        "huree!! customer added :)")
+                        .show();
             }
+
         }
 
     }
