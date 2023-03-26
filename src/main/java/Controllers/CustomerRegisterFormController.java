@@ -1,6 +1,8 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,13 +56,22 @@ public class CustomerRegisterFormController {
     @FXML
     private TextField Date;
 
-    @FXML
-    private TextField txtTitle;
+
+    //ObservableList<String> titles = FXCollections.observableArrayList("Miss", "Mr", "Mrs");
+   // ComboBox<String> cmbTitle = new ComboBox<>(titles);
+
+    //private static String[] titles = {"Miss","Mr","Mrs"};
+
+  //  ComboBox cmbTitle = new ComboBox<>();
+   // cmbTitle.addAll(titles);
 
 
+    //ObservableList<String> titles = FXCollections.observableArrayList("Miss", "Mr", "Mrs");
+     //ComboBox<String> cmbTitle = new ComboBox<>(titles);
+    //cmbTitle.setVisibleRowCount();
 
-
-
+    ComboBox<String> cmbTitle = new ComboBox<>();
+    cmbTitle.getItems().addAll("Miss", "Ms","Mrs");
 
 
     public void petbtnOnAction(ActionEvent event) throws IOException {
@@ -129,7 +140,7 @@ public class CustomerRegisterFormController {
     @FXML
     public void savebtnOnAction(ActionEvent event) throws SQLException {
         String CustomerID=txtID.getText();
-        String CustTitle=txtTitle.getText();
+        String CustTitle=cmbTitle.getValue();
         String CustName=txtName.getText();
         String NIC=txtNIC.getText();
         String DOB=Date.getText();
@@ -164,5 +175,8 @@ public class CustomerRegisterFormController {
 
         }
 
+    }
+
+    public void cmbTitleOnAction(ActionEvent event) {
     }
 }
