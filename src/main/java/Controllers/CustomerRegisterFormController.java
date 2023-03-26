@@ -77,8 +77,8 @@ public class CustomerRegisterFormController {
 
     //cmbTitle.setVisibleRowCount();
 
-   ComboBox<String> cmbTitle = new ComboBox<>();
-   cmbTitle.getItems().addAll("Miss", "Ms","Mrs");      vbvnbvnbvnmnbm
+   // ComboBox<String> cmbTitle = new ComboBox<>();
+    //cmbTitle.getItems().addAll("Miss", "Ms","Mrs");
 
 
     public void petbtnOnAction(ActionEvent event) throws IOException {
