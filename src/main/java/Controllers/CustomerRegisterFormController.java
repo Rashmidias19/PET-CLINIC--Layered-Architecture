@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
@@ -56,6 +57,11 @@ public class CustomerRegisterFormController {
     @FXML
     private TextField Date;
 
+    @FXML
+    private TextField txtTitle;
+
+
+
 
     //ObservableList<String> titles = FXCollections.observableArrayList("Miss", "Mr", "Mrs");
    // ComboBox<String> cmbTitle = new ComboBox<>(titles);
@@ -66,12 +72,13 @@ public class CustomerRegisterFormController {
    // cmbTitle.addAll(titles);
 
 
-    //ObservableList<String> titles = FXCollections.observableArrayList("Miss", "Mr", "Mrs");
-     //ComboBox<String> cmbTitle = new ComboBox<>(titles);
+   // String[] items = {"Miss", "Ms", "Mrs"};
+   // JComboBox<String> cmbTitle = new JComboBox<>(items);
+
     //cmbTitle.setVisibleRowCount();
 
-    ComboBox<String> cmbTitle = new ComboBox<>();
-    cmbTitle.getItems().addAll("Miss", "Ms","Mrs");
+   // ComboBox<String> cmbTitle = new ComboBox<>();
+    //cmbTitle.getItems().addAll("Miss", "Ms","Mrs");
 
 
     public void petbtnOnAction(ActionEvent event) throws IOException {
@@ -140,7 +147,7 @@ public class CustomerRegisterFormController {
     @FXML
     public void savebtnOnAction(ActionEvent event) throws SQLException {
         String CustomerID=txtID.getText();
-        String CustTitle=cmbTitle.getValue();
+        String CustTitle=txtTitle.getText();
         String CustName=txtName.getText();
         String NIC=txtNIC.getText();
         String DOB=Date.getText();
@@ -178,5 +185,6 @@ public class CustomerRegisterFormController {
     }
 
     public void cmbTitleOnAction(ActionEvent event) {
+
     }
 }
