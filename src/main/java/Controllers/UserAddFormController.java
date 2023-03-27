@@ -2,13 +2,16 @@ package Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class UserAddFormController {
+public class UserAddFormController implements Initializable {
+
+
     public AnchorPane dashboardPane;
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();

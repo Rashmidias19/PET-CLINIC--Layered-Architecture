@@ -6,18 +6,23 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+
 import javax.swing.*;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
-public class CustomerRegisterFormController {
+public class CustomerRegisterFormController implements Initializable {
     private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
     private static final Properties props = new Properties();
 
@@ -55,11 +60,32 @@ public class CustomerRegisterFormController {
     private TextField txtGender;
 
     @FXML
-    private TextField Date;
+    private DatePicker date;
 
     @FXML
-    private TextField txtTitle;
+    private ComboBox cmbTitle;
 
+    @FXML
+    private ComboBox cmbGender;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadGender();
+        loadTitles();
+    }
+
+    private void loadGender() {
+        ObservableList<String> obList = FXCollections.observableArrayList("Male","Female","Other");
+        cmbGender.setItems(obList);
+
+    }
+
+    private void loadTitles() {
+            ObservableList<String> obList = FXCollections.observableArrayList("Miss","Mr","Mrs");
+            cmbTitle.setItems(obList);
+
+    }
 
 
 
@@ -147,12 +173,12 @@ public class CustomerRegisterFormController {
     @FXML
     public void savebtnOnAction(ActionEvent event) throws SQLException {
         String CustomerID=txtID.getText();
-        String CustTitle=txtTitle.getText();
+        String CustTitle= (String) cmbTitle.getValue();
         String CustName=txtName.getText();
         String NIC=txtNIC.getText();
-        String DOB=Date.getText();
+        LocalDate DOB=date.getValue();
         int age=Integer.parseInt(txtAge.getText());
-        String Gender=txtGender.getText();
+        String Gender=(String)cmbGender.getValue();
         String contact=txtContact.getText();
         String email=txtEmail.getText();
         String address=txtAddress.getText();
@@ -165,7 +191,7 @@ public class CustomerRegisterFormController {
             pstm.setString(2, CustTitle);
             pstm.setString(3, CustName);
             pstm.setString(4, NIC);
-            pstm.setString(5, DOB);
+            pstm.setDate(5, java.sql.Date.valueOf(DOB));
             pstm.setInt(6,age);
             pstm.setString(7,Gender);
             pstm.setString(8,contact);
