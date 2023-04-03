@@ -52,14 +52,6 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RunManager" selected="Application.AppInitializer">
-    <configuration name="AppInitializer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="AppInitializer" />
-      <module name="petClinic" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\openjfx-19.0.2.1_windows-x64_bin-sdk (1)\javafx-sdk-19.0.2.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -67,6 +59,14 @@
         </value>
       </option>
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppInitializer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AppInitializer" />
+      <module name="petClinic" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\openjfx-19.0.2.1_windows-x64_bin-sdk (1)\javafx-sdk-19.0.2.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -79,7 +79,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.AppInitializer" />
-        <item itemvalue="Database Script.item.sql" />
       </list>
     </recent_temporary>
   </component>
