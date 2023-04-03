@@ -162,6 +162,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
     }
 
     private void fillEmployeeFields(Employee employee) {
+
         lblName.setText(String.valueOf(employee.getName()));
     }
 
@@ -201,6 +202,21 @@ public class EmployeeAddScheduleFormController implements Initializable {
             pstm.setString(7,Shift);
             pstm.setString(8,OT);
 
+
+            int affectedRows = pstm.executeUpdate();
+            if (affectedRows > 0) {
+                new Alert(Alert.AlertType.CONFIRMATION,
+                        "huree!! customer added :)")
+                        .show();
+            }
+
+        }
+        try (Connection con = DriverManager.getConnection(URL, props)) {
+            String sql = "INSERT INTO EmpSched(ScheduleID,EmployeeID)" +
+                    "VALUES(?, ?)";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1,ScheduleID);
+            pstm.setString(2, EmployeeID);
 
             int affectedRows = pstm.executeUpdate();
             if (affectedRows > 0) {
