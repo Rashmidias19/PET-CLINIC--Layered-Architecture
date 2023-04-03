@@ -1,0 +1,215 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"19\" project-jdk-type=\"JavaSDK\" />\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 0d35e89613f8a486bbcfe7580cda165e4402cb7e)
++++ b/.idea/misc.xml	(date 1679897653077)
+@@ -7,5 +7,5 @@
+       </list>
+     </option>
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="19" project-jdk-type="JavaSDK" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+ </project>
+\ No newline at end of file
+Index: src/main/resources/view/BillAddForm.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import javafx.geometry.Rectangle2D?>\r\n<?import javafx.scene.control.Button?>\r\n<?import javafx.scene.control.ComboBox?>\r\n<?import javafx.scene.control.DatePicker?>\r\n<?import javafx.scene.control.Label?>\r\n<?import javafx.scene.control.TextField?>\r\n<?import javafx.scene.image.Image?>\r\n<?import javafx.scene.image.ImageView?>\r\n<?import javafx.scene.layout.AnchorPane?>\r\n<?import javafx.scene.paint.LinearGradient?>\r\n<?import javafx.scene.paint.RadialGradient?>\r\n<?import javafx.scene.paint.Stop?>\r\n<?import javafx.scene.text.Font?>\r\n\r\n<AnchorPane fx:id=\"dashboardPane\" prefHeight=\"525.0\" prefWidth=\"776.0\" xmlns=\"http://javafx.com/javafx/19\" xmlns:fx=\"http://javafx.com/fxml/1\" fx:controller=\"Controllers.BillAddFormController\">\r\n   <children>\r\n      <Label layoutX=\"360.0\" layoutY=\"14.0\" prefHeight=\"32.0\" prefWidth=\"238.0\" style=\"-fx-background-color: #00695c;\" text=\"            ADD BILLS\">\r\n         <font>\r\n            <Font name=\"System Bold\" size=\"21.0\" />\r\n         </font>\r\n         <textFill>\r\n            <RadialGradient centerX=\"0.5\" centerY=\"0.5\" radius=\"0.5\">\r\n               <stops>\r\n                  <Stop color=\"#cdbaba\" />\r\n                  <Stop color=\"WHITE\" offset=\"1.0\" />\r\n               </stops>\r\n            </RadialGradient>\r\n         </textFill>\r\n      </Label>\r\n      <Label layoutX=\"207.0\" layoutY=\"128.0\" prefHeight=\"20.0\" prefWidth=\"100.0\" text=\" Customer_ID :\">\r\n         <font>\r\n            <Font size=\"14.0\" />\r\n         </font>\r\n      </Label>\r\n      <Label layoutX=\"212.0\" layoutY=\"234.0\" prefHeight=\"19.0\" prefWidth=\"53.0\" text=\"Time :\">\r\n         <font>\r\n            <Font size=\"13.0\" />\r\n         </font>\r\n      </Label>\r\n      <Label layoutX=\"210.0\" layoutY=\"263.0\" prefHeight=\"19.0\" prefWidth=\"53.0\" text=\"Amount :\">\r\n         <font>\r\n            <Font size=\"13.0\" />\r\n         </font>\r\n      </Label>\r\n      <Label layoutX=\"212.0\" layoutY=\"95.0\" prefHeight=\"20.0\" prefWidth=\"81.0\" text=\"Bill_ID :\">\r\n         <font>\r\n            <Font size=\"13.0\" />\r\n         </font>\r\n      </Label>\r\n      <Label layoutX=\"209.0\" layoutY=\"298.0\" prefHeight=\"19.0\" prefWidth=\"72.0\" text=\"Contact :\">\r\n         <font>\r\n            <Font size=\"13.0\" />\r\n         </font>\r\n      </Label>\r\n      <Label layoutX=\"212.0\" layoutY=\"373.0\" prefHeight=\"19.0\" prefWidth=\"81.0\" text=\"Description :\">\r\n         <font>\r\n            <Font size=\"13.0\" />\r\n         </font>\r\n      </Label>\r\n      <Button fx:id=\"btnSave\" layoutX=\"573.0\" layoutY=\"419.0\" mnemonicParsing=\"false\" onAction=\"#savebtnOnAction\" prefHeight=\"32.0\" prefWidth=\"81.0\" style=\"-fx-background-color: #00695c;\" text=\"Save\">\r\n         <font>\r\n            <Font name=\"System Bold\" size=\"15.0\" />\r\n         </font>\r\n      </Button>\r\n      <TextField layoutX=\"314.0\" layoutY=\"92.0\" />\r\n      <TextField layoutX=\"286.0\" layoutY=\"295.0\" />\r\n      <TextField layoutX=\"263.0\" layoutY=\"231.0\" prefHeight=\"25.0\" prefWidth=\"149.0\" />\r\n      <TextField layoutX=\"305.0\" layoutY=\"370.0\" prefHeight=\"25.0\" prefWidth=\"348.0\" />\r\n      <Label layoutX=\"212.0\" layoutY=\"165.0\" prefHeight=\"20.0\" prefWidth=\"65.0\" text=\"Name :\">\r\n         <font>\r\n            <Font size=\"14.0\" />\r\n         </font>\r\n      </Label>\r\n      <Label layoutX=\"212.0\" layoutY=\"198.0\" prefHeight=\"20.0\" prefWidth=\"53.0\" text=\"Date :\">\r\n         <font>\r\n            <Font size=\"14.0\" />\r\n         </font>\r\n      </Label>\r\n      <DatePicker layoutX=\"267.0\" layoutY=\"196.0\" />\r\n      <AnchorPane prefHeight=\"528.0\" prefWidth=\"200.0\" style=\"-fx-background-color: #00695c;\">\r\n         <children>\r\n            <Label layoutX=\"17.0\" layoutY=\"10.0\" prefHeight=\"46.0\" prefWidth=\"166.0\" text=\"VETCLOUD\">\r\n               <font>\r\n                  <Font name=\"System Bold\" size=\"31.0\" />\r\n               </font>\r\n               <textFill>\r\n                  <LinearGradient endX=\"1.0\" endY=\"1.0\">\r\n                     <stops>\r\n                        <Stop color=\"BLACK\" />\r\n                        <Stop color=\"#8daea4\" offset=\"0.42528735632183884\" />\r\n                        <Stop color=\"#082c23\" offset=\"1.0\" />\r\n                     </stops>\r\n                  </LinearGradient>\r\n               </textFill>\r\n            </Label>\r\n            <Button fx:id=\"btnPets\" layoutX=\"87.0\" layoutY=\"82.0\" mnemonicParsing=\"false\" onAction=\"#petbtnOnAction\" prefHeight=\"30.0\" prefWidth=\"65.0\" style=\"-fx-background-color: #00695c;\" text=\"PETS\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"System Bold\" size=\"14.0\" />\r\n               </font>\r\n            </Button>\r\n            <Button fx:id=\"btnCustomer\" layoutX=\"87.0\" layoutY=\"144.0\" mnemonicParsing=\"false\" onAction=\"#customerbtnOnAction\" prefHeight=\"30.0\" prefWidth=\"110.0\" style=\"-fx-background-color: #00695c;\" text=\"CUSTOMERS\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"System Bold\" size=\"14.0\" />\r\n               </font>\r\n            </Button>\r\n            <Button fx:id=\"btnEmployees\" layoutX=\"84.0\" layoutY=\"255.0\" mnemonicParsing=\"false\" onAction=\"#employeebtnOnAction\" prefHeight=\"30.0\" prefWidth=\"110.0\" style=\"-fx-background-color: #00695c;\" text=\"EMPLOYEES\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"System Bold\" size=\"14.0\" />\r\n               </font>\r\n            </Button>\r\n            <Button fx:id=\"btnSupplies\" layoutX=\"75.0\" layoutY=\"307.0\" mnemonicParsing=\"false\" onAction=\"#suppliesbtnOnAction\" prefHeight=\"30.0\" prefWidth=\"110.0\" style=\"-fx-background-color: #00695c;\" text=\"SUPPLIES\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"System Bold\" size=\"14.0\" />\r\n               </font>\r\n            </Button>\r\n            <Button fx:id=\"btnBilling\" layoutX=\"80.0\" layoutY=\"358.0\" mnemonicParsing=\"false\" onAction=\"#billingbtnOnAction\" prefHeight=\"30.0\" prefWidth=\"94.0\" style=\"-fx-background-color: #00695c;\" text=\"BILLING\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"System Bold\" size=\"14.0\" />\r\n               </font>\r\n            </Button>\r\n            <Button fx:id=\"btnInhouse\" layoutX=\"72.0\" layoutY=\"411.0\" mnemonicParsing=\"false\" onAction=\"#inhousebtnOnAction\" prefHeight=\"30.0\" prefWidth=\"123.0\" style=\"-fx-background-color: #00695c;\" text=\"IN-HOUSE\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"System Bold\" size=\"14.0\" />\r\n               </font>\r\n            </Button>\r\n            <Button fx:id=\"btnLogout\" layoutX=\"88.0\" layoutY=\"468.0\" mnemonicParsing=\"false\" onAction=\"#logoutbtnOnAction\" prefHeight=\"30.0\" prefWidth=\"94.0\" style=\"-fx-background-color: #00695c;\" text=\"LOGOUT\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"System Bold\" size=\"14.0\" />\r\n               </font>\r\n            </Button>\r\n            <Button fx:id=\"btnUsers\" layoutX=\"83.0\" layoutY=\"197.0\" mnemonicParsing=\"false\" onAction=\"#usersbtnOnAction\" prefHeight=\"30.0\" prefWidth=\"79.0\" style=\"-fx-background-color: #00695c;\" text=\"USERS\" textFill=\"WHITE\">\r\n               <font>\r\n                  <Font name=\"System Bold\" size=\"14.0\" />\r\n               </font>\r\n            </Button>\r\n            <ImageView fitHeight=\"41.0\" fitWidth=\"41.0\" layoutX=\"32.0\" layoutY=\"74.0\">\r\n               <image>\r\n                  <Image url=\"@../img/clipart387321.png\" />\r\n               </image>\r\n            </ImageView>\r\n            <ImageView fitHeight=\"41.0\" fitWidth=\"41.0\" layoutX=\"32.0\" layoutY=\"133.0\">\r\n               <image>\r\n                  <Image url=\"@../img/fghfgh.png\" />\r\n               </image>\r\n            </ImageView>\r\n            <ImageView fitHeight=\"41.0\" fitWidth=\"41.0\" layoutX=\"32.0\" layoutY=\"192.0\">\r\n               <image>\r\n                  <Image url=\"@../img/fghfgh.png\" />\r\n               </image>\r\n            </ImageView>\r\n            <ImageView fitHeight=\"41.0\" fitWidth=\"41.0\" layoutX=\"32.0\" layoutY=\"242.0\">\r\n               <image>\r\n                  <Image url=\"@../img/clipart61323.png\" />\r\n               </image>\r\n            </ImageView>\r\n            <ImageView fitHeight=\"41.0\" fitWidth=\"41.0\" layoutX=\"32.0\" layoutY=\"353.0\">\r\n               <image>\r\n                  <Image url=\"@../img/clipart395457.png\" />\r\n               </image>\r\n            </ImageView>\r\n            <ImageView fitHeight=\"41.0\" fitWidth=\"41.0\" layoutX=\"29.0\" layoutY=\"274.0\">\r\n               <image>\r\n                  <Image url=\"@../img/clipart722574.png\" />\r\n               </image>\r\n               <viewport>\r\n                  <Rectangle2D height=\"41.0\" width=\"41.0\" />\r\n               </viewport>\r\n            </ImageView>\r\n            <ImageView fitHeight=\"41.0\" fitWidth=\"41.0\" layoutX=\"32.0\" layoutY=\"406.0\">\r\n               <image>\r\n                  <Image url=\"@../img/clipart722574.png\" />\r\n               </image>\r\n            </ImageView>\r\n            <ImageView fitHeight=\"30.0\" fitWidth=\"34.0\" layoutX=\"36.0\" layoutY=\"468.0\">\r\n               <image>\r\n                  <Image url=\"@../img/clipart2257855.png\" />\r\n               </image>\r\n            </ImageView>\r\n            <ImageView fitHeight=\"41.0\" fitWidth=\"41.0\" layoutX=\"33.0\" layoutY=\"302.0\">\r\n               <image>\r\n                  <Image url=\"@../img/clipart281332.png\" />\r\n               </image>\r\n            </ImageView>\r\n         </children>\r\n      </AnchorPane>\r\n      <ComboBox layoutX=\"314.0\" layoutY=\"126.0\" prefHeight=\"25.0\" prefWidth=\"150.0\" />\r\n      <TextField layoutX=\"270.0\" layoutY=\"163.0\" prefHeight=\"25.0\" prefWidth=\"303.0\" />\r\n      <TextField layoutX=\"280.0\" layoutY=\"260.0\" prefHeight=\"25.0\" prefWidth=\"149.0\" />\r\n      <Label layoutX=\"209.0\" layoutY=\"336.0\" prefHeight=\"19.0\" prefWidth=\"72.0\" text=\"Email :\">\r\n         <font>\r\n            <Font size=\"13.0\" />\r\n         </font>\r\n      </Label>\r\n      <TextField layoutX=\"263.0\" layoutY=\"333.0\" prefHeight=\"25.0\" prefWidth=\"333.0\" />\r\n   </children>\r\n</AnchorPane>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/view/BillAddForm.fxml b/src/main/resources/view/BillAddForm.fxml
+--- a/src/main/resources/view/BillAddForm.fxml	(revision 0d35e89613f8a486bbcfe7580cda165e4402cb7e)
++++ b/src/main/resources/view/BillAddForm.fxml	(date 1680323514098)
+@@ -6,6 +6,7 @@
+ <?import javafx.scene.control.DatePicker?>
+ <?import javafx.scene.control.Label?>
+ <?import javafx.scene.control.TextField?>
++<?import javafx.scene.effect.ColorAdjust?>
+ <?import javafx.scene.image.Image?>
+ <?import javafx.scene.image.ImageView?>
+ <?import javafx.scene.layout.AnchorPane?>
+@@ -14,7 +15,7 @@
+ <?import javafx.scene.paint.Stop?>
+ <?import javafx.scene.text.Font?>
+ 
+-<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BillAddFormController">
++<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BillAddFormController">
+    <children>
+       <Label layoutX="360.0" layoutY="14.0" prefHeight="32.0" prefWidth="238.0" style="-fx-background-color: #00695c;" text="            ADD BILLS">
+          <font>
+@@ -28,16 +29,18 @@
+                </stops>
+             </RadialGradient>
+          </textFill>
+-      </Label>
+-      <Label layoutX="207.0" layoutY="128.0" prefHeight="20.0" prefWidth="100.0" text=" Customer_ID :">
+-         <font>
+-            <Font size="14.0" />
+-         </font>
+       </Label>
+       <Label layoutX="212.0" layoutY="234.0" prefHeight="19.0" prefWidth="53.0" text="Time :">
+          <font>
+             <Font size="13.0" />
+          </font>
++         <graphic>
++            <Label prefHeight="20.0" prefWidth="100.0" text=" Customer_ID :">
++               <font>
++                  <Font size="14.0" />
++               </font>
++            </Label>
++         </graphic>
+       </Label>
+       <Label layoutX="210.0" layoutY="263.0" prefHeight="19.0" prefWidth="53.0" text="Amount :">
+          <font>
+@@ -79,9 +82,9 @@
+          </font>
+       </Label>
+       <DatePicker layoutX="267.0" layoutY="196.0" />
+-      <AnchorPane prefHeight="528.0" prefWidth="200.0" style="-fx-background-color: #00695c;">
++      <AnchorPane prefHeight="528.0" prefWidth="200.0" style="-fx-background-color: #8e44ad;">
+          <children>
+-            <Label layoutX="17.0" layoutY="10.0" prefHeight="46.0" prefWidth="166.0" text="VETCLOUD">
++            <Label layoutX="17.0" layoutY="10.0" prefHeight="46.0" prefWidth="166.0" text="PETSNOW">
+                <font>
+                   <Font name="System Bold" size="31.0" />
+                </font>
+@@ -95,27 +98,27 @@
+                   </LinearGradient>
+                </textFill>
+             </Label>
+-            <Button fx:id="btnPets" layoutX="87.0" layoutY="82.0" mnemonicParsing="false" onAction="#petbtnOnAction" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: #00695c;" text="PETS" textFill="WHITE">
++            <Button fx:id="btnPets" layoutX="87.0" layoutY="82.0" mnemonicParsing="false" onAction="#petbtnOnAction" prefHeight="30.0" prefWidth="65.0" style="-fx-background-color: #2c3e50;" text="PETS" textFill="WHITE">
+                <font>
+                   <Font name="System Bold" size="14.0" />
+                </font>
+             </Button>
+-            <Button fx:id="btnCustomer" layoutX="87.0" layoutY="144.0" mnemonicParsing="false" onAction="#customerbtnOnAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #00695c;" text="CUSTOMERS" textFill="WHITE">
++            <Button fx:id="btnCustomer" layoutX="87.0" layoutY="144.0" mnemonicParsing="false" onAction="#customerbtnOnAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #2c3e50;" text="CUSTOMERS" textFill="WHITE">
+                <font>
+                   <Font name="System Bold" size="14.0" />
+                </font>
+             </Button>
+-            <Button fx:id="btnEmployees" layoutX="84.0" layoutY="255.0" mnemonicParsing="false" onAction="#employeebtnOnAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #00695c;" text="EMPLOYEES" textFill="WHITE">
++            <Button fx:id="btnEmployees" layoutX="84.0" layoutY="255.0" mnemonicParsing="false" onAction="#employeebtnOnAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #2c3e50;" text="EMPLOYEES" textFill="WHITE">
+                <font>
+                   <Font name="System Bold" size="14.0" />
+                </font>
+             </Button>
+-            <Button fx:id="btnSupplies" layoutX="75.0" layoutY="307.0" mnemonicParsing="false" onAction="#suppliesbtnOnAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #00695c;" text="SUPPLIES" textFill="WHITE">
++            <Button fx:id="btnSupplies" layoutX="75.0" layoutY="307.0" mnemonicParsing="false" onAction="#suppliesbtnOnAction" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #2c3e50;" text="SUPPLIES" textFill="WHITE">
+                <font>
+                   <Font name="System Bold" size="14.0" />
+                </font>
+             </Button>
+-            <Button fx:id="btnBilling" layoutX="80.0" layoutY="358.0" mnemonicParsing="false" onAction="#billingbtnOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #00695c;" text="BILLING" textFill="WHITE">
++            <Button fx:id="btnBilling" layoutX="80.0" layoutY="358.0" mnemonicParsing="false" onAction="#billingbtnOnAction" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #2c3e50;" text="BILLING" textFill="WHITE">
+                <font>
+                   <Font name="System Bold" size="14.0" />
+                </font>
+@@ -130,7 +133,7 @@
+                   <Font name="System Bold" size="14.0" />
+                </font>
+             </Button>
+-            <Button fx:id="btnUsers" layoutX="83.0" layoutY="197.0" mnemonicParsing="false" onAction="#usersbtnOnAction" prefHeight="30.0" prefWidth="79.0" style="-fx-background-color: #00695c;" text="USERS" textFill="WHITE">
++            <Button fx:id="btnUsers" layoutX="83.0" layoutY="197.0" mnemonicParsing="false" onAction="#usersbtnOnAction" prefHeight="30.0" prefWidth="79.0" style="-fx-background-color: #2c3e50;" text="USERS" textFill="WHITE">
+                <font>
+                   <Font name="System Bold" size="14.0" />
+                </font>
+@@ -144,6 +147,9 @@
+                <image>
+                   <Image url="@../img/fghfgh.png" />
+                </image>
++               <effect>
++                  <ColorAdjust brightness="-0.12" contrast="-0.05" hue="-0.05" saturation="-0.01" />
++               </effect>
+             </ImageView>
+             <ImageView fitHeight="41.0" fitWidth="41.0" layoutX="32.0" layoutY="192.0">
+                <image>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"e734372e-659b-420d-85c9-37c6226b7340\" name=\"Default Changelist\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/.gitignore\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/dataSources.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/dataSources.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/libraries/jfoenix_9_0_10.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/libraries/lib.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/uiDesigner.xml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/vcs.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/petClinic.iml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/petClinic.iml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Controllers/CustomerRegisterFormController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Controllers/CustomerRegisterFormController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/Controllers/UserAddFormController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/Controllers/UserAddFormController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/dto/User.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/dto/User.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/view/CustomerRegisterForm.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/view/CustomerRegisterForm.fxml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/target/classes/view/CustomerRegisterForm.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/target/classes/view/CustomerRegisterForm.fxml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2NaC6xMBsBkMEyO2KYnIHKbPYiS\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"DatabaseDriversLRU\" value=\"mysql\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\r\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\r\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\r\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"AppInitializer\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"AppInitializer\" />\r\n      <module name=\"petClinic\" />\r\n      <option name=\"VM_PARAMETERS\" value=\"--module-path &quot;C:\\Program Files\\Java\\openjfx-19.0.2.1_windows-x64_bin-sdk (1)\\javafx-sdk-19.0.2.1\\lib&quot; --add-modules javafx.controls,javafx.fxml\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"ArquillianJUnit\" factoryName=\"\" nameIsGenerated=\"true\">\r\n      <option name=\"arquillianRunConfiguration\">\r\n        <value>\r\n          <option name=\"containerStateName\" value=\"\" />\r\n        </value>\r\n      </option>\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.AppInitializer\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"e734372e-659b-420d-85c9-37c6226b7340\" name=\"Default Changelist\" comment=\"\" />\r\n      <created>1679892644394</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1679892644394</updated>\r\n      <workItem from=\"1679892645927\" duration=\"4354000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 0d35e89613f8a486bbcfe7580cda165e4402cb7e)
++++ b/.idea/workspace.xml	(date 1680323404379)
+@@ -5,19 +5,9 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="e734372e-659b-420d-85c9-37c6226b7340" name="Default Changelist" comment="">
+-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jfoenix_9_0_10.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/petClinic.iml" beforeDir="false" afterPath="$PROJECT_DIR$/petClinic.iml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/CustomerRegisterFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/CustomerRegisterFormController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/UserAddFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/UserAddFormController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/dto/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dto/User.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/CustomerRegisterForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/CustomerRegisterForm.fxml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/target/classes/view/CustomerRegisterForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/CustomerRegisterForm.fxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/view/BillAddForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/BillAddForm.fxml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -32,28 +22,13 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">
+-    <property name="DatabaseDriversLRU" value="mysql" />
+-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+-    <property name="WebServerToolWindowFactoryState" value="false" />
+-    <property name="aspect.path.notification.shown" value="true" />
+-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+-    <property name="node.js.detected.package.eslint" value="true" />
+-    <property name="node.js.detected.package.tslint" value="true" />
+-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+-    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+-  </component>
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
++  }
++}</component>
+   <component name="RunManager">
+-    <configuration name="AppInitializer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="AppInitializer" />
+-      <module name="petClinic" />
+-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\openjfx-19.0.2.1_windows-x64_bin-sdk (1)\javafx-sdk-19.0.2.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+       <option name="arquillianRunConfiguration">
+         <value>
+@@ -61,6 +36,14 @@
+         </value>
+       </option>
+       <option name="TEST_OBJECT" value="class" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="AppInitializer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="AppInitializer" />
++      <module name="petClinic" />
++      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\openjfx-19.0.2.1_windows-x64_bin-sdk (1)\javafx-sdk-19.0.2.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
