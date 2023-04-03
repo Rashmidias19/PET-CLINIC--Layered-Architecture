@@ -10,16 +10,19 @@ import lombok.*;
 @ToString
 
 public class Pet {
+ private String PetID;
+ private String Name;
  private String CustomerID;
- private String CustTitle;
- private String CustName;
- private String NIC;
- private String DOB;
- private int age;
+ private String Type;
+ private String Breed;
  private String Gender;
- private String contact;
- private String email;
+ private String DOB;
+ private int Age;
  private String address;
- private String UserID;
+ private String contact;
 
+ public Pet(String string, String string1) {
+     this.CustomerID=string;
+     this.contact=string1;
+ }
 }

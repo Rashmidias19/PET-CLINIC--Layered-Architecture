@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserAddFormController">
+<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserAddFormController">
    <children>
       <Label layoutX="295.0" layoutY="14.0" prefHeight="32.0" prefWidth="395.0" style="-fx-background-color: #00695c;" text="                 USER REGISTRATION">
          <font>
@@ -47,15 +47,15 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <TextField layoutX="314.0" layoutY="114.0" />
-      <TextField layoutX="304.0" layoutY="157.0" prefHeight="25.0" prefWidth="200.0" />
-      <TextField layoutX="280.0" layoutY="206.0" prefHeight="25.0" prefWidth="247.0" />
+      <TextField fx:id="txtName" layoutX="314.0" layoutY="114.0" prefHeight="25.0" prefWidth="190.0" />
+      <TextField fx:id="txtPassword" layoutX="304.0" layoutY="157.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="txtEmail" layoutX="280.0" layoutY="206.0" prefHeight="25.0" prefWidth="247.0" />
       <Label layoutX="216.0" layoutY="78.0" prefHeight="20.0" prefWidth="63.0" text="UserID :">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="279.0" layoutY="76.0" />
+      <TextField fx:id="txtID" layoutX="279.0" layoutY="76.0" />
       <AnchorPane prefHeight="530.0" prefWidth="200.0" style="-fx-background-color: #00695c;">
          <children>
             <Label layoutX="17.0" layoutY="10.0" prefHeight="46.0" prefWidth="166.0" text="VETCLOUD">

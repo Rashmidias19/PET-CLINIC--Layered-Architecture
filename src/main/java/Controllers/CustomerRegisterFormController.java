@@ -88,25 +88,6 @@ public class CustomerRegisterFormController implements Initializable {
     }
 
 
-
-    //ObservableList<String> titles = FXCollections.observableArrayList("Miss", "Mr", "Mrs");
-   // ComboBox<String> cmbTitle = new ComboBox<>(titles);
-
-    //private static String[] titles = {"Miss","Mr","Mrs"};
-
-  //  ComboBox cmbTitle = new ComboBox<>();
-   // cmbTitle.addAll(titles);
-
-
-   // String[] items = {"Miss", "Ms", "Mrs"};
-   // JComboBox<String> cmbTitle = new JComboBox<>(items);
-
-    //cmbTitle.setVisibleRowCount();
-
-   // ComboBox<String> cmbTitle = new ComboBox<>();
-    //cmbTitle.getItems().addAll("Miss", "Ms","Mrs");
-
-
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetManagementForm.fxml"))));

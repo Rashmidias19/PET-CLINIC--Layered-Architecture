@@ -20,4 +20,8 @@ public class Customer {
     private String address;
     private String UserID;
 
+    public Customer(String setString, String resultSetString) {
+        this.contact=setString;
+        this.email=resultSetString;
+    }
 }
