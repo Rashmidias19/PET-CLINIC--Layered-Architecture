@@ -1,6 +1,8 @@
 package model;
 
 import db.DBConnection;
+import dto.User;
+import util.CrudUtil;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -25,6 +27,23 @@ public class UserModel {
 
         while (resultSet.next()) {
             data.add(resultSet.getString(1));
+        }
+        return data;
+    }
+
+    public static List<User> getAll() throws SQLException {
+        List<User> data = new ArrayList<>();
+
+        String sql = "SELECT * FROM User";
+        ResultSet resultSet = CrudUtil.execute(sql);
+
+        while (resultSet.next()) {
+            data.add(new User(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4)
+            ));
         }
         return data;
     }
