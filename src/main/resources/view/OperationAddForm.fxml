@@ -140,7 +140,6 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <JFXComboBox layoutX="317.0" layoutY="88.0" prefHeight="25.0" prefWidth="150.0" />
       <Label layoutX="217.0" layoutY="139.0" prefHeight="19.0" prefWidth="65.0" text="Pet_ID :">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -151,42 +150,43 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <DatePicker layoutX="282.0" layoutY="222.0" />
+      <DatePicker fx:id="date" layoutX="282.0" layoutY="222.0" />
       <Label layoutX="217.0" layoutY="263.0" prefHeight="19.0" prefWidth="65.0" text="Time :">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="282.0" layoutY="260.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="time" layoutX="282.0" layoutY="260.0" prefHeight="25.0" prefWidth="174.0" />
       <Label layoutX="217.0" layoutY="302.0" prefHeight="19.0" prefWidth="88.0" text="Description :">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="305.0" layoutY="299.0" prefHeight="25.0" prefWidth="380.0" />
-      <TextField layoutX="282.0" layoutY="340.0" prefHeight="25.0" prefWidth="110.0" />
+      <TextField fx:id="txtDescription" layoutX="305.0" layoutY="299.0" prefHeight="25.0" prefWidth="380.0" />
+      <TextField fx:id="txtHours" layoutX="282.0" layoutY="340.0" prefHeight="25.0" prefWidth="110.0" />
       <Label layoutX="217.0" layoutY="343.0" prefHeight="19.0" prefWidth="50.0" text="Hours :">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Button layoutX="585.0" layoutY="467.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #00695c;" text="Save">
+      <Button fx:id="btnSave" layoutX="585.0" layoutY="467.0" mnemonicParsing="false" onAction="#savebtnOnAction" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #00695c;" text="Save">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <JFXComboBox layoutX="282.0" layoutY="127.0" prefHeight="25.0" prefWidth="150.0" />
+      <JFXComboBox fx:id="cmbPetID" layoutX="282.0" layoutY="127.0" onAction="#cmbPetIDOnAction" prefHeight="25.0" prefWidth="150.0" />
       <Label layoutX="217.0" layoutY="181.0" prefHeight="19.0" prefWidth="104.0" text="Customer_ID :">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="317.0" layoutY="178.0" prefHeight="25.0" prefWidth="174.0" />
       <Label layoutX="217.0" layoutY="382.0" prefHeight="19.0" prefWidth="65.0" text="Contact :">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="282.0" layoutY="379.0" prefHeight="25.0" prefWidth="174.0" />
+      <TextField fx:id="txtID" layoutX="317.0" layoutY="97.0" prefHeight="25.0" prefWidth="174.0" />
+      <Label fx:id="lblCustomerID" layoutX="323.0" layoutY="174.0" prefHeight="30.0" prefWidth="166.0" />
+      <Label fx:id="lblContact" layoutX="286.0" layoutY="377.0" prefHeight="30.0" prefWidth="166.0" />
    </children>
 </AnchorPane>

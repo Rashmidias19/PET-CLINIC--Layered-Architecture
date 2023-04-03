@@ -12,9 +12,10 @@ import lombok.*;
 public class OperationSchedule {
     private String OperationID;
     private String PetID;
+    private String CustomerID;
     private String Date;
     private String Time;
-    private String WorkTime;
-    private String Shift;
-    private String OT;
+    private String Description;
+    private String Hours;
+    private String Contact;
 }
