@@ -10,7 +10,7 @@ public class DBConnection {
 
     private DBConnection() throws SQLException {
         con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/VETCLOUD",
+                "jdbc:mysql://localhost:3306/PETSNOW",
                 "root",
                 "1234"
         );
