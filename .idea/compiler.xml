@@ -11,6 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Clinic" target="11" />
       <module name="petClinic" target="11" />
     </bytecodeTargetLevel>
   </component>
