@@ -1,18 +1,17 @@
-package dto;
+package dto.tm;
 
 import lombok.*;
-
-import java.sql.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Customer {
+
+public class CustomerTM {
     private String CustomerID;
     private String CustTitle;
-    private String CustName;
+    private String Name;
     private String NIC;
     private String DOB;
     private int age;
@@ -22,6 +21,4 @@ public class Customer {
     private String address;
 
 
-    public Customer(String string, String string1) {
-    }
 }

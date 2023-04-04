@@ -13,20 +13,22 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" prefHeight="505.0" prefWidth="769.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerViewFormController">
+<AnchorPane fx:id="dashboardPane" prefHeight="505.0" prefWidth="769.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.CustomerViewFormController">
    <children>
       <ScrollPane layoutX="216.0" layoutY="18.0" prefHeight="496.0" prefWidth="553.0">
          <content>
-            <TableView prefHeight="485.0" prefWidth="570.0">
+            <TableView fx:id="tblCustomer" prefHeight="485.0" prefWidth="570.0">
               <columns>
-                <TableColumn prefWidth="76.0" text="CustomerID" />
-                <TableColumn prefWidth="97.0" text="Name" />
-                  <TableColumn prefWidth="64.0" text="Age" />
-                  <TableColumn prefWidth="106.0" text="Address" />
-                  <TableColumn prefWidth="79.0" text="Contact" />
-                  <TableColumn prefWidth="76.0" text="DOB" />
-                  <TableColumn prefWidth="142.0" text="Email" />
-                  <TableColumn prefWidth="133.0" text="Email" />
+                <TableColumn fx:id="colID" prefWidth="76.0" text="CustomerID" />
+                  <TableColumn fx:id="colTitle" prefWidth="76.0" text="CustTitle" />
+                <TableColumn fx:id="colName" prefWidth="97.0" text="Name" />
+                  <TableColumn fx:id="colNIC" prefWidth="97.0" text="NIC" />
+                  <TableColumn fx:id="colDOB" prefWidth="97.0" text="DOB" />
+                  <TableColumn fx:id="colAge" prefWidth="64.0" text="Age" />
+                  <TableColumn fx:id="colGender" prefWidth="106.0" text="Gender" />
+                  <TableColumn fx:id="colContact" prefWidth="79.0" text="Contact" />
+                  <TableColumn fx:id="colEmail" prefWidth="76.0" text="Email" />
+                  <TableColumn fx:id="colAddress" prefWidth="142.0" text="Address" />
               </columns>
             </TableView>
          </content>

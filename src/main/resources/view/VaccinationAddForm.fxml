@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VaccinationAddFormController">
+<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.VaccinationAddFormController">
    <children>
       <AnchorPane prefHeight="525.0" prefWidth="200.0" style="-fx-background-color: #00695c;">
          <children>
@@ -135,7 +135,7 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <Label layoutX="217.0" layoutY="100.0" prefHeight="19.0" prefWidth="104.0" text="Vaccination_ID :">
+      <Label fx:id="lblCustomer_ID" layoutX="217.0" layoutY="100.0" prefHeight="19.0" prefWidth="104.0" text="Vaccination_ID :">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -162,8 +162,8 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="Description" layoutX="305.0" layoutY="299.0" prefHeight="25.0" prefWidth="380.0" />
-      <Button layoutX="585.0" layoutY="387.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #00695c;" text="Save">
+      <TextField fx:id="textDescription" layoutX="305.0" layoutY="299.0" prefHeight="25.0" prefWidth="380.0" />
+      <Button fx:id="btnSave" layoutX="585.0" layoutY="387.0" mnemonicParsing="false" onAction="#savebtnOnAction" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #00695c;" text="Save">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -180,7 +180,7 @@
          </font>
       </Label>
       <TextField fx:id="txtID" layoutX="327.0" layoutY="97.0" prefHeight="25.0" prefWidth="174.0" />
-      <Label layoutX="310.0" layoutY="340.0" prefHeight="21.0" prefWidth="200.0" />
+      <Label fx:id="lblContact" layoutX="310.0" layoutY="340.0" prefHeight="21.0" prefWidth="200.0" />
       <Label fx:id="lblCustomer_ID" layoutX="321.0" layoutY="180.0" prefHeight="21.0" prefWidth="123.0" />
    </children>
 </AnchorPane>

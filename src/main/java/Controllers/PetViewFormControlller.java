@@ -1,15 +1,123 @@
 package Controllers;
 
+import dto.Customer;
+import dto.Pet;
+import dto.tm.CustomerTM;
+import dto.tm.PetTM;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.CustomerModel;
+import model.PetModel;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
-public class PetViewFormControlller {
-    public AnchorPane dashboardPane;
+public class PetViewFormControlller implements Initializable {
+    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
+    private static final Properties props = new Properties();
+
+    static {
+        props.setProperty("user", "root");
+        props.setProperty("password", "1234");
+    }
+
+    public TableView<PetTM> tblPet;
+
+    @FXML
+    private TableColumn<?, ?> colID;
+
+    @FXML
+    private TableColumn<?, ?> colCusID;
+
+    @FXML
+    private TableColumn<?, ?> colName;
+
+    @FXML
+    private TableColumn<?, ?> colType;
+
+    @FXML
+    private TableColumn<?, ?> colBreed;
+
+    @FXML
+    private TableColumn<?, ?> colAge;
+
+    @FXML
+    private TableColumn<?, ?> colGender;
+
+    @FXML
+    private TableColumn<?, ?> colAddress;
+
+    @FXML
+    private TableColumn<?, ?> colContact;
+
+    @FXML
+    private TableColumn<?, ?> colDOB;
+
+    @FXML
+    private AnchorPane dashboardPane;
+
+
+
+    @Override
+    public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
+        setCellValueFactory();
+        getAll();
+    }
+    private void setCellValueFactory() {
+        colID.setCellValueFactory(new PropertyValueFactory<>("PetID"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        colCusID.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        colType.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        colBreed.setCellValueFactory(new PropertyValueFactory<>("Breed"));
+        colGender.setCellValueFactory(new PropertyValueFactory<>("Gender"));
+        colDOB.setCellValueFactory(new PropertyValueFactory<>("DOB"));
+        colAge.setCellValueFactory(new PropertyValueFactory<>("Age"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        colContact.setCellValueFactory(new PropertyValueFactory<>("Contact"));
+
+    }
+
+    private void getAll() {
+        try {
+            ObservableList<PetTM> obList = FXCollections.observableArrayList();
+            List<Pet> petList = PetModel.getAll();
+
+            for (Pet pet : petList) {
+                obList.add(new PetTM(
+                        pet.getPetID(),
+                        pet.getName(),
+                        pet.getCustomerID(),
+                        pet.getType(),
+                        pet.getBreed(),
+                        pet.getGender(),
+                        pet.getDOB(),
+                        pet.getAge(),
+                        pet.getAddress(),
+                        pet.getContact()
+                ));
+            }
+            tblPet.setItems(obList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+        }
+    }
+
+
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetManagementForm.fxml"))));

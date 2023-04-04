@@ -2,6 +2,8 @@ package model;
 
 import db.DBConnection;
 import dto.Customer;
+import dto.User;
+import util.CrudUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -46,5 +48,29 @@ public class CustomerModel {
             );
         }
         return null;
+    }
+
+
+    public static List<Customer> getAll() throws SQLException {
+        List<Customer> data = new ArrayList<>();
+
+        String sql = "SELECT * FROM Customer";
+        ResultSet resultSet = CrudUtil.execute(sql);
+
+        while (resultSet.next()) {
+            data.add(new Customer(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getInt(6),
+                    resultSet.getString(7),
+                    resultSet.getString(8),
+                    resultSet.getString(9),
+                    resultSet.getString(10)
+            ));
+        }
+        return data;
     }
 }

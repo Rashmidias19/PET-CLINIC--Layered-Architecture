@@ -1,8 +1,10 @@
 package model;
 
 import db.DBConnection;
+import dto.Customer;
 import dto.Item;
 import dto.Pet;
+import util.CrudUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,4 +51,26 @@ public class PetModel {
         return null;
     }
 
+    public static List<Pet> getAll() throws SQLException {
+        List<Pet> data = new ArrayList<>();
+
+        String sql = "SELECT * FROM Pet";
+        ResultSet resultSet = CrudUtil.execute(sql);
+
+        while (resultSet.next()) {
+            data.add(new Pet(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6),
+                    resultSet.getString(7),
+                    resultSet.getInt(8),
+                    resultSet.getString(9),
+                    resultSet.getString(10)
+            ));
+        }
+        return data;
+    }
 }

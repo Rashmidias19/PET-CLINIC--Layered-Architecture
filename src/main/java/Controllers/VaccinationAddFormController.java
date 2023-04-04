@@ -1,6 +1,7 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dto.Employee;
 import dto.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,24 +11,51 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.EmployeeModel;
 import model.PetModel;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-;
-
-
-
 
 public class VaccinationAddFormController implements Initializable {
     public AnchorPane dashboardPane;
+
+    @FXML
+    private TextField txtID;
+
+    @FXML
+    private JFXComboBox cmbPet_ID;
+
+    @FXML
+    private Label lblCustomer_ID;
+
+    @FXML
+    private DatePicker date;
+
+    @FXML
+    private TextField time;
+
+    @FXML
+    private TextField textDescription;
+
+    @FXML
+    private Label lblContact;
+
+
+
     private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
     private static final Properties props = new Properties();
 
@@ -35,9 +63,6 @@ public class VaccinationAddFormController implements Initializable {
         props.setProperty("user", "root");
         props.setProperty("password", "1234");
     }
-
-    @FXML
-    private JFXComboBox cmbPet_ID;
 
 
     public void petbtnOnAction(ActionEvent event) throws IOException {
@@ -112,7 +137,7 @@ public class VaccinationAddFormController implements Initializable {
     private void loadPet_ID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = EmployeeModel.loadEmployeeID();
+            List<String> codes = PetModel.loadPetID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -128,7 +153,7 @@ public class VaccinationAddFormController implements Initializable {
         String ID = (String) cmbPet_ID.getValue();
         try {
             Pet pet = PetModel.searchById(ID);
-            cmbPet_ID(pet);
+            FillPetFields(pet);
 
             // txtQty.requestFocus();
         } catch (SQLException e) {
@@ -137,7 +162,40 @@ public class VaccinationAddFormController implements Initializable {
         }
     }
 
-    private void cmbPet_ID(Pet pet) {
+    private void FillPetFields(Pet pet) {
+        lblCustomer_ID.setText(String.valueOf(pet.getCustomerID()));
+        lblContact.setText(String.valueOf(pet.getContact()));
+    }
+
+    public void savebtnOnAction(ActionEvent actionEvent) throws SQLException {
+        String Vaccination_ID = txtID.getText();
+        String Pet_ID = (String) cmbPet_ID.getValue();
+        String Customer_ID = lblCustomer_ID.getText();
+        LocalDate Date = date.getValue();
+        String Time = time.getText();
+        String Description = textDescription.getText();
+        String Contact = lblContact.getText();
+
+        try (Connection con = DriverManager.getConnection(URL, props)) {
+            String sql = "INSERT INTO Vaccinationschedule(VaccinationID, PetID,CustomerID,Date,Time,Description,Contact)" +
+                    "VALUES(?, ?, ?, ?,?,?,?)";
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, Vaccination_ID);
+            pstm.setString(2, Pet_ID);
+            pstm.setString(3, Customer_ID);
+            pstm.setDate(4, java.sql.Date.valueOf(Date));
+            pstm.setTime(5, java.sql.Time.valueOf(Time));
+            pstm.setString(6, Description);
+            pstm.setString(7, Contact);
+
+
+            int affectedRows = pstm.executeUpdate();
+            if (affectedRows > 0) {
+                new Alert(Alert.AlertType.CONFIRMATION,
+                        "huree!! customer added :)")
+                        .show();
+            }
+
+        }
     }
 }
-
