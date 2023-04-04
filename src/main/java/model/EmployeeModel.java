@@ -3,6 +3,8 @@ package model;
 import db.DBConnection;
 import dto.Customer;
 import dto.Employee;
+import dto.Pet;
+import util.CrudUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,4 +40,27 @@ public class EmployeeModel {
         return data;
     }
 
+    public static List<Employee> getAll() throws SQLException {
+        List<Employee> data = new ArrayList<>();
+
+        String sql = "SELECT * FROM Employee";
+        ResultSet resultSet = CrudUtil.execute(sql);
+
+        while (resultSet.next()) {
+            data.add(new Employee(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getInt(6),
+                    resultSet.getString(7),
+                    resultSet.getString(8),
+                    resultSet.getString(9),
+                    resultSet.getString(10),
+                    resultSet.getString(11)
+            ));
+        }
+        return data;
+    }
 }

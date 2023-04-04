@@ -13,24 +13,8 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" prefHeight="505.0" prefWidth="769.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EmployeeViewFormController">
+<AnchorPane fx:id="dashboardPane" prefHeight="505.0" prefWidth="769.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EmployeeViewFormController">
    <children>
-      <ScrollPane layoutX="216.0" layoutY="18.0" prefHeight="496.0" prefWidth="553.0">
-         <content>
-            <TableView prefHeight="485.0" prefWidth="570.0">
-               <columns>
-                  <TableColumn prefWidth="76.0" text="EmployeeID" />
-                  <TableColumn prefWidth="97.0" text="Name" />
-                  <TableColumn prefWidth="64.0" text="Salary" />
-                  <TableColumn prefWidth="106.0" text="Address" />
-                  <TableColumn prefWidth="79.0" text="Contact" />
-                  <TableColumn prefWidth="76.0" text="DOB" />
-                  <TableColumn prefWidth="142.0" text="Email" />
-                  <TableColumn prefWidth="133.0" text="Email" />
-               </columns>
-            </TableView>
-         </content>
-      </ScrollPane>
       <AnchorPane prefHeight="529.0" prefWidth="200.0" style="-fx-background-color: #00695c;">
          <children>
             <Label layoutX="17.0" layoutY="10.0" prefHeight="46.0" prefWidth="166.0" text="VETCLOUD">
@@ -137,5 +121,24 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <ScrollPane layoutX="209.0" layoutY="17.0" prefHeight="507.0" prefWidth="549.0">
+         <content>
+            <TableView fx:id="tblEmployee" prefHeight="508.0" prefWidth="1250.0">
+              <columns>
+                <TableColumn fx:id="colID" prefWidth="78.0" text="EmployeeID" />
+                <TableColumn fx:id="colName" prefWidth="147.0" text="Name" />
+                  <TableColumn fx:id="colUserID" prefWidth="79.0" text="UserID" />
+                  <TableColumn fx:id="colDOB" prefWidth="91.0" text="DOB" />
+                  <TableColumn fx:id="colNIC" prefWidth="124.0" text="NIC" />
+                  <TableColumn fx:id="colAge" prefWidth="50.0" text="Age" />
+                  <TableColumn fx:id="colGender" prefWidth="100.0" text="Gender" />
+                  <TableColumn fx:id="colAddress" prefWidth="150.0" text="Address" />
+                  <TableColumn fx:id="colSalary" prefWidth="150.0" text="Salary" />
+                  <TableColumn fx:id="colContact" prefWidth="150.0" text="Contact" />
+                  <TableColumn fx:id="colEmail" prefWidth="170.0" text="Email" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>
