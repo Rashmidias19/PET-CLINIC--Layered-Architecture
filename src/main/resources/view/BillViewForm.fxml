@@ -13,21 +13,20 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BillViewFormController">
+<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BillViewFormController">
    <children>
       <ScrollPane layoutX="214.0" layoutY="20.0" prefHeight="491.0" prefWidth="546.0">
          <content>
-            <TableView prefHeight="489.0" prefWidth="644.0">
+            <TableView fx:id="tblBill" prefHeight="489.0" prefWidth="644.0">
                <columns>
-                  <TableColumn prefWidth="72.0" text="Bill_ID" />
-                  <TableColumn prefWidth="85.0" text="Customer_ID" />
-                  <TableColumn prefWidth="76.0" text="Name" />
-                  <TableColumn prefWidth="76.0" text="Date" />
-                  <TableColumn prefWidth="83.0" text="Amount" />
-                  <TableColumn prefWidth="66.0" text="Contact" />
-                  <TableColumn prefWidth="64.0" text="Email" />
-                  <TableColumn prefWidth="121.0" text="Description" />
-                  <TableColumn text="Contact" />
+                  <TableColumn fx:id="colID" prefWidth="72.0" text="Bill_ID" />
+                  <TableColumn fx:id="colCustID" prefWidth="85.0" text="Customer_ID" />
+                  <TableColumn fx:id="colDate" prefWidth="76.0" text="Date" />
+                  <TableColumn fx:id="colTime" prefWidth="76.0" text="Time" />
+                  <TableColumn fx:id="colAmount" prefWidth="83.0" text="Amount" />
+                  <TableColumn fx:id="colContact" prefWidth="66.0" text="Contact" />
+                  <TableColumn fx:id="colEmail" prefWidth="64.0" text="Email" />
+                  <TableColumn fx:id="colDescription" prefWidth="121.0" text="Description" />
                </columns>
             </TableView>
          </content>

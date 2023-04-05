@@ -12,16 +12,16 @@
    <children>
       <ScrollPane layoutX="13.0" layoutY="64.0" prefHeight="453.0" prefWidth="753.0">
          <content>
-            <TableView prefHeight="453.0" prefWidth="753.0">
+            <TableView fx:id="tblOperation" prefHeight="453.0" prefWidth="753.0">
                <columns>
-                  <TableColumn prefWidth="98.0" text="Operation_ID" />
-                  <TableColumn minWidth="0.0" prefWidth="116.0" text="Pet_ID" />
-                  <TableColumn minWidth="0.0" prefWidth="122.0" text="Customer_ID" />
-                  <TableColumn minWidth="0.0" prefWidth="122.0" text="Date" />
-                  <TableColumn minWidth="0.0" prefWidth="108.0" text="Time" />
-                  <TableColumn minWidth="0.0" prefWidth="180.0" text="Description" />
-                  <TableColumn minWidth="0.0" text="Hours" />
-                  <TableColumn minWidth="0.0" prefWidth="100.0" text="Contact" />
+                  <TableColumn fx:id="colID" prefWidth="98.0" text="Operation_ID" />
+                  <TableColumn fx:id="colPetID" minWidth="0.0" prefWidth="116.0" text="Pet_ID" />
+                  <TableColumn fx:id="colCusID" minWidth="0.0" prefWidth="122.0" text="Customer_ID" />
+                  <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="122.0" text="Date" />
+                  <TableColumn fx:id="colTime" minWidth="0.0" prefWidth="108.0" text="Time" />
+                  <TableColumn fx:id="colDescription" minWidth="0.0" prefWidth="180.0" text="Description" />
+                  <TableColumn fx:id="colHours" minWidth="0.0" text="Hours" />
+                  <TableColumn fx:id="colContact" minWidth="0.0" prefWidth="100.0" text="Contact" />
                </columns>
             </TableView>
          </content>

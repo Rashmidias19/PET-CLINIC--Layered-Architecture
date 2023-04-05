@@ -11,7 +11,6 @@ import lombok.*;
 public class Bill {
     private String BillID;
     private String CustomerID;
-    private String Name;
     private String Date;
     private String Time;
     private double Amount ;

@@ -1,4 +1,4 @@
-package dto;
+package dto.tm;
 
 import lombok.*;
 
@@ -8,9 +8,9 @@ import lombok.*;
 @Setter
 @ToString
 
-public class EmployeeSchedule {
-    private String ScheduleID;
-    private String EmployeeID;
+public class EmployeeScheduleTM {
+    private String Schedule_ID;
+    private String Employee_ID;
     private String Name;
     private String Date;
     private String Time;

@@ -83,7 +83,7 @@ public class VaccineScheduleManagementFormController {
 
     public void viewbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/VaccinationScheduleForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/VaccineScheduleForm.fxml"))));
         stage.setTitle("Item Form");
         stage.centerOnScreen();
         stage.show();

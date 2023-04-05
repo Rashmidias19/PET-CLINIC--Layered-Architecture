@@ -17,17 +17,16 @@
    <children>
       <ScrollPane layoutX="214.0" layoutY="20.0" prefHeight="491.0" prefWidth="546.0">
          <content>
-            <TableView prefHeight="489.0" prefWidth="644.0">
+            <TableView fx:id="tblInhouse" prefHeight="489.0" prefWidth="644.0">
                <columns>
-                  <TableColumn prefWidth="72.0" text="Inhouse_ID" />
-                  <TableColumn prefWidth="85.0" text="Pet_ID" />
-                  <TableColumn prefWidth="76.0" text="Customer_ID" />
-                  <TableColumn prefWidth="98.0" text="Admitted_Date" />
-                  <TableColumn prefWidth="45.0" text="Time" />
-                  <TableColumn prefWidth="95.0" text="Discharge_Date" />
-                  <TableColumn prefWidth="51.0" text="Contact" />
-                  <TableColumn prefWidth="98.0" text="Email" />
-                  <TableColumn prefWidth="130.0" text="Description" />
+                  <TableColumn fx:id="colID" prefWidth="72.0" text="Inhouse_ID" />
+                  <TableColumn fx:id="colPetID" prefWidth="85.0" text="Pet_ID" />
+                  <TableColumn fx:id="colCustID" prefWidth="76.0" text="Customer_ID" />
+                  <TableColumn fx:id="colAd" prefWidth="98.0" text="Admitted_Date" />
+                  <TableColumn fx:id="colTime" prefWidth="45.0" text="Time" />
+                  <TableColumn fx:id="colDis" prefWidth="95.0" text="Discharge_Date" />
+                  <TableColumn fx:id="colDescription" prefWidth="130.0" text="Description" />
+                  <TableColumn fx:id="colContact" prefWidth="51.0" text="Contact" />
                </columns>
             </TableView>
          </content>
