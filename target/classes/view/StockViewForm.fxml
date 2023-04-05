@@ -13,21 +13,22 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StockViewFormCotroller">
+<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.StockViewFormCotroller">
    <children>
       <ScrollPane layoutX="214.0" layoutY="20.0" prefHeight="491.0" prefWidth="546.0">
          <content>
-            <TableView prefHeight="489.0" prefWidth="644.0">
+            <TableView fx:id="tblSupplie" prefHeight="489.0" prefWidth="1500.0">
                <columns>
-                  <TableColumn prefWidth="72.0" text="   Stock_ID" />
-                  <TableColumn prefWidth="85.0" text="Name" />
-                  <TableColumn prefWidth="76.0" text="Manu_Date" />
-                  <TableColumn prefWidth="76.0" text="Exp_Date" />
-                  <TableColumn prefWidth="83.0" text="Supp_name" />
-                  <TableColumn prefWidth="66.0" text="Type" />
-                  <TableColumn prefWidth="64.0" text="Contact" />
-                  <TableColumn prefWidth="121.0" text="Description" />
-                  <TableColumn text="Contact" />
+                  <TableColumn fx:id="colID" text="   Item_ID" />
+                  <TableColumn fx:id="colName" prefWidth="170.0" text="Name" />
+                  <TableColumn fx:id="colMan" prefWidth="90.0" text="Man_Date" />
+                  <TableColumn fx:id="colExp" prefWidth="90.0" text="Exp_Date" />
+                  <TableColumn fx:id="colSuppName" prefWidth="150.0" text="Supplier_name" />
+                  <TableColumn fx:id="colType" prefWidth="150.0" text="Type" />
+                  <TableColumn fx:id="colContact" prefWidth="90.0" text="Contact" />
+                  <TableColumn fx:id="colDescription" prefWidth="150.0" text="Description" />
+                  <TableColumn fx:id="colQuantity" prefWidth="210.0" text="Quantity" />
+                  <TableColumn fx:id="colPrice" prefWidth="210.0" text="Price" />
                </columns>
             </TableView>
          </content>

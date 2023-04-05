@@ -1,6 +1,7 @@
 package model;
 
 import db.DBConnection;
+import dto.Employee;
 import dto.Item;
 import util.CrudUtil;
 
@@ -48,5 +49,29 @@ public class ItemModel {
             );
         }
         return null;
+    }
+
+    public static List<Item> getAll() throws SQLException {
+        List<Item> data = new ArrayList<>();
+
+        String sql = "SELECT * FROM Item";
+        ResultSet resultSet = CrudUtil.execute(sql);
+
+        while (resultSet.next()) {
+            data.add(new Item(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6),
+                    resultSet.getString(7),
+                    resultSet.getString(8),
+                    resultSet.getDouble(9),
+                    resultSet.getString(10)
+
+            ));
+        }
+        return data;
     }
 }
