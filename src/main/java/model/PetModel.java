@@ -43,8 +43,15 @@ public class PetModel {
 
         if(resultSet.next()) {
             return new Pet(
-
+                    resultSet.getString(1),
+                    resultSet.getString(2),
                     resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getString(6),
+                    resultSet.getString(7),
+                    resultSet.getInt(8),
+                    resultSet.getString(9),
                     resultSet.getString(10)
             );
         }

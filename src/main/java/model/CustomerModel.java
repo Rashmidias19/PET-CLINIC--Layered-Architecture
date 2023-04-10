@@ -42,8 +42,16 @@ public class CustomerModel {
 
         if(resultSet.next()) {
             return new Customer(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5),
+                    resultSet.getInt(6),
+                    resultSet.getString(7),
                     resultSet.getString(8),
-                    resultSet.getString(9)
+                    resultSet.getString(9),
+                    resultSet.getString(10)
 
             );
         }

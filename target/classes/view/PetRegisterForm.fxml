@@ -65,7 +65,7 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="216.0" layoutY="417.0" prefHeight="19.0" prefWidth="63.0" text="Contact :">
+      <Label layoutX="208.0" layoutY="417.0" prefHeight="19.0" prefWidth="63.0" text="Contact :">
          <font>
             <Font size="13.0" />
          </font>
@@ -192,7 +192,7 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cmbCustomID" layoutX="301.0" layoutY="347.0" prefHeight="20.0" prefWidth="131.0" />
+      <ComboBox fx:id="cmbCustomerID" layoutX="301.0" layoutY="347.0" prefHeight="20.0" prefWidth="131.0" />
       <ComboBox fx:id="cmbGender" layoutX="288.0" layoutY="220.0" prefHeight="20.0" prefWidth="131.0" />
       <Label layoutX="216.0" layoutY="299.0" prefHeight="17.0" prefWidth="47.0" text="Age :">
          <font>

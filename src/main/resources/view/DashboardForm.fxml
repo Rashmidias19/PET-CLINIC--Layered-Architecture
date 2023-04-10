@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DashboardFormController">
+<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DashboardFormController">
    <children>
       <AnchorPane prefHeight="525.0" prefWidth="200.0" style="-fx-background-color: #00695c;">
          <children>
@@ -118,27 +118,27 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Label layoutX="230.0" layoutY="28.0" prefHeight="72.0" prefWidth="223.0" style="-fx-background-color: #26a69a;" text="  DOGS :" textFill="WHITE">
+      <Label layoutX="230.0" layoutY="28.0" prefHeight="72.0" prefWidth="223.0" style="-fx-background-color: #26a69a;" text="  PETS :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="516.0" layoutY="28.0" prefHeight="72.0" prefWidth="223.0" style="-fx-background-color: #26a69a;" text="   CATS :" textFill="WHITE">
+      <Label layoutX="516.0" layoutY="28.0" prefHeight="72.0" prefWidth="223.0" style="-fx-background-color: #26a69a;" text="   EMPL0YEE :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="230.0" layoutY="150.0" prefHeight="72.0" prefWidth="223.0" style="-fx-background-color: #26a69a;" text="  BIRDS :" textFill="WHITE">
+      <Label layoutX="230.0" layoutY="150.0" prefHeight="72.0" prefWidth="223.0" style="-fx-background-color: #26a69a;" text="  ITEMS :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="516.0" layoutY="150.0" prefHeight="72.0" prefWidth="223.0" style="-fx-background-color: #26a69a;" text="  OTHERS :" textFill="WHITE">
+      <Label layoutX="516.0" layoutY="150.0" prefHeight="72.0" prefWidth="223.0" style="-fx-background-color: #26a69a;" text=" INHOUSE :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="360.0" layoutY="288.0" prefHeight="72.0" prefWidth="263.0" style="-fx-background-color: #26a69a;" text="  CUSTOMERS :" textFill="WHITE">
+      <Label layoutX="360.0" layoutY="289.0" prefHeight="72.0" prefWidth="263.0" style="-fx-background-color: #26a69a;" text="  CUSTOMERS :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -148,10 +148,10 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblDogs" layoutX="379.0" layoutY="37.0" prefHeight="53.0" prefWidth="59.0" />
-      <Label fx:id="lblCats" layoutX="662.0" layoutY="38.0" prefHeight="53.0" prefWidth="59.0" />
-      <Label fx:id="lblBirds" layoutX="379.0" layoutY="160.0" prefHeight="53.0" prefWidth="59.0" />
-      <Label fx:id="lblOthers" layoutX="662.0" layoutY="160.0" prefHeight="53.0" prefWidth="59.0" />
+      <Label fx:id="lblPet" layoutX="379.0" layoutY="37.0" prefHeight="53.0" prefWidth="59.0" />
+      <Label fx:id="lblEmployee" layoutX="674.0" layoutY="37.0" prefHeight="53.0" prefWidth="59.0" />
+      <Label fx:id="lblItem" layoutX="379.0" layoutY="160.0" prefHeight="53.0" prefWidth="59.0" />
+      <Label fx:id="lblInhouse" layoutX="662.0" layoutY="160.0" prefHeight="53.0" prefWidth="59.0" />
       <Label fx:id="lblCustomers" layoutX="553.0" layoutY="298.0" prefHeight="53.0" prefWidth="59.0" />
       <Label fx:id="lblUsers" layoutX="553.0" layoutY="415.0" prefHeight="53.0" prefWidth="59.0" />
    </children>
