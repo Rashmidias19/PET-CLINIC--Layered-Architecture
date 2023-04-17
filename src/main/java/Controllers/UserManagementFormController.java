@@ -100,7 +100,7 @@ public class UserManagementFormController {
 
     public void userDeletebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DeleteForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetDeleteForm.fxml"))));
         stage.setTitle("Item Form");
         stage.centerOnScreen();
         stage.show();

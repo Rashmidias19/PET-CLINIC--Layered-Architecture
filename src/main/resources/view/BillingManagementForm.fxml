@@ -10,7 +10,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BillingManagementFormController">
+<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.BillingManagementFormController">
    <children>
       <Button fx:id="btnBillAdd" layoutX="234.0" layoutY="34.0" mnemonicParsing="false" onAction="#billAddbtnOnAction" prefHeight="71.0" prefWidth="498.0" style="-fx-background-color: #00695c;" text="ADD BILLS" textFill="WHITE">
          <font>
@@ -22,12 +22,7 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="btnBillUpdate" layoutX="234.0" layoutY="278.0" mnemonicParsing="false" onAction="#billUpdatebtnOnAction" prefHeight="71.0" prefWidth="498.0" style="-fx-background-color: #00695c;" text="UPDATE BILLS" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="22.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnBillDelete" layoutX="234.0" layoutY="404.0" mnemonicParsing="false" onAction="#billDeletebtnOnAction" prefHeight="71.0" prefWidth="498.0" style="-fx-background-color: #00695c;" text="DELETE BILLS" textFill="WHITE">
+      <Button fx:id="btnBillDelete" layoutX="234.0" layoutY="295.0" mnemonicParsing="false" onAction="#billDeletebtnOnAction" prefHeight="71.0" prefWidth="498.0" style="-fx-background-color: #00695c;" text="DELETE BILLS" textFill="WHITE">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>

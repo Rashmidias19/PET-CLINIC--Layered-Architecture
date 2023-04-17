@@ -1,12 +1,11 @@
 package model;
 
 import db.DBConnection;
+import dto.Customer;
 import dto.User;
 import util.CrudUtil;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -19,6 +18,7 @@ public class UserModel {
         props.setProperty("user", "root");
         props.setProperty("password", "1234");
     }
+
     public static List<String> loadUserID() throws SQLException {
         Connection con = DBConnection.getInstance().getConnection();
         ResultSet resultSet = con.createStatement().executeQuery("SELECT UserID FROM User");
@@ -46,5 +46,23 @@ public class UserModel {
             ));
         }
         return data;
+    }
+
+    public static User searchById(String userID) throws SQLException {
+        PreparedStatement pstm = DBConnection.getInstance().getConnection()
+                .prepareStatement("SELECT * FROM User WHERE UserID =?");
+        pstm.setString(1, userID);
+        ResultSet resultSet = pstm.executeQuery();
+
+        if(resultSet.next()) {
+            return new User(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4)
+
+            );
+        }
+        return null;
     }
 }

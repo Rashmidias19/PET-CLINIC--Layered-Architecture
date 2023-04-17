@@ -101,7 +101,7 @@ public class InhouseManagementFormController {
 
     public void inhouseDeletebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DeleteForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/InhouseDeleteForm.fxml"))));
         stage.setTitle("Item Form");
         stage.centerOnScreen();
         stage.show();

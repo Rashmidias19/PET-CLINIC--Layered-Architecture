@@ -68,7 +68,7 @@ public class PetRegistrationFormController implements Initializable {
     private ComboBox cmbGender;
 
     @FXML
-    private ComboBox cmbCustomID;
+    private ComboBox cmbCustomerID;
 
 
     @Override
@@ -103,7 +103,7 @@ public class PetRegistrationFormController implements Initializable {
             for (String code : codes) {
                 obList.add(code);
             }
-            cmbCustomID.setItems(obList);
+            cmbCustomerID.setItems(obList);
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
@@ -170,7 +170,7 @@ public class PetRegistrationFormController implements Initializable {
     public void savebtnOnAction(ActionEvent event) throws SQLException {
         String PetID=txtID.getText();
         String Name=txtName.getText();
-        String CustomerID= (String) cmbCustomID.getValue();
+        String CustomerID= (String) cmbCustomerID.getValue();
         String Type= (String) cmbSpecies.getValue();
         String Breed=txtBreed.getText();
         String Gender= (String) cmbGender.getValue();

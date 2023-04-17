@@ -46,21 +46,13 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Label layoutX="216.0" layoutY="376.0" prefHeight="19.0" prefWidth="55.0" text="Email :">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <TextField layoutX="314.0" layoutY="92.0" />
-      <TextField layoutX="279.0" layoutY="327.0" />
-      <TextField layoutX="267.0" layoutY="218.0" prefHeight="25.0" prefWidth="150.0" />
-      <TextField layoutX="276.0" layoutY="373.0" prefHeight="25.0" prefWidth="247.0" />
+      <TextField fx:id="txtID" layoutX="314.0" layoutY="92.0" />
+      <TextField fx:id="time" layoutX="267.0" layoutY="218.0" prefHeight="25.0" prefWidth="150.0" />
       <Label layoutX="208.0" layoutY="161.0" prefHeight="20.0" prefWidth="102.0" text="Customer_ID :">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="323.0" layoutY="159.0" prefHeight="25.0" prefWidth="200.0" />
       <AnchorPane prefHeight="525.0" prefWidth="200.0" style="-fx-background-color: #00695c;">
          <children>
             <Label layoutX="17.0" layoutY="10.0" prefHeight="46.0" prefWidth="166.0" text="VETCLOUD">
@@ -167,20 +159,20 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <JFXComboBox layoutX="274.0" layoutY="115.0" prefHeight="25.0" prefWidth="159.0" />
-      <DatePicker layoutX="313.0" layoutY="189.0" />
+      <JFXComboBox fx:id="cmbPetID" layoutX="274.0" layoutY="115.0" prefHeight="25.0" prefWidth="159.0" />
+      <DatePicker fx:id="AdDate" layoutX="313.0" layoutY="189.0" />
       <Label layoutX="212.0" layoutY="253.0" prefHeight="19.0" prefWidth="102.0" text="Discharge_Date :">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <DatePicker layoutX="313.0" layoutY="250.0" />
+      <DatePicker fx:id="DisDate" layoutX="313.0" layoutY="250.0" />
       <Label layoutX="211.0" layoutY="296.0" prefHeight="19.0" prefWidth="81.0" text="Description :">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="294.0" layoutY="293.0" prefHeight="25.0" prefWidth="334.0" />
+      <TextField fx:id="txtDescription" layoutX="294.0" layoutY="293.0" prefHeight="25.0" prefWidth="334.0" />
       <Label layoutX="204.0" layoutY="25.0" prefHeight="32.0" prefWidth="159.0" style="-fx-background-color: #00695c;" text="  IN-HOUSE ID :">
          <font>
             <Font name="System Bold" size="21.0" />
@@ -194,16 +186,18 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <JFXComboBox layoutX="380.0" layoutY="26.0" prefHeight="30.0" prefWidth="166.0" />
-      <Button fx:id="btnSearch" layoutX="569.0" layoutY="26.0" mnemonicParsing="false" onAction="#searchbtnOnAction" prefHeight="32.0" prefWidth="88.0" style="-fx-background-color: #00695c;" text="Search">
+      <JFXComboBox fx:id="cmbInhouseID" layoutX="380.0" layoutY="26.0" prefHeight="30.0" prefWidth="166.0" />
+      <Button fx:id="btnSearch" layoutX="569.0" layoutY="26.0" mnemonicParsing="false" onAction="#btnSearchOnAction" prefHeight="32.0" prefWidth="88.0" style="-fx-background-color: #00695c;" text="Search">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <Button layoutX="573.0" layoutY="426.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="81.0" style="-fx-background-color: #00695c;" text="Update">
+      <Button fx:id="btnUpdate" layoutX="573.0" layoutY="426.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="32.0" prefWidth="81.0" style="-fx-background-color: #00695c;" text="Update">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
+      <Label fx:id="lblContact" layoutX="278.0" layoutY="323.0" prefHeight="25.0" prefWidth="149.0" />
+      <Label fx:id="lblCustID" layoutX="306.0" layoutY="159.0" prefHeight="25.0" prefWidth="149.0" />
    </children>
 </AnchorPane>

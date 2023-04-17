@@ -1,6 +1,7 @@
 package Controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -13,24 +14,47 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginFormController {
-    public Button btnLogin;
-    public TextField txtUserName;
-    public TextField txtPassword;
-    public ImageView loginPane;
+    @FXML
     public Button btnRegister;
-    public AnchorPane dashboardPane;
+
+    @FXML
+    private TextField txtPassword;
+
+    @FXML
+    private TextField txtUserName;
+
+    @FXML
+    private Button btnLogin;
+
+    @FXML
+    private  AnchorPane dashboardPane;
 
     public void loginButtonOnAction(ActionEvent event) throws IOException {
 
-       // if(txtUserName.getText().equals("Rashmi19") && txtPassword.getText().equals("1234")){
-            Stage stage = (Stage) dashboardPane.getScene().getWindow();
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DashboardForm.fxml"))));
-            stage.setTitle("Item Form");
-            stage.centerOnScreen();
-            stage.show();
-       // }else{
-       //     new Alert(Alert.AlertType.ERROR, "Not a existing user!").show();
-      //  }*/
+        if((txtUserName.getText().isEmpty()||txtUserName.getText().isBlank())||(txtPassword.getText().isEmpty()||txtPassword.getText().isBlank())){
+            new Alert(Alert.AlertType.ERROR, "Please enter the username or password").show();
+        }
+
+        if(txtUserName.getText().matches("^(?:[^.\\s])\\S*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
+            if(txtUserName.getText().equals("Rashmidias819@gmail.com") || txtPassword.equals("1234")){
+                Stage stage = (Stage) dashboardPane.getScene().getWindow();
+                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DashboardForm.fxml"))));
+                stage.setTitle("Item Form");
+                stage.centerOnScreen();
+                stage.show();
+            }else{
+                new Alert(Alert.AlertType.ERROR, "Please enter correct username or password").show();
+            }
+        }else{
+            new Alert(Alert.AlertType.ERROR, "Please enter a valid email").show();
+        }
+
+        //else{
+         //   new Alert(Alert.AlertType.ERROR, "Please enter correct username or password").show();
+       // }
+
+
+
     }
 
     public void registerButtonOnAction(ActionEvent event) {

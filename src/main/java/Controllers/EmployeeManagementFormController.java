@@ -100,7 +100,7 @@ public class EmployeeManagementFormController {
 
     public void employeeDeletebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DeleteForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/EmployeeDeleteForm.fxml"))));
         stage.setTitle("Item Form");
         stage.centerOnScreen();
         stage.show();

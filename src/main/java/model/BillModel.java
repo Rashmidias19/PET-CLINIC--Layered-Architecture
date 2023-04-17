@@ -1,9 +1,11 @@
 package model;
 
+import db.DBConnection;
 import dto.Bill;
 import dto.Item;
 import util.CrudUtil;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,6 +30,18 @@ public class BillModel {
                     resultSet.getString(7),
                     resultSet.getString(8)
             ));
+        }
+        return data;
+    }
+
+    public static List<String> loadBillID() throws SQLException {
+        Connection con = DBConnection.getInstance().getConnection();
+        ResultSet resultSet = con.createStatement().executeQuery("SELECT BillID FROM Bill");
+
+        List<String> data = new ArrayList<>();
+
+        while (resultSet.next()) {
+            data.add(resultSet.getString(1));
         }
         return data;
     }
