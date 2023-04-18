@@ -133,5 +133,10 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <Button fx:id="btnReport" layoutX="349.0" layoutY="406.0" mnemonicParsing="false" onAction="#btnReportOnAction" prefHeight="46.0" prefWidth="269.0" style="-fx-background-color: #00695c;" text="Reports" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

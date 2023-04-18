@@ -4,7 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e734372e-659b-420d-85c9-37c6226b7340" name="Default Changelist" comment="new commit-6" />
+    <list default="true" id="e734372e-659b-420d-85c9-37c6226b7340" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/ReportFormController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/TestApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/Bill.jasper" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/customer.jasper" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/pet.jasper" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/view/reportForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AppInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/BillingManagementFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/BillingManagementFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/CustomerManagementFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/CustomerManagementFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/LoginFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/LoginFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/OperationAddFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/OperationAddFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/PetManagementFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/PetManagementFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/BillingManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/BillingManagementForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/CustomerManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/CustomerManagementForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/PetManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/PetManagementForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AppInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AppInitializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/BillingManagementFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/BillingManagementFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/CustomerManagementFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/CustomerManagementFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/LoginFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/LoginFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/OperationAddFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/OperationAddFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/PetManagementFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/PetManagementFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/BillingManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/BillingManagementForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/CustomerManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/CustomerManagementForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/PetManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/PetManagementForm.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +42,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
+        <option value="Tag Library Descriptor" />
         <option value="Class" />
       </list>
     </option>
@@ -38,18 +67,39 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/view" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="dto.tm" />
       <recent name="dto" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\OOP Final\petClinic\src\main\resources\view" />
+      <recent name="F:\OOP Final\petClinic\src\main\resources\report" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.AppInitializer">
     <configuration name="AppInitializer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AppInitializer" />
+      <module name="petClinic" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\openjfx-19.0.2.1_windows-x64_bin-sdk (1)\javafx-sdk-19.0.2.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestApp" />
       <module name="petClinic" />
       <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\openjfx-19.0.2.1_windows-x64_bin-sdk (1)\javafx-sdk-19.0.2.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
@@ -74,11 +124,13 @@
     </configuration>
     <list>
       <item itemvalue="Application.AppInitializer" />
+      <item itemvalue="Application.TestApp" />
       <item itemvalue="Database Script.item.sql" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.AppInitializer" />
+        <item itemvalue="Application.TestApp" />
       </list>
     </recent_temporary>
   </component>
@@ -192,7 +244,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681705617785</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="new commit">
+      <created>1681705873436</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1681705873436</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,14 +276,14 @@
     <MESSAGE value="new feature added-2" />
     <MESSAGE value="new feature added-3" />
     <MESSAGE value="new feature added-4" />
-    <MESSAGE value="new commit" />
     <MESSAGE value="new commit-1" />
     <MESSAGE value="new commit-2" />
     <MESSAGE value="new commit-3" />
     <MESSAGE value="new commit-4" />
     <MESSAGE value="new commit-5" />
     <MESSAGE value="new commit-6" />
-    <option name="LAST_COMMIT_MESSAGE" value="new commit-6" />
+    <MESSAGE value="new commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="new commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

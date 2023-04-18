@@ -31,23 +31,23 @@ public class LoginFormController {
 
     public void loginButtonOnAction(ActionEvent event) throws IOException {
 
-        if((txtUserName.getText().isEmpty()||txtUserName.getText().isBlank())||(txtPassword.getText().isEmpty()||txtPassword.getText().isBlank())){
-            new Alert(Alert.AlertType.ERROR, "Please enter the username or password").show();
-        }
+    //    if((txtUserName.getText().isEmpty()||txtUserName.getText().isBlank())||(txtPassword.getText().isEmpty()||txtPassword.getText().isBlank())){
+   //         new Alert(Alert.AlertType.ERROR, "Please enter the username or password").show();
+   //     }
 
-        if(txtUserName.getText().matches("^(?:[^.\\s])\\S*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
-            if(txtUserName.getText().equals("Rashmidias819@gmail.com") || txtPassword.equals("1234")){
+    //    if(txtUserName.getText().matches("^(?:[^.\\s])\\S*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
+    //        if(txtUserName.getText().equals("Rashmidias819@gmail.com") || txtPassword.equals("1234")){
                 Stage stage = (Stage) dashboardPane.getScene().getWindow();
                 stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/DashboardForm.fxml"))));
                 stage.setTitle("Item Form");
                 stage.centerOnScreen();
                 stage.show();
-            }else{
-                new Alert(Alert.AlertType.ERROR, "Please enter correct username or password").show();
-            }
-        }else{
-            new Alert(Alert.AlertType.ERROR, "Please enter a valid email").show();
-        }
+        //    }else{
+         //       new Alert(Alert.AlertType.ERROR, "Please enter correct username or password").show();
+        //    }
+      //  }else{
+     //       new Alert(Alert.AlertType.ERROR, "Please enter a valid email").show();
+    //    }
 
         //else{
          //   new Alert(Alert.AlertType.ERROR, "Please enter correct username or password").show();

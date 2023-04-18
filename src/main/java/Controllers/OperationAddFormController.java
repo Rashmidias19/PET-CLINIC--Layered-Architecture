@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-public class OperationAddFormController implements Initializable {
+public class OperationAddFormController implements Initializable{
     public AnchorPane dashboardPane;
     private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
     private static final Properties props = new Properties();
@@ -70,13 +70,6 @@ public class OperationAddFormController implements Initializable {
     @FXML
     private TextField txtHours;
 
-
-
-
-    @Override
-    public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
-        loadPetID();
-    }
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetManagementForm.fxml"))));
@@ -141,6 +134,11 @@ public class OperationAddFormController implements Initializable {
         stage.show();
     }
 
+
+    @Override
+    public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
+        loadPetID();
+    }
     public void savebtnOnAction(ActionEvent event) throws SQLException {
         String OperationID=txtID.getText();
         String PetID= (String) cmbPetID.getValue();

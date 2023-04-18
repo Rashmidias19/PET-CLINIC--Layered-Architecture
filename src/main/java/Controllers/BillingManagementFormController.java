@@ -5,8 +5,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class BillingManagementFormController {
 
@@ -108,4 +117,24 @@ public class BillingManagementFormController {
     }
 
 
+    public void btnReportOnAction(ActionEvent event) {
+        try {
+            JasperReport compileReport = (JasperReport) JRLoader.loadObject(this.getClass().getResource("/view/Bill.jasper"));
+            JasperPrint jasperPrint = JasperFillManager.fillReport(compileReport,null,getCon());
+            JasperViewer.viewReport(jasperPrint,false);
+
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+    public Connection getCon(){
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/VETCLOUD","root","1234");
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
