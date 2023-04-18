@@ -4,34 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e734372e-659b-420d-85c9-37c6226b7340" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Controllers/ReportFormController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/TestApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/view/Bill.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/view/customer.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/view/pet.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/view/reportForm.fxml" afterDir="false" />
+    <list default="true" id="e734372e-659b-420d-85c9-37c6226b7340" name="Default Changelist" comment="new commit-9">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AppInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/BillingManagementFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/BillingManagementFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/CustomerManagementFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/CustomerManagementFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/LoginFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/LoginFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/DashboardFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/DashboardFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/EmployeeAddScheduleFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/EmployeeAddScheduleFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/EmployeeScheduleFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/EmployeeScheduleFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/EmployeeScheduleManagementFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/EmployeeScheduleManagementFormController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/OperationAddFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/OperationAddFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/PetManagementFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/PetManagementFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/BillingManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/BillingManagementForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/CustomerManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/CustomerManagementForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/PetManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/PetManagementForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AppInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AppInitializer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/BillingManagementFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/BillingManagementFormController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/CustomerManagementFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/CustomerManagementFormController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/LoginFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/LoginFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/OperationScheduleFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/OperationScheduleFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/OperationScheduleManagementFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/OperationScheduleManagementFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/ScheduleManagementFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/ScheduleManagementFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controllers/VaccineScheduleManagementFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controllers/VaccineScheduleManagementFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/ClinicAddForm.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/ClinicScheduleForm.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/ClinicScheduleManagementForm.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/DashboardForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/DashboardForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/EmployeeAddScheduleForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/EmployeeAddScheduleForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/EmployeeScheduleManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/EmployeeScheduleManagementForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OperationAddForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/OperationAddForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/OperationScheduleManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/OperationScheduleManagementForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/ScheduleForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/ScheduleForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/VaccinationAddForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/VaccinationAddForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/VaccineScheduleManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/VaccineScheduleManagementForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/DashboardFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/DashboardFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/EmployeeAddScheduleFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/EmployeeAddScheduleFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/EmployeeScheduleFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/EmployeeScheduleFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/EmployeeScheduleManagementFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/EmployeeScheduleManagementFormController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Controllers/OperationAddFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/OperationAddFormController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/PetManagementFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/PetManagementFormController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/BillingManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/BillingManagementForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/CustomerManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/CustomerManagementForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/view/PetManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/PetManagementForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/OperationScheduleFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/OperationScheduleFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/OperationScheduleManagementFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/OperationScheduleManagementFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controllers/ScheduleManagementFormController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controllers/ScheduleManagementFormController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ClinicAddForm.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ClinicScheduleForm.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ClinicScheduleManagementForm.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/DashboardForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/DashboardForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/EmployeeAddScheduleForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/EmployeeAddScheduleForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/EmployeeScheduleManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/EmployeeScheduleManagementForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/OperationAddForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/OperationAddForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/OperationScheduleManagementForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/OperationScheduleManagementForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/view/ScheduleForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/view/ScheduleForm.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +83,11 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/view" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -106,13 +121,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -145,6 +162,7 @@
       <workItem from="1679892645927" duration="9648000" />
       <workItem from="1679971513699" duration="8960000" />
       <workItem from="1680214642235" duration="63107000" />
+      <workItem from="1681822300090" duration="1061000" />
     </task>
     <task id="LOCAL-00001" summary="new features added">
       <created>1679897459305</created>
@@ -251,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681705873436</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="new commit-9">
+      <created>1681805263662</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1681805263662</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -283,7 +308,8 @@
     <MESSAGE value="new commit-5" />
     <MESSAGE value="new commit-6" />
     <MESSAGE value="new commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="new commit" />
+    <MESSAGE value="new commit-9" />
+    <option name="LAST_COMMIT_MESSAGE" value="new commit-9" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

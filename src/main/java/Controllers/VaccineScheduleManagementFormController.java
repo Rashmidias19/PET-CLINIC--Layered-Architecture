@@ -88,4 +88,7 @@ public class VaccineScheduleManagementFormController {
         stage.centerOnScreen();
         stage.show();
     }
+
+    public void backbtnOnAction(ActionEvent event) {
+    }
 }

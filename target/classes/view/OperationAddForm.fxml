@@ -169,7 +169,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="btnSave" layoutX="585.0" layoutY="467.0" mnemonicParsing="false" onAction="#savebtnOnAction" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #00695c;" text="Save">
+      <Button fx:id="btnSave" layoutX="653.0" layoutY="470.0" mnemonicParsing="false" onAction="#savebtnOnAction" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #00695c;" text="Save">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -188,5 +188,10 @@
       <TextField fx:id="txtID" layoutX="317.0" layoutY="97.0" prefHeight="25.0" prefWidth="174.0" />
       <Label fx:id="lblCustomerID" layoutX="323.0" layoutY="174.0" prefHeight="30.0" prefWidth="166.0" />
       <Label fx:id="lblContact" layoutX="286.0" layoutY="377.0" prefHeight="30.0" prefWidth="166.0" />
+      <Button fx:id="btnBack" layoutX="539.0" layoutY="470.0" mnemonicParsing="false" onAction="#backbtnOnAction" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #00695c;" text="Back">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

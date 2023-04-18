@@ -128,5 +128,10 @@
                 <Font name="System Bold" size="22.0" />
             </font>
         </Button>
+      <Button fx:id="btnBack" layoutX="223.0" layoutY="29.0" mnemonicParsing="false" onAction="#backbtnOnAction" prefHeight="27.0" prefWidth="65.0" style="-fx-background-color: #00695c;" text="Back">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

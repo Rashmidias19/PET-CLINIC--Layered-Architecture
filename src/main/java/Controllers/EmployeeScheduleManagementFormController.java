@@ -88,4 +88,12 @@ public class EmployeeScheduleManagementFormController {
         stage.centerOnScreen();
         stage.show();
     }
+
+    public void backbtnOnAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"))));
+        stage.setTitle("Item Form");
+        stage.centerOnScreen();
+        stage.show();
+    }
 }

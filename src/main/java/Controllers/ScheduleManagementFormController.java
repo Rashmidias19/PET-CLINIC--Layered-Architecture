@@ -73,14 +73,4 @@ public class ScheduleManagementFormController {
         stage.centerOnScreen();
         stage.show();
     }
-    public void addbtnOnAction(ActionEvent event) throws IOException {
-        Stage stage = (Stage) dashboardPane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/Form.fxml"))));
-        stage.setTitle("Item Form");
-        stage.centerOnScreen();
-        stage.show();
-    }
-
-    public void viewbtnOnAction(ActionEvent event) {
-    }
 }

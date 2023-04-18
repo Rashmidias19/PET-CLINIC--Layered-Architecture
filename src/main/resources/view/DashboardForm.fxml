@@ -148,11 +148,29 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblPet" layoutX="379.0" layoutY="37.0" prefHeight="53.0" prefWidth="59.0" />
-      <Label fx:id="lblEmployee" layoutX="674.0" layoutY="37.0" prefHeight="53.0" prefWidth="59.0" />
-      <Label fx:id="lblItem" layoutX="379.0" layoutY="160.0" prefHeight="53.0" prefWidth="59.0" />
-      <Label fx:id="lblInhouse" layoutX="662.0" layoutY="160.0" prefHeight="53.0" prefWidth="59.0" />
-      <Label fx:id="lblCustomers" layoutX="553.0" layoutY="298.0" prefHeight="53.0" prefWidth="59.0" />
-      <Label fx:id="lblUsers" layoutX="553.0" layoutY="415.0" prefHeight="53.0" prefWidth="59.0" />
+      <Label fx:id="lblPet" layoutX="379.0" layoutY="37.0" prefHeight="53.0" prefWidth="59.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label fx:id="lblEmployee" layoutX="674.0" layoutY="37.0" prefHeight="53.0" prefWidth="59.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label fx:id="lblItem" layoutX="379.0" layoutY="160.0" prefHeight="53.0" prefWidth="59.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label fx:id="lblInhouse" layoutX="662.0" layoutY="160.0" prefHeight="53.0" prefWidth="59.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label fx:id="lblCustomers" layoutX="553.0" layoutY="298.0" prefHeight="53.0" prefWidth="59.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label fx:id="lblUsers" layoutX="553.0" layoutY="415.0" prefHeight="53.0" prefWidth="59.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
    </children>
 </AnchorPane>

@@ -22,7 +22,7 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Button>
-      <Button fx:id="btnVaccination" layoutX="234.0" layoutY="299.0" mnemonicParsing="false" onAction="#vaccinationOnAction" prefHeight="71.0" prefWidth="200.0" style="-fx-background-color: #00695c;" text="VACCINATION" textFill="WHITE">
+      <Button fx:id="btnVaccination" layoutX="388.0" layoutY="298.0" mnemonicParsing="false" onAction="#vaccinationOnAction" prefHeight="71.0" prefWidth="200.0" style="-fx-background-color: #00695c;" text="VACCINATION" textFill="WHITE">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
@@ -133,10 +133,5 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Button fx:id="btnClinic" layoutX="521.0" layoutY="299.0" mnemonicParsing="false" onAction="#clinicOnAction" prefHeight="71.0" prefWidth="200.0" style="-fx-background-color: #00695c;" text="CLINIC" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="22.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>

@@ -1,19 +1,23 @@
 package Controllers;
 
 
+import dto.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
+import model.*;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -45,28 +49,36 @@ public class DashboardFormController implements Initializable {
     @FXML
     private Label lblItem;
 
+    private Connection con;
+
     @SneakyThrows
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
+        loadValues();
     }
 
 
 
-   /* private void loadValues() throws SQLException{
-        int pet="SELECT COUNT(*) FROM Pet";
-        String employee="SELECT COUNT(*) FROM Employee";
-        String item="SELECT COUNT(*) FROM Item";
-        String inhouse="SELECT COUNT(*) FROM Inhouse";
-        String customer="SELECT COUNT(*) FROM Customer";
-        String user="SELECT COUNT(*) FROM User";
+    private void loadValues() throws SQLException{
+       try{
+           List<User> userList= UserModel.getAll();
+           List<Customer> customerList= CustomerModel.getAll();
+           List<Pet> petList= PetModel.getAll();
+           List<Employee> employeeList= EmployeeModel.getAll();
+           List<Item> itemList= ItemModel.getAll();
+           List<Inhouse> inhouseList=InhouseModel.getAll();
+           lblUsers.setText(String.valueOf(userList.size()));
+           lblCustomers.setText(String.valueOf(customerList.size()));
+           lblPet.setText(String.valueOf(petList.size()));
+           lblEmployee.setText(String.valueOf(employeeList.size()));
+           lblItem.setText(String.valueOf(itemList.size()));
+           lblInhouse.setText(String.valueOf(inhouseList.size()));
 
-        lblPet.setText(pet);
-        lblEmployee.setText(employee);
-        lblItem.setText(item);
-        lblInhouse.setText(inhouse);
-        lblCustomers.setText(customer);
-        lblUsers.setText(user);
-    }*/
+
+       }catch (SQLException e){
+           new Alert(Alert.AlertType.ERROR, "something happend!").show();
+       }
+    }
 
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
