@@ -83,7 +83,7 @@ public class DashboardFormController implements Initializable {
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -91,7 +91,7 @@ public class DashboardFormController implements Initializable {
     public void customerbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -99,7 +99,7 @@ public class DashboardFormController implements Initializable {
     public void usersbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -107,7 +107,7 @@ public class DashboardFormController implements Initializable {
     public void employeebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/EmployeeManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -115,7 +115,7 @@ public class DashboardFormController implements Initializable {
     public void suppliesbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/SupplieManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -123,7 +123,7 @@ public class DashboardFormController implements Initializable {
     public void billingbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/BillingManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -131,7 +131,7 @@ public class DashboardFormController implements Initializable {
     public void inhousebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/InhouseManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -139,7 +139,7 @@ public class DashboardFormController implements Initializable {
     public void logoutbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/LoginForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }

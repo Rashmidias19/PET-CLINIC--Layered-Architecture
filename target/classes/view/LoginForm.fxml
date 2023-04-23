@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginFormController">
+<AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginFormController">
    <children>
       <ImageView fitHeight="525.0" fitWidth="776.0">
          <image>
@@ -40,7 +40,7 @@
                   </RadialGradient>
                </textFill>
             </Label>
-            <Label layoutX="30.0" layoutY="105.0" prefHeight="29.0" prefWidth="230.0" text="User Name" textFill="#221f1f">
+            <Label layoutX="30.0" layoutY="105.0" prefHeight="29.0" prefWidth="230.0" text="Email" textFill="#221f1f">
                <font>
                   <Font name="System Bold Italic" size="16.0" />
                </font>
@@ -50,15 +50,14 @@
                   <Font name="System Bold Italic" size="16.0" />
                </font>
             </Label>
-            <Button fx:id="btnLogin" layoutX="112.0" layoutY="295.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="32.0" prefWidth="101.0" style="-fx-background-color: black;" text="Login">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
             <TextField fx:id="txtUserName" layoutX="23.0" layoutY="148.0" prefHeight="26.0" prefWidth="275.0" />
             <TextField fx:id="txtPassword" layoutX="23.0" layoutY="238.0" prefHeight="26.0" prefWidth="275.0" />
+            <Button fx:id="btnLogin" layoutX="117.0" layoutY="315.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: black;" text="Login">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
-      <Button fx:id="btnRegister" layoutX="628.0" layoutY="16.0" mnemonicParsing="false" onAction="#registerButtonOnAction" prefHeight="50.0" prefWidth="121.0" style="-fx-background-color: #616161;" text="Register" />
    </children>
 </AnchorPane>

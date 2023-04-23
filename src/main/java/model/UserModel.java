@@ -65,4 +65,26 @@ public class UserModel {
         }
         return null;
     }
+    public static String getNextUserId() throws SQLException {
+        Connection con = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT UserID FROM user ORDER BY UserID DESC LIMIT 1";
+
+        ResultSet resultSet = con.createStatement().executeQuery(sql);
+
+        if (resultSet.next()) {
+            return splitUserId(resultSet.getString(1));
+        }
+        return splitUserId(null);
+    }
+
+    private static String splitUserId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("U000");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            return "U000" + id;
+        }
+        return "U0001";
+    }
 }

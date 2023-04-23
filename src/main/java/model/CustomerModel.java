@@ -81,4 +81,27 @@ public class CustomerModel {
         }
         return data;
     }
+
+    public static String getNextCustomerId() throws SQLException {
+        Connection con = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT CustomerID FROM customer ORDER BY CustomerID DESC LIMIT 1";
+
+        ResultSet resultSet = con.createStatement().executeQuery(sql);
+
+        if (resultSet.next()) {
+            return splitCustomerId(resultSet.getString(1));
+        }
+        return splitCustomerId(null);
+    }
+
+    private static String splitCustomerId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("C000");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            return "C000" + id;
+        }
+        return "C0001";
+    }
 }

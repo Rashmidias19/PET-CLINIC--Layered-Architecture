@@ -45,4 +45,27 @@ public class BillModel {
         }
         return data;
     }
+
+    public static String getNextBillId() throws SQLException {
+        Connection con = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT BillID FROM Bill ORDER BY BillID DESC LIMIT 1";
+
+        ResultSet resultSet = con.createStatement().executeQuery(sql);
+
+        if (resultSet.next()) {
+            return splitBillId(resultSet.getString(1));
+        }
+        return splitBillId(null);
+    }
+
+    private static String splitBillId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("B000");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            return "B000" + id;
+        }
+        return "B0001";
+    }
 }

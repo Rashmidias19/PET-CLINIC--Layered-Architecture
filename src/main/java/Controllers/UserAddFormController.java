@@ -6,9 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.CustomerModel;
+import model.UserModel;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,7 +37,7 @@ public class UserAddFormController implements Initializable {
     private AnchorPane dashboardPane;
 
     @FXML
-    private TextField txtID;
+    private Label lblID;
 
     @FXML
     private TextField txtName;
@@ -48,13 +51,13 @@ public class UserAddFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        generateNextUserId();
     }
 
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -62,7 +65,7 @@ public class UserAddFormController implements Initializable {
     public void customerbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -70,7 +73,7 @@ public class UserAddFormController implements Initializable {
     public void usersbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -78,7 +81,7 @@ public class UserAddFormController implements Initializable {
     public void employeebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/EmployeeManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -86,7 +89,7 @@ public class UserAddFormController implements Initializable {
     public void suppliesbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/SupplieManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -94,7 +97,7 @@ public class UserAddFormController implements Initializable {
     public void billingbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/BillingManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -102,7 +105,7 @@ public class UserAddFormController implements Initializable {
     public void inhousebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/InhouseManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -110,34 +113,63 @@ public class UserAddFormController implements Initializable {
     public void logoutbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/LoginForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
-        String UserID=txtID.getText();
-        String UserName=txtName.getText();
-        String password=txtPassword.getText();
-        String email=txtEmail.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO User(UserID,UserName,password,email)" +
-                    "VALUES(?, ?, ?, ?)";
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1,UserID);
-            pstm.setString(2, UserName);
-            pstm.setString(3, password);
-            pstm.setString(4, email);
+    private void generateNextUserId() {
+        try {
+            String id = UserModel.getNextUserId();
+            lblID.setText(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+        }
+    }
 
-            int affectedRows = pstm.executeUpdate();
-            if (affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! user added :)")
-                        .show();
+
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
+
+
+        if(txtEmail.getText().matches("^(?:[^.\\s])\\S*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")) {
+            if (txtPassword.getText().matches("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{5,}$")) {
+                String UserID = lblID.getText();
+                String UserName = txtName.getText();
+                String password = txtPassword.getText();
+                String email = txtEmail.getText();
+
+                try (Connection con = DriverManager.getConnection(URL, props)) {
+                    String sql = "INSERT INTO User(UserID,UserName,password,email)" +
+                            "VALUES(?, ?, ?, ?)";
+                    PreparedStatement pstm = con.prepareStatement(sql);
+                    pstm.setString(1, UserID);
+                    pstm.setString(2, UserName);
+                    pstm.setString(3, password);
+                    pstm.setString(4, email);
+
+                    int affectedRows = pstm.executeUpdate();
+                    if (affectedRows > 0) {
+                        new Alert(Alert.AlertType.CONFIRMATION,
+                                "huree!! user added :)")
+                                .show();
+                    }
+
+
+                }
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Please enter a password with minimum 5 characters, with a upper case and lower case letters and atleast one number.").show();
+            }
+        }else{
+                new Alert(Alert.AlertType.ERROR, "Please enter a valid email").show();
+
             }
 
-        }
-
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserAddForm.fxml"))));
+        stage.setTitle("User Form");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 }

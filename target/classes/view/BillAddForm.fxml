@@ -46,7 +46,6 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Button>
-      <TextField fx:id="txtID" layoutX="104.0" layoutY="81.0" />
       <Label layoutX="24.0" layoutY="181.0" prefHeight="20.0" prefWidth="65.0" text="  Name :">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -123,6 +122,11 @@
       <Label layoutX="362.0" layoutY="266.0" prefHeight="21.0" prefWidth="81.0" text="Email :">
          <font>
             <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblID" layoutX="102.0" layoutY="74.0" prefHeight="40.0" prefWidth="160.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
    </children>

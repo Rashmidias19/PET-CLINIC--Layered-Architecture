@@ -7,13 +7,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CustomerModel;
+import model.EmployeeModel;
 import model.UserModel;
 
 import java.io.IOException;
@@ -38,7 +36,7 @@ public class EmployeeRegisterFormController implements Initializable {
 
 
     @FXML
-    private TextField txtID;
+    private Label lblID;
 
     @FXML
     private TextField txtName;
@@ -75,14 +73,16 @@ public class EmployeeRegisterFormController implements Initializable {
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
+        generateNextEmpId();
         loadGender();
         loadUserID();
 
     }
+
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -90,7 +90,7 @@ public class EmployeeRegisterFormController implements Initializable {
     public void customerbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -98,7 +98,7 @@ public class EmployeeRegisterFormController implements Initializable {
     public void usersbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -106,7 +106,7 @@ public class EmployeeRegisterFormController implements Initializable {
     public void employeebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/EmployeeManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -114,7 +114,7 @@ public class EmployeeRegisterFormController implements Initializable {
     public void suppliesbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/SupplieManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -122,7 +122,7 @@ public class EmployeeRegisterFormController implements Initializable {
     public void billingbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/BillingManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -130,7 +130,7 @@ public class EmployeeRegisterFormController implements Initializable {
     public void inhousebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/InhouseManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -138,13 +138,13 @@ public class EmployeeRegisterFormController implements Initializable {
     public void logoutbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/LoginForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
 
     private void loadGender() {
-        ObservableList<String> obList = FXCollections.observableArrayList("Male","Female");
+        ObservableList<String> obList = FXCollections.observableArrayList("Male", "Female");
         cmbGender.setItems(obList);
 
     }
@@ -165,45 +165,66 @@ public class EmployeeRegisterFormController implements Initializable {
 
     }
 
+    private void generateNextEmpId() {
+        try {
+            String id = EmployeeModel.getNextEmpId();
+            lblID.setText(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+        }
+    }
+
     public void savebtnOnAction(ActionEvent event) throws SQLException {
-        String EmployeeID=txtID.getText();
-        String Name=txtName.getText();
-        String UserID= (String) cmbUserID.getValue();
-        LocalDate DOB=date.getValue();
-        String NIC=txtNIC.getText();
-        int Age=Integer.parseInt(txtAge.getText());
-        String Gender= (String) cmbGender.getValue();
-        String address=txtAddress.getText();
-        String Salary=txtSalary.getText();
-        String contact=txtContact.getText();
-        String email=txtEmail.getText();
+
+        if (txtEmail.getText().matches("^(?:[^.\\s])\\S*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")) {
+            if (Integer.parseInt(txtAge.getText()) > 19 && Integer.parseInt(txtAge.getText()) < 70) {
+
+                String EmployeeID = lblID.getText();
+                String Name = txtName.getText();
+                String UserID = (String) cmbUserID.getValue();
+                LocalDate DOB = date.getValue();
+                String NIC = txtNIC.getText();
+                int Age = Integer.parseInt(txtAge.getText());
+                String Gender = (String) cmbGender.getValue();
+                String address = txtAddress.getText();
+                String Salary = txtSalary.getText();
+                String contact = txtContact.getText();
+                String email = txtEmail.getText();
 
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO Employee(EmployeeID,Name,UserID,DOB,NIC,Age,Gender,address,Salary,contact,email)" +
-                    "VALUES(?, ?, ?, ?,?,?,?,?,?,?,?)";
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1,EmployeeID);
-            pstm.setString(2, Name);
-            pstm.setString(3, UserID);
-            pstm.setDate(4, java.sql.Date.valueOf(DOB));
-            pstm.setString(5,NIC);
-            pstm.setInt(6,Age);
-            pstm.setString(7,Gender);
-            pstm.setString(8,address);
-            pstm.setString(9, Salary);
-            pstm.setString(10,contact);
-            pstm.setString(11,email);
+                try (Connection con = DriverManager.getConnection(URL, props)) {
+                    String sql = "INSERT INTO Employee(EmployeeID,Name,UserID,DOB,NIC,Age,Gender,address,Salary,contact,email)" +
+                            "VALUES(?, ?, ?, ?,?,?,?,?,?,?,?)";
+                    PreparedStatement pstm = con.prepareStatement(sql);
+                    pstm.setString(1, EmployeeID);
+                    pstm.setString(2, Name);
+                    pstm.setString(3, UserID);
+                    pstm.setDate(4, java.sql.Date.valueOf(DOB));
+                    pstm.setString(5, NIC);
+                    pstm.setInt(6, Age);
+                    pstm.setString(7, Gender);
+                    pstm.setString(8, address);
+                    pstm.setString(9, Salary);
+                    pstm.setString(10, contact);
+                    pstm.setString(11, email);
 
 
-            int affectedRows = pstm.executeUpdate();
-            if (affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
-                        .show();
+                    int affectedRows = pstm.executeUpdate();
+                    if (affectedRows > 0) {
+                        new Alert(Alert.AlertType.CONFIRMATION,
+                                "huree!! customer added :)")
+                                .show();
+                    }
+
+                }}else{
+                    new Alert(Alert.AlertType.ERROR, "Please enter a valid age between 20-70").show();
+                }
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Please enter a valid email").show();
+
             }
 
         }
-
     }
-}
+

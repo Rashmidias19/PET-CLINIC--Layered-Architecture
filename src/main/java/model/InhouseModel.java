@@ -14,6 +14,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InhouseModel {
+
+    public static String getNextInId() throws SQLException {
+        Connection con = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT InhouseID FROM Inhouse ORDER BY InhouseID DESC LIMIT 1";
+
+        ResultSet resultSet = con.createStatement().executeQuery(sql);
+
+        if (resultSet.next()) {
+            return splitInId(resultSet.getString(1));
+        }
+        return splitInId(null);
+    }
+
+    private static String splitInId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("IH000");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            return "IH000" + id;
+        }
+        return "IH0001";
+    }
+
     public static List<Inhouse> getAll() throws SQLException {
         List<Inhouse> data = new ArrayList<>();
 

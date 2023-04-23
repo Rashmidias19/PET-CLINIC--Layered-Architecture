@@ -105,7 +105,7 @@ public class VaccineScheduleFormController implements Initializable {
     public void backbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/ScheduleManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }

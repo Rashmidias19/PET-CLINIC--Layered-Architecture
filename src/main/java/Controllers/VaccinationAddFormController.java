@@ -16,8 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.CustomerModel;
 import model.EmployeeModel;
 import model.PetModel;
+import model.VaccinationScheduleModel;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -34,7 +36,7 @@ public class VaccinationAddFormController implements Initializable {
     public AnchorPane dashboardPane;
 
     @FXML
-    private TextField txtID;
+    private Label lblID;
 
     @FXML
     private JFXComboBox cmbPet_ID;
@@ -68,7 +70,7 @@ public class VaccinationAddFormController implements Initializable {
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -76,7 +78,7 @@ public class VaccinationAddFormController implements Initializable {
     public void customerbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -84,7 +86,7 @@ public class VaccinationAddFormController implements Initializable {
     public void usersbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -92,7 +94,7 @@ public class VaccinationAddFormController implements Initializable {
     public void employeebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/EmployeeManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -100,7 +102,7 @@ public class VaccinationAddFormController implements Initializable {
     public void suppliesbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/SupplieManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -108,7 +110,7 @@ public class VaccinationAddFormController implements Initializable {
     public void billingbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/BillingManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -116,7 +118,7 @@ public class VaccinationAddFormController implements Initializable {
     public void inhousebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/InhouseManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -124,13 +126,14 @@ public class VaccinationAddFormController implements Initializable {
     public void logoutbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/LoginForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
+        generateNextVaccId();
         loadPet_ID();
     }
 
@@ -167,8 +170,19 @@ public class VaccinationAddFormController implements Initializable {
         lblContact.setText(String.valueOf(pet.getContact()));
     }
 
+    private void generateNextVaccId() {
+        try {
+            String id = VaccinationScheduleModel.getNextVaccId();
+            lblID.setText(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+        }
+    }
+
+
     public void savebtnOnAction(ActionEvent actionEvent) throws SQLException {
-        String Vaccination_ID = txtID.getText();
+        String Vaccination_ID = lblID.getText();
         String Pet_ID = (String) cmbPet_ID.getValue();
         String Customer_ID = lblCustomer_ID.getText();
         LocalDate Date = date.getValue();
@@ -197,5 +211,13 @@ public class VaccinationAddFormController implements Initializable {
             }
 
         }
+    }
+
+    public void backbtnOnAction(ActionEvent event) throws IOException {
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/VaccineScheduleManagementForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
     }
 }

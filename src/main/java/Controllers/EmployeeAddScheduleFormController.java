@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CustomerModel;
 import model.EmployeeModel;
+import model.EmployeeScheduleModel;
 import model.PetModel;
 
 import java.io.IOException;
@@ -40,7 +41,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
 
 
     @FXML
-    private TextField txtID;
+    private Label lblID;
 
     @FXML
     private JFXComboBox cmbEmployeeID;
@@ -72,13 +73,24 @@ public class EmployeeAddScheduleFormController implements Initializable {
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
         loadShift();
         loadEmployeeID();
-
+        generateNextEmpSchedId();
 
     }
+
+    private void generateNextEmpSchedId() {
+        try {
+            String id = EmployeeScheduleModel.getNextSchedId();
+            lblID.setText(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
+        }
+    }
+
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -86,7 +98,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
     public void customerbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -94,7 +106,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
     public void usersbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -102,7 +114,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
     public void employeebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/EmployeeManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -110,7 +122,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
     public void suppliesbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/SupplieManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -118,7 +130,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
     public void billingbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/BillingManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -126,7 +138,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
     public void inhousebtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/InhouseManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -134,7 +146,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
     public void logoutbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/LoginForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }
@@ -180,7 +192,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
     }
 
     public void savebtnOnAction(ActionEvent event) throws SQLException {
-        String ScheduleID=txtID.getText();
+        String ScheduleID=lblID.getText();
         String EmployeeID= (String) cmbEmployeeID.getValue();
         String Name=lblName.getText();
         LocalDate Date= date.getValue();
@@ -189,49 +201,24 @@ public class EmployeeAddScheduleFormController implements Initializable {
         String Shift= (String) cmbShift.getValue();
         String OT=Ot.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO EmployeeSchedule(ScheduleID,EmployeeID,Name,Date,Time,WorkTime,Shift,OT)" +
-                    "VALUES(?, ?, ?, ?,?,?,?,?)";
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1,ScheduleID);
-            pstm.setString(2, EmployeeID);
-            pstm.setString(3, Name);
-            pstm.setDate(4, java.sql.Date.valueOf(Date));
-            pstm.setTime(5, java.sql.Time.valueOf(Time));
-            pstm.setString(6,WorkTime);
-            pstm.setString(7,Shift);
-            pstm.setString(8,OT);
-
-
-            int affectedRows = pstm.executeUpdate();
-            if (affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
-                        .show();
+        boolean isAdd = false;
+        try {
+            isAdd = EmployeeScheduleModel.addSchedule(ScheduleID, EmployeeID,Name,Date,Time,WorkTime,Shift,OT);
+            if(isAdd) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Order Placed").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Order Not Placed").show();
             }
-
-        }
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO EmpSched(ScheduleID,EmployeeID)" +
-                    "VALUES(?, ?)";
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1,ScheduleID);
-            pstm.setString(2, EmployeeID);
-
-            int affectedRows = pstm.executeUpdate();
-            if (affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
-                        .show();
-            }
-
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "SQL Error").show();
         }
     }
 
     public void backbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/EmployeeScheduleManagementForm.fxml"))));
-        stage.setTitle("Item Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
     }

@@ -73,4 +73,27 @@ public class EmployeeModel {
         }
         return data;
     }
+
+    public static String getNextEmpId() throws SQLException {
+        Connection con = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT EmployeeID FROM employee ORDER BY EmployeeID DESC LIMIT 1";
+
+        ResultSet resultSet = con.createStatement().executeQuery(sql);
+
+        if (resultSet.next()) {
+            return splitEmpId(resultSet.getString(1));
+        }
+        return splitEmpId(null);
+    }
+
+    private static String splitEmpId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("E000");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            return "E000" + id;
+        }
+        return "E0001";
+    }
 }

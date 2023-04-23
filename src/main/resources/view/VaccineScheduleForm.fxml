@@ -12,7 +12,7 @@
    <children>
       <ScrollPane layoutX="13.0" layoutY="64.0" prefHeight="453.0" prefWidth="753.0">
          <content>
-            <TableView fx:id="tblVaccination" prefHeight="453.0" prefWidth="753.0">
+            <TableView fx:id="tblVaccination" prefHeight="453.0" prefWidth="850.0">
                <columns>
                   <TableColumn fx:id="colID" prefWidth="98.0" text="Vaccination_ID" />
                   <TableColumn fx:id="colPetID" minWidth="0.0" prefWidth="116.0" text="Pet_ID" />

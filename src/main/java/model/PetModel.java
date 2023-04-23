@@ -80,4 +80,28 @@ public class PetModel {
         }
         return data;
     }
+
+    public static String getNextPetId() throws SQLException {
+        Connection con = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT PetID FROM pet ORDER BY PetID DESC LIMIT 1";
+
+        ResultSet resultSet = con.createStatement().executeQuery(sql);
+
+        if (resultSet.next()) {
+            return splitPetId(resultSet.getString(1));
+        }
+        return splitPetId(null);
+    }
+
+    private static String splitPetId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("P000");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            return "P000" + id;
+        }
+        return "P0001";
+    }
+
 }

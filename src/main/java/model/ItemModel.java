@@ -59,6 +59,29 @@ public class ItemModel {
         return null;
     }
 
+    public static String getNextItemId() throws SQLException {
+        Connection con = DBConnection.getInstance().getConnection();
+
+        String sql = "SELECT ItemID FROM item ORDER BY ItemID DESC LIMIT 1";
+
+        ResultSet resultSet = con.createStatement().executeQuery(sql);
+
+        if (resultSet.next()) {
+            return splitItemId(resultSet.getString(1));
+        }
+        return splitItemId(null);
+    }
+
+    private static String splitItemId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("I000");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            return "I000" + id;
+        }
+        return "I0001";
+    }
+
     public static List<Item> getAll() throws SQLException {
         List<Item> data = new ArrayList<>();
 
