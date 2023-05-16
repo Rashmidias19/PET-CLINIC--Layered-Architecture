@@ -40,7 +40,7 @@
                   </RadialGradient>
                </textFill>
             </Label>
-            <Label layoutX="30.0" layoutY="105.0" prefHeight="29.0" prefWidth="230.0" text="Email" textFill="#221f1f">
+            <Label layoutX="30.0" layoutY="105.0" prefHeight="29.0" prefWidth="230.0" text="UserName" textFill="#221f1f">
                <font>
                   <Font name="System Bold Italic" size="16.0" />
                </font>

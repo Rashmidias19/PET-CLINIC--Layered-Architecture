@@ -200,7 +200,7 @@ public class CustomerUpdateFormController implements Initializable {
 
     }
 
-    public void btnUpdateOnAction(ActionEvent event) throws SQLException {
+    public void btnUpdateOnAction(ActionEvent event) throws SQLException, IOException {
         String CustomerID=txtID.getText();
         String CustTitle= (String) cmbTitle.getValue();
         String CustName=txtName.getText();
@@ -234,6 +234,11 @@ public class CustomerUpdateFormController implements Initializable {
             }
 
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerUpdateForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 }

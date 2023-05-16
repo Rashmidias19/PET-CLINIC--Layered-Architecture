@@ -2,6 +2,8 @@ package dto;
 
 import lombok.*;
 
+import java.sql.Blob;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -20,8 +22,5 @@ public class Employee {
     private String Salary;
     private String Contact;
     private String email;
-
-    public Employee(String string) {
-        this.Name=string;
-    }
+    private Blob picture;
 }

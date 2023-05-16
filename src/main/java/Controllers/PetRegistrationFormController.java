@@ -8,17 +8,28 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.CustomerModel;
 import model.PetModel;
 
-import java.io.IOException;
+import javax.swing.*;
+import javax.swing.text.Element;
+import javax.swing.text.html.ImageView;
+import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+import java.io.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.AttributedCharacterIterator;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Properties;
@@ -46,6 +57,8 @@ public class PetRegistrationFormController implements Initializable {
     @FXML
     private TextField txtAge;
 
+    @FXML
+    private TextField txtImage;
 
     @FXML
     private TextField txtAddress;
@@ -66,7 +79,22 @@ public class PetRegistrationFormController implements Initializable {
     private ComboBox cmbGender;
 
     @FXML
+    private Label lblImg;
+
+    @FXML
     private ComboBox cmbCustomerID;
+
+    private FileChooser fileChooser;
+
+    private File file;
+
+    private Desktop desktop=Desktop.getDesktop();
+
+    private FileInputStream inp;
+
+    private FileInputStream fsp;
+
+    private Circle circle;
 
 
     @Override
@@ -175,7 +203,7 @@ public class PetRegistrationFormController implements Initializable {
         }
     }
 
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
         String PetID=lblID.getText();
         String Name=txtName.getText();
         String CustomerID= (String) cmbCustomerID.getValue();
@@ -188,8 +216,8 @@ public class PetRegistrationFormController implements Initializable {
         String contact=txtContact.getText();
 
         try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO Pet(PetID,Name,CustomerID,Type ,Breed,Gender,DOB,age,address,contact )" +
-                    "VALUES(?, ?, ?, ?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Pet(PetID,Name,CustomerID,Type ,Breed,Gender,DOB,age,address,contact,picture )" +
+                    "VALUES(?, ?, ?, ?,?,?,?,?,?,?,?)";
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setString(1,PetID);
             pstm.setString(2, Name);
@@ -201,16 +229,43 @@ public class PetRegistrationFormController implements Initializable {
             pstm.setInt(8,age);
             pstm.setString(9,address);
             pstm.setString(10,contact);
+            inp=new FileInputStream(file);
+            pstm.setBinaryStream(11,(InputStream) inp,(int)file.length());
+
 
 
             int affectedRows = pstm.executeUpdate();
             if (affectedRows > 0) {
                 new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
+                        "Pet added :)")
                         .show();
             }
 
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetRegistrationForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
+    }
+
+    public void btnAddOnAction(ActionEvent event) throws FileNotFoundException {
+
+        fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files","*.png","*.jpg","*.gif","*.")
+        );
+        fileChooser.setTitle("Choose File");
+        file = fileChooser.showOpenDialog(null);
+        inp=new FileInputStream(file);
+        if (file != null){
+            try {
+                desktop.open(file);
+                txtImage.setText(file.getAbsolutePath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

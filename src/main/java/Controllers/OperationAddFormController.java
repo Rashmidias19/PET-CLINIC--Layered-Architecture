@@ -151,7 +151,7 @@ public class OperationAddFormController implements Initializable{
         generateNextOpId();
         loadPetID();
     }
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
         String OperationID=lblID.getText();
         String PetID= (String) cmbPetID.getValue();
         String CustomerID=lblCustomerID.getText();
@@ -178,11 +178,16 @@ public class OperationAddFormController implements Initializable{
             int affectedRows = pstm.executeUpdate();
             if (affectedRows > 0) {
                 new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
+                        "Operation added :)")
                         .show();
             }
 
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/OperationAddForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
     }
 
     private void loadPetID() {

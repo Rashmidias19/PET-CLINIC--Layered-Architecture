@@ -43,13 +43,13 @@ public class UserDeleteFormController implements Initializable {
     }
     private void loadUserID() {
         try {
-            ObservableList<String> obList = FXCollections.observableArrayList();
+            ObservableList<String> obbList = FXCollections.observableArrayList();
             List<String> codes = UserModel.loadUserID();
 
             for (String code : codes) {
-                obList.add(code);
+                obbList.add(code);
             }
-            cmbID.setItems(obList);
+            cmbID.setItems(obbList);
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();

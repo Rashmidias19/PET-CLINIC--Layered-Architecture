@@ -193,7 +193,7 @@ public class InhouseUpdateFormController implements Initializable {
         lblContact.setText(inhouse.getContact());
     }
 
-    public void btnUpdateOnAction(ActionEvent event) throws SQLException {
+    public void btnUpdateOnAction(ActionEvent event) throws SQLException, IOException {
         String InhouseID=txtID.getText();
         String PetID= (String) cmbPetID.getValue();
         String CustomerID=lblCustID.getText();
@@ -223,6 +223,11 @@ public class InhouseUpdateFormController implements Initializable {
             }
 
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/InhouseUpdateForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 }

@@ -70,7 +70,7 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Button fx:id="btnSave" layoutX="631.0" layoutY="480.0" mnemonicParsing="false" onAction="#savebtnOnAction" prefHeight="32.0" prefWidth="81.0" style="-fx-background-color: #00695c;" text="Save">
+      <Button fx:id="btnSave" layoutX="669.0" layoutY="481.0" mnemonicParsing="false" onAction="#savebtnOnAction" prefHeight="32.0" prefWidth="81.0" style="-fx-background-color: #00695c;" text="Save">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -238,5 +238,11 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Button fx:id="btnAdd" layoutX="210.0" layoutY="484.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="25.0" prefWidth="79.0" text="Add Image">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtImage" layoutX="299.0" layoutY="484.0" prefHeight="25.0" prefWidth="325.0" promptText="Path of selected image" />
    </children>
 </AnchorPane>

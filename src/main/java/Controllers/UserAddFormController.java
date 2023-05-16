@@ -12,6 +12,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CustomerModel;
 import model.UserModel;
+import java.util.*;
+import javax.activation.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.naming.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -151,8 +156,9 @@ public class UserAddFormController implements Initializable {
                     int affectedRows = pstm.executeUpdate();
                     if (affectedRows > 0) {
                         new Alert(Alert.AlertType.CONFIRMATION,
-                                "huree!! user added :)")
+                                "User added :)")
                                 .show();
+                        new sendUserEmail(email);
                     }
 
 
@@ -167,7 +173,7 @@ public class UserAddFormController implements Initializable {
 
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserAddForm.fxml"))));
-        stage.setTitle("User Form");
+        stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
 

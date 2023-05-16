@@ -156,7 +156,7 @@ public class UserUpdateFormController implements Initializable {
         txtEmail.setText(user.getEmail());
     }
 
-    public void btnUpdateOnAction(ActionEvent event) throws SQLException {
+    public void btnUpdateOnAction(ActionEvent event) throws SQLException, IOException {
         String UserID=txtID.getText();
         String UserName= txtName.getText();
         String Password=txtPassword.getText();
@@ -177,6 +177,11 @@ public class UserUpdateFormController implements Initializable {
             }
 
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserUpdateForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 }

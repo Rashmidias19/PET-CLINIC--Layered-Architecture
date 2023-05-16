@@ -3,6 +3,8 @@ package dto;
 
 import lombok.*;
 
+import java.sql.Blob;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -20,9 +22,6 @@ public class Pet {
  private int Age;
  private String address;
  private String contact;
+ private Blob picture;
 
- public Pet(String string, String string1) {
-     this.CustomerID=string;
-     this.contact=string1;
- }
 }

@@ -239,7 +239,7 @@ public class BillAddFormController implements Initializable {
         }
     }
 
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
         cmbCustomerOnAction(event);
         String BillID=lblID.getText();
         String CustomerID= (String) cmbCustomID.getValue();
@@ -267,11 +267,16 @@ public class BillAddFormController implements Initializable {
             int affectedRows = pstm.executeUpdate();
             if (affectedRows > 0) {
                 new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
+                        "Bill added :)")
                         .show();
             }
 
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/BillAddForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
 
     }

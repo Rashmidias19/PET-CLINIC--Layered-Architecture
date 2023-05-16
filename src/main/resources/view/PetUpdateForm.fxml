@@ -232,6 +232,6 @@
          </font>
       </Label>
       <TextField fx:id="txtAge" layoutX="255.0" layoutY="383.0" prefHeight="25.0" prefWidth="88.0" />
-      <Circle fx:id="image" fill="WHITE" layoutX="655.0" layoutY="258.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="circle" fill="WHITE" layoutX="650.0" layoutY="247.0" radius="117.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

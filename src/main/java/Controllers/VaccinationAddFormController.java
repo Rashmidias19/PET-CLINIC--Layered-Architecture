@@ -181,7 +181,7 @@ public class VaccinationAddFormController implements Initializable {
     }
 
 
-    public void savebtnOnAction(ActionEvent actionEvent) throws SQLException {
+    public void savebtnOnAction(ActionEvent actionEvent) throws SQLException, IOException {
         String Vaccination_ID = lblID.getText();
         String Pet_ID = (String) cmbPet_ID.getValue();
         String Customer_ID = lblCustomer_ID.getText();
@@ -206,11 +206,16 @@ public class VaccinationAddFormController implements Initializable {
             int affectedRows = pstm.executeUpdate();
             if (affectedRows > 0) {
                 new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
+                        "Vaccine Schedule added :)")
                         .show();
             }
 
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/VaccinationAddForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
     }
 
     public void backbtnOnAction(ActionEvent event) throws IOException {

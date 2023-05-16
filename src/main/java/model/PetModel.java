@@ -6,6 +6,7 @@ import dto.Item;
 import dto.Pet;
 import util.CrudUtil;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,7 +53,8 @@ public class PetModel {
                     resultSet.getString(7),
                     resultSet.getInt(8),
                     resultSet.getString(9),
-                    resultSet.getString(10)
+                    resultSet.getString(10),
+                    resultSet.getBlob(11)
             );
         }
         return null;
@@ -75,7 +77,8 @@ public class PetModel {
                     resultSet.getString(7),
                     resultSet.getInt(8),
                     resultSet.getString(9),
-                    resultSet.getString(10)
+                    resultSet.getString(10),
+                    resultSet.getBlob(11)
             ));
         }
         return data;

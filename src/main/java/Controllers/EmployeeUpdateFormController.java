@@ -13,13 +13,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.CustomerModel;
 import model.EmployeeModel;
 import model.UserModel;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -76,8 +82,8 @@ public class EmployeeUpdateFormController implements Initializable {
     @FXML
     private JFXComboBox cmbEmployeeID;
 
-
-
+    @FXML
+    private Circle circle;
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -197,12 +203,24 @@ public class EmployeeUpdateFormController implements Initializable {
             fillEmployeeFields(employee);
             loadUserID();
             loadGender();
+            loadImage(employee);
 
             // txtQty.requestFocus();
-        } catch (SQLException e) {
+        } catch (SQLException | FileNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
+    }
+
+    private void loadImage(Employee employee) throws FileNotFoundException, SQLException {
+        InputStream is=null;
+        if(employee.getPicture()==null){
+            is=new FileInputStream("F:\\OOP Final\\petClinic\\src\\main\\resources\\img\\images.png");
+        }else{
+            is=employee.getPicture().getBinaryStream();
+        }
+        Image image=new Image(is);
+        circle.setFill(new ImagePattern(image));
     }
 
     private void fillEmployeeFields(Employee employee) {
@@ -220,7 +238,7 @@ public class EmployeeUpdateFormController implements Initializable {
 
     }
 
-    public void updatebtnOnAction(ActionEvent event) throws SQLException {
+    public void updatebtnOnAction(ActionEvent event) throws SQLException, IOException {
         String EmployeeID=txtID.getText();
         String Name=txtName.getText();
         String UserID= (String) cmbUserID.getValue();
@@ -257,6 +275,11 @@ public class EmployeeUpdateFormController implements Initializable {
             }
 
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/EmployeeUpdateForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 }

@@ -191,7 +191,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
         }
     }
 
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
         String ScheduleID=lblID.getText();
         String EmployeeID= (String) cmbEmployeeID.getValue();
         String Name=lblName.getText();
@@ -205,14 +205,19 @@ public class EmployeeAddScheduleFormController implements Initializable {
         try {
             isAdd = EmployeeScheduleModel.addSchedule(ScheduleID, EmployeeID,Name,Date,Time,WorkTime,Shift,OT);
             if(isAdd) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Order Placed").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Schedule added").show();
             } else {
-                new Alert(Alert.AlertType.ERROR, "Order Not Placed").show();
+                new Alert(Alert.AlertType.ERROR, "Not added").show();
             }
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error").show();
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/EmployeeAddScheduleForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
     }
 
     public void backbtnOnAction(ActionEvent event) throws IOException {

@@ -1,5 +1,6 @@
 package model;
 
+import com.mysql.cj.jdbc.Blob;
 import db.DBConnection;
 import dto.Customer;
 import dto.Employee;
@@ -32,7 +33,8 @@ public class EmployeeModel {
                     resultSet.getString(8),
                     resultSet.getString(9),
                     resultSet.getString(10),
-                    resultSet.getString(11)
+                    resultSet.getString(11),
+                    resultSet.getBlob(12)
             );
         }
         return null;
@@ -68,7 +70,8 @@ public class EmployeeModel {
                     resultSet.getString(8),
                     resultSet.getString(9),
                     resultSet.getString(10),
-                    resultSet.getString(11)
+                    resultSet.getString(11),
+                    resultSet.getBlob(12)
             ));
         }
         return data;

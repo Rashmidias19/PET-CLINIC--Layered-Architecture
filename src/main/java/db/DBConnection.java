@@ -8,7 +8,7 @@ public class DBConnection {
     private static DBConnection dbConnection;
     private Connection con;
 
-    private DBConnection() throws SQLException {
+    DBConnection() throws SQLException {
         con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/VETCLOUD",
                 "root",

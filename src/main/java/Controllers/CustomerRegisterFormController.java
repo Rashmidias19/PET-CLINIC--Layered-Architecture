@@ -166,7 +166,7 @@ public class CustomerRegisterFormController implements Initializable {
     }
 
     @FXML
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
 
         if(txtEmail.getText().matches("^(?:[^.\\s])\\S*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")) {
             if(Integer.parseInt(txtAge.getText())>17 && Integer.parseInt(txtAge.getText())<100 ){
@@ -200,7 +200,7 @@ public class CustomerRegisterFormController implements Initializable {
             int affectedRows = pstm.executeUpdate();
             if (affectedRows > 0) {
                 new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
+                        "Customer added :)")
                         .show();
             }
 
@@ -212,6 +212,11 @@ public class CustomerRegisterFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Please enter a valid email").show();
 
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerRegisterForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 

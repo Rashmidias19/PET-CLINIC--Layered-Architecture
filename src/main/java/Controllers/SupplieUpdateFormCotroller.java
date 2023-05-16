@@ -187,7 +187,7 @@ public class SupplieUpdateFormCotroller implements Initializable {
         txtPrice.setText(String.valueOf(item.getPrice()));
     }
 
-    public void updatebtnOnAction(ActionEvent event) throws SQLException {
+    public void updatebtnOnAction(ActionEvent event) throws SQLException, IOException {
         String ItemID=txtID.getText();
         String Name=txtName.getText();
         String Man_Date= String.valueOf(ManDate.getValue());
@@ -221,6 +221,11 @@ public class SupplieUpdateFormCotroller implements Initializable {
             }
 
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/SupplieUpdateForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 }

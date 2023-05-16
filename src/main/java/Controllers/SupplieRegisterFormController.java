@@ -153,7 +153,7 @@ public class SupplieRegisterFormController implements Initializable {
         }
     }
 
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
         String ItemID=lblID.getText();
         String Name=txtName.getText();
         LocalDate Man_Date=ManDate.getValue();
@@ -186,11 +186,16 @@ public class SupplieRegisterFormController implements Initializable {
             int affectedRows = pstm.executeUpdate();
             if (affectedRows > 0) {
                 new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
+                        "Item added :)")
                         .show();
             }
 
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/SupplieRegisterForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 }
