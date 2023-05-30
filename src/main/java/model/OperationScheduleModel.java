@@ -13,7 +13,7 @@ import java.util.List;
 
 public class OperationScheduleModel {
 
-    public static String getNextOpId() throws SQLException {
+    public static String getNextOpId() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT OperationID FROM operationschedule ORDER BY OperationID DESC LIMIT 1";
@@ -36,7 +36,7 @@ public class OperationScheduleModel {
         return "OP0001";
     }
 
-    public static List<OperationSchedule> getAll() throws SQLException {
+    public static List<OperationSchedule> getAll() throws SQLException, ClassNotFoundException {
         List<OperationSchedule> data = new ArrayList<>();
 
         String sql = "SELECT * FROM OperationSchedule";
@@ -56,5 +56,20 @@ public class OperationScheduleModel {
             ));
         }
         return data;
+    }
+
+    public static boolean save(OperationSchedule operationSchedule) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO OperationSchedule(OperationID,PetID,CustomerID,Date,Time,Description,Hours,Contact)" +
+                    "VALUES(?, ?, ?, ?,?,?,?,?)";
+        return CrudUtil.execute(
+                sql,
+                operationSchedule.getOperationID(),
+                operationSchedule.getPetID(),
+                operationSchedule.getCustomerID(),
+                operationSchedule.getDate(),
+                operationSchedule.getTime(),
+                operationSchedule.getDescription(),
+                operationSchedule.getHours(),
+                operationSchedule.getContact());
     }
 }

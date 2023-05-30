@@ -2,7 +2,9 @@ package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import dto.Employee;
+import dto.Item;
 import dto.Pet;
+import dto.VaccinationSchedule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,10 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.EmployeeModel;
-import model.PetModel;
-import model.VaccinationScheduleModel;
+import model.*;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -55,17 +54,6 @@ public class VaccinationAddFormController implements Initializable {
 
     @FXML
     private Label lblContact;
-
-
-
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
 
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
@@ -146,7 +134,7 @@ public class VaccinationAddFormController implements Initializable {
                 obList.add(code);
             }
             cmbPet_ID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -159,7 +147,7 @@ public class VaccinationAddFormController implements Initializable {
             FillPetFields(pet);
 
             // txtQty.requestFocus();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -174,43 +162,38 @@ public class VaccinationAddFormController implements Initializable {
         try {
             String id = VaccinationScheduleModel.getNextVaccId();
             lblID.setText(id);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
     }
 
 
-    public void savebtnOnAction(ActionEvent actionEvent) throws SQLException {
+    public void savebtnOnAction(ActionEvent actionEvent) throws SQLException, IOException {
         String Vaccination_ID = lblID.getText();
         String Pet_ID = (String) cmbPet_ID.getValue();
         String Customer_ID = lblCustomer_ID.getText();
-        LocalDate Date = date.getValue();
+        String Date = String.valueOf(date.getValue());
         String Time = time.getText();
         String Description = textDescription.getText();
         String Contact = lblContact.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO Vaccinationschedule(VaccinationID, PetID,CustomerID,Date,Time,Description,Contact)" +
-                    "VALUES(?, ?, ?, ?,?,?,?)";
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, Vaccination_ID);
-            pstm.setString(2, Pet_ID);
-            pstm.setString(3, Customer_ID);
-            pstm.setDate(4, java.sql.Date.valueOf(Date));
-            pstm.setTime(5, java.sql.Time.valueOf(Time));
-            pstm.setString(6, Description);
-            pstm.setString(7, Contact);
 
+        VaccinationSchedule vaccinationSchedule = new VaccinationSchedule(Vaccination_ID,Pet_ID,Customer_ID,Date,Time,Description,Contact);
 
-            int affectedRows = pstm.executeUpdate();
-            if (affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
-                        .show();
+        try {
+            boolean isSaved = VaccinationScheduleModel.save(vaccinationSchedule);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
             }
-
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/VaccinationAddForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
     }
 
     public void backbtnOnAction(ActionEvent event) throws IOException {

@@ -27,14 +27,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class PetViewFormControlller implements Initializable {
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
     public TableView<PetTM> tblPet;
 
     @FXML
@@ -111,7 +103,7 @@ public class PetViewFormControlller implements Initializable {
                 ));
             }
             tblPet.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

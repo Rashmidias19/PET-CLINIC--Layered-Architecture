@@ -4,18 +4,17 @@ import db.DBConnection;
 import dto.Bill;
 import dto.Customer;
 import dto.Inhouse;
+import javafx.scene.control.Alert;
 import util.CrudUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class InhouseModel {
 
-    public static String getNextInId() throws SQLException {
+    public static String getNextInId() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT InhouseID FROM Inhouse ORDER BY InhouseID DESC LIMIT 1";
@@ -38,7 +37,7 @@ public class InhouseModel {
         return "IH0001";
     }
 
-    public static List<Inhouse> getAll() throws SQLException {
+    public static List<Inhouse> getAll() throws SQLException, ClassNotFoundException {
         List<Inhouse> data = new ArrayList<>();
 
         String sql = "SELECT * FROM Inhouse";
@@ -59,7 +58,7 @@ public class InhouseModel {
         return data;
     }
 
-    public static List<String> loadInhouseID() throws SQLException {
+    public static List<String> loadInhouseID() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
         ResultSet resultSet = con.createStatement().executeQuery("SELECT InhouseID FROM Inhouse");
 
@@ -71,7 +70,7 @@ public class InhouseModel {
         return data;
     }
 
-    public static Inhouse searchById(String inhouseID) throws SQLException {
+    public static Inhouse searchById(String inhouseID) throws SQLException, ClassNotFoundException {
         PreparedStatement pstm = DBConnection.getInstance().getConnection()
                 .prepareStatement("SELECT * FROM Inhouse WHERE InhouseID =?");
         pstm.setString(1, inhouseID);
@@ -91,4 +90,44 @@ public class InhouseModel {
         }
         return null;
     }
+
+    public static boolean save(Inhouse inhouse) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO Inhouse(InhouseID,PetID,CustomerID,AdmittedDate,Time,DischargeDate,Description,contact)" +
+                    "VALUES(?, ?, ?, ?,?,?,?,?)";
+        return CrudUtil.execute(
+                sql,
+                inhouse.getInhouseID(),
+                inhouse.getPetID(),
+                inhouse.getCustomerID(),
+                inhouse.getAdmittedDate(),
+                inhouse.getTime(),
+                inhouse.getDischargeDate(),
+                inhouse.getDescription(),
+                inhouse.getContact());
+    }
+
+    public static boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("DELETE FROM Inhouse WHERE InhouseID = ?",id);
+    }
+
+    public static void update(Inhouse inhouse) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE Inhouse SET PetID = ?,  CustomerID = ?, AdmittedDate = ?, Time = ?, DischargeDate = ?, Description = ?, Contact = ? WHERE InhouseID = ?" ;
+
+        PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
+        pstm.setString(1, inhouse.getPetID());
+        pstm.setString(2, inhouse.getCustomerID());
+        pstm.setString(3, inhouse.getAdmittedDate());
+        pstm.setString(4, inhouse.getTime());
+        pstm.setString(5, inhouse.getDischargeDate());
+        pstm.setString(6, inhouse.getDescription());
+        pstm.setString(7, inhouse.getContact());
+        pstm.setString(8, inhouse.getInhouseID());
+
+            boolean isUpdated = pstm.executeUpdate() > 0;
+            if (isUpdated) {
+                new Alert(Alert.AlertType.CONFIRMATION, "yes! updated!!").show();
+            }
+
+        }
+
 }

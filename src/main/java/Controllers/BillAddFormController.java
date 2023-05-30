@@ -1,6 +1,7 @@
 package Controllers;
 
 import db.DBConnection;
+import dto.Bill;
 import dto.Customer;
 import dto.Item;
 import dto.tm.CartTM;
@@ -29,14 +30,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class BillAddFormController implements Initializable {
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
     @FXML
     private AnchorPane dashboardPane;
 
@@ -206,7 +199,7 @@ public class BillAddFormController implements Initializable {
                 obList.add(code);
             }
             cmbCustomID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -222,7 +215,7 @@ public class BillAddFormController implements Initializable {
                 obList.add(code);
             }
             cmbItemID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -233,45 +226,40 @@ public class BillAddFormController implements Initializable {
         try {
             String id = BillModel.getNextBillId();
             lblID.setText(id);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
     }
 
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
         cmbCustomerOnAction(event);
         String BillID=lblID.getText();
         String CustomerID= (String) cmbCustomID.getValue();
-        LocalDate Date= LocalDate.parse(lblDate.getText());
-        LocalTime Time= LocalTime.parse(lblTime.getText());
+        String Date= String.valueOf(LocalDate.parse(lblDate.getText()));
+        String Time= String.valueOf(LocalTime.parse(lblTime.getText()));
         double Amount= Double.parseDouble(lblTotal.getText());
         String contact=lblContact.getText();
         String email=lblEmail.getText();
         String Description=txtDescription.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO Bill(BillID,CustomerID,Date,Time,Amount,contact,email,Description)" +
-                    "VALUES(?, ?, ?, ?,?,?,?,?)";
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1,BillID);
-            pstm.setString(2, CustomerID);
-            pstm.setDate(3, java.sql.Date.valueOf(Date));
-            pstm.setTime(4, java.sql.Time.valueOf(Time));
-            pstm.setDouble(5,Amount);
-            pstm.setString(6,contact);
-            pstm.setString(7,email);
-            pstm.setString(8,Description);
+        Bill bill = new Bill(BillID,CustomerID,Date,Time,Amount,contact,email,Description);
 
-
-            int affectedRows = pstm.executeUpdate();
-            if (affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
-                        .show();
+        try {
+            boolean isSaved = BillModel.save(bill);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Bill saved!").show();
             }
-
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
         }
+
+
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/BillAddForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
 
     }
@@ -319,7 +307,7 @@ public class BillAddFormController implements Initializable {
             fillItemFields(item);
 
            // txtQty.requestFocus();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -337,7 +325,7 @@ public class BillAddFormController implements Initializable {
              fillCustomerFields(customer);
 
             // txtQty.requestFocus();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

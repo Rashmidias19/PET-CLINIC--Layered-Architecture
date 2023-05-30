@@ -6,27 +6,18 @@ import java.sql.SQLException;
 
 public class DBConnection {
     private static DBConnection dbConnection;
-    private Connection con;
+    private final Connection connection;
 
-    private DBConnection() throws SQLException {
-        con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/VETCLOUD",
-                "root",
-                "1234"
-        );
+    private DBConnection() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/VETCLOUD", "root", "1234");
     }
 
-    public static DBConnection getInstance() throws SQLException {
-        /*if(dbConnection == null) {
-            dbConnection = new DBConnection();
-            return dbConnection;
-        } else {
-            return dbConnection;
-        }*/
-        return (null == dbConnection) ? dbConnection = new DBConnection()
-                : dbConnection;
+    public static DBConnection getInstance() throws SQLException, ClassNotFoundException {
+        return dbConnection == null ? dbConnection= new DBConnection() : dbConnection;
     }
+
     public Connection getConnection() {
-        return con;
+        return connection;
     }
 }

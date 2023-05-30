@@ -2,6 +2,7 @@ package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import dto.Customer;
+import dto.Item;
 import dto.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CustomerModel;
+import model.ItemModel;
 import model.UserModel;
 
 import java.io.IOException;
@@ -27,14 +29,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class UserUpdateFormController implements Initializable {
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
     public AnchorPane dashboardPane;
 
     @FXML
@@ -66,7 +60,7 @@ public class UserUpdateFormController implements Initializable {
                 obList.add(code);
             }
             cmbUserID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -143,7 +137,7 @@ public class UserUpdateFormController implements Initializable {
             fillUserFields(user);
 
             // txtQty.requestFocus();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -156,27 +150,21 @@ public class UserUpdateFormController implements Initializable {
         txtEmail.setText(user.getEmail());
     }
 
-    public void btnUpdateOnAction(ActionEvent event) throws SQLException {
+    public void btnUpdateOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
         String UserID=txtID.getText();
         String UserName= txtName.getText();
         String Password=txtPassword.getText();
         String email=txtEmail.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "UPDATE User SET UserName = ?,  Password = ?, email = ? WHERE UserID = ?" ;
 
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, UserName);
-            pstm.setString(2, Password);
-            pstm.setString(3, email);
-            pstm.setString(4,UserID);
+        User user = new User(UserID,UserName,Password,email);
+        UserModel.update(user);
 
-            boolean isUpdated = pstm.executeUpdate() > 0;
-            if (isUpdated) {
-                new Alert(Alert.AlertType.CONFIRMATION, "yes! updated!!").show();
-            }
-
-        }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserUpdateForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 }

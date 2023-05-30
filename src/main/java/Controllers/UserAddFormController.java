@@ -1,5 +1,7 @@
 package Controllers;
 
+import dto.Item;
+import dto.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CustomerModel;
+import model.ItemModel;
 import model.UserModel;
 
 import java.io.IOException;
@@ -24,14 +27,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class UserAddFormController implements Initializable {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
 
     @FXML
     private AnchorPane dashboardPane;
@@ -122,7 +117,7 @@ public class UserAddFormController implements Initializable {
         try {
             String id = UserModel.getNextUserId();
             lblID.setText(id);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -139,23 +134,15 @@ public class UserAddFormController implements Initializable {
                 String password = txtPassword.getText();
                 String email = txtEmail.getText();
 
-                try (Connection con = DriverManager.getConnection(URL, props)) {
-                    String sql = "INSERT INTO User(UserID,UserName,password,email)" +
-                            "VALUES(?, ?, ?, ?)";
-                    PreparedStatement pstm = con.prepareStatement(sql);
-                    pstm.setString(1, UserID);
-                    pstm.setString(2, UserName);
-                    pstm.setString(3, password);
-                    pstm.setString(4, email);
+                User user = new User(UserID,UserName,password,email);
 
-                    int affectedRows = pstm.executeUpdate();
-                    if (affectedRows > 0) {
-                        new Alert(Alert.AlertType.CONFIRMATION,
-                                "huree!! user added :)")
-                                .show();
+                try {
+                    boolean isSaved = UserModel.save(user);
+                    if (isSaved) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
                     }
-
-
+                } catch (SQLException | ClassNotFoundException e) {
+                    new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
                 }
             } else {
                 new Alert(Alert.AlertType.ERROR, "Please enter a password with minimum 5 characters, with a upper case and lower case letters and atleast one number.").show();

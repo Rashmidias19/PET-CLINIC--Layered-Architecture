@@ -2,6 +2,7 @@ package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import dto.Customer;
+import dto.Inhouse;
 import dto.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CustomerModel;
+import model.InhouseModel;
 import model.ItemModel;
 
 import java.io.IOException;
@@ -28,15 +30,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class SupplieUpdateFormCotroller implements Initializable {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
     public AnchorPane dashboardPane;
 
     @FXML
@@ -86,7 +79,7 @@ public class SupplieUpdateFormCotroller implements Initializable {
                 obList.add(code);
             }
             cmbItemID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -163,7 +156,7 @@ public class SupplieUpdateFormCotroller implements Initializable {
             fillItemFields(item);
             loadTypes();
             // txtQty.requestFocus();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -187,7 +180,7 @@ public class SupplieUpdateFormCotroller implements Initializable {
         txtPrice.setText(String.valueOf(item.getPrice()));
     }
 
-    public void updatebtnOnAction(ActionEvent event) throws SQLException {
+    public void updatebtnOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
         String ItemID=txtID.getText();
         String Name=txtName.getText();
         String Man_Date= String.valueOf(ManDate.getValue());
@@ -199,28 +192,14 @@ public class SupplieUpdateFormCotroller implements Initializable {
         String Quantity=txtQuantity.getText();
         Double Price= Double.valueOf(txtPrice.getText());
 
+        Item item = new Item(ItemID,Name,Man_Date,Exp_Date,Supplier_name,Type,Supplier_contact,Description, Integer.parseInt(Quantity),Price);
+        ItemModel.update(item);
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "UPDATE Item SET Name = ?,  Man_Date = ?, Exp_Date = ?, Supplier_name = ?, Type = ?, Supplier_contact = ?, Description = ?, Quantity = ?, Price = ? WHERE ItemID = ?" ;
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, Name);
-            pstm.setString(2, Man_Date);
-            pstm.setString(3, Exp_Date);
-            pstm.setString(4,Supplier_name);
-            pstm.setString(5,Type);
-            pstm.setString(6,Supplier_contact);
-            pstm.setString(7,Description);
-            pstm.setString(8,Quantity);
-            pstm.setDouble(9,Price);
-            pstm.setString(10,ItemID);
-
-            boolean isUpdated = pstm.executeUpdate() > 0;
-            if (isUpdated) {
-                new Alert(Alert.AlertType.CONFIRMATION, "yes! updated!!").show();
-            }
-
-        }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/SupplieUpdateForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 }

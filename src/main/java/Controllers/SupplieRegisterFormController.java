@@ -1,5 +1,6 @@
 package Controllers;
 
+import dto.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,28 +11,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
 import model.ItemModel;
+import model.OperationScheduleModel;
 
 import java.io.IOException;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class SupplieRegisterFormController implements Initializable {
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
     @FXML
     private AnchorPane dashboardPane;
 
@@ -147,50 +134,39 @@ public class SupplieRegisterFormController implements Initializable {
         try {
             String id = ItemModel.getNextItemId();
             lblID.setText(id);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
     }
 
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
         String ItemID=lblID.getText();
         String Name=txtName.getText();
-        LocalDate Man_Date=ManDate.getValue();
-        LocalDate Exp_Date=ExpDate.getValue();
+        String Man_Date= String.valueOf(ManDate.getValue());
+        String Exp_Date= String.valueOf(ExpDate.getValue());
         String Supplier_name=txtSupName.getText();
         String Type= (String) cmbType.getValue();
         String Supplier_contact=txtContact.getText();
         String Description=txtDescription.getText();
-        String Quantity=txtQuantity.getText();
+        int Quantity= Integer.parseInt(txtQuantity.getText());
         Double Price= Double.valueOf(txtPrice.getText());
 
+        Item item = new Item(ItemID,Name,Man_Date,Exp_Date,Supplier_name,Type,Supplier_contact,Description,Quantity,Price);
 
-
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO Item(ItemID,Name,Man_Date,Exp_Date,Supplier_name,Type,Supplier_contact,Description,Quantity,Price)" +
-                    "VALUES(?, ?, ?, ?,?,?,?,?,?,?)";
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1,ItemID);
-            pstm.setString(2, Name);
-            pstm.setDate(3, java.sql.Date.valueOf(Man_Date));
-            pstm.setDate(4, java.sql.Date.valueOf(Exp_Date));
-            pstm.setString(5,Supplier_name);
-            pstm.setString(6,Type);
-            pstm.setString(7,Supplier_contact);
-            pstm.setString(8,Description);
-            pstm.setString(9, Quantity);
-            pstm.setDouble(10,Price);
-
-
-            int affectedRows = pstm.executeUpdate();
-            if (affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
-                        .show();
+        try {
+            boolean isSaved =ItemModel.save(item);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
             }
-
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/SupplieRegisterForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 }

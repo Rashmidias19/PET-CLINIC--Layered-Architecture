@@ -31,15 +31,6 @@ import java.util.ResourceBundle;
 
 public class EmployeeAddScheduleFormController implements Initializable {
     public AnchorPane dashboardPane;
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
-
     @FXML
     private Label lblID;
 
@@ -81,7 +72,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
         try {
             String id = EmployeeScheduleModel.getNextSchedId();
             lblID.setText(id);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -160,7 +151,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
                 obList.add(code);
             }
             cmbEmployeeID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -185,13 +176,13 @@ public class EmployeeAddScheduleFormController implements Initializable {
             fillEmployeeFields(employee);;
 
             // txtQty.requestFocus();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
     }
 
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
         String ScheduleID=lblID.getText();
         String EmployeeID= (String) cmbEmployeeID.getValue();
         String Name=lblName.getText();
@@ -205,14 +196,19 @@ public class EmployeeAddScheduleFormController implements Initializable {
         try {
             isAdd = EmployeeScheduleModel.addSchedule(ScheduleID, EmployeeID,Name,Date,Time,WorkTime,Shift,OT);
             if(isAdd) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Order Placed").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Schedule added").show();
             } else {
-                new Alert(Alert.AlertType.ERROR, "Order Not Placed").show();
+                new Alert(Alert.AlertType.ERROR, "Not added").show();
             }
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error").show();
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/EmployeeAddScheduleForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
     }
 
     public void backbtnOnAction(ActionEvent event) throws IOException {

@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.BillModel;
 import model.CustomerModel;
 
 import java.io.IOException;
@@ -23,14 +24,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class CustomerDeleteFormController implements Initializable {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
 
     @FXML
     private AnchorPane dashboardPane;
@@ -52,7 +45,7 @@ public class CustomerDeleteFormController implements Initializable {
                 obList.add(code);
             }
             cmbID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -62,15 +55,14 @@ public class CustomerDeleteFormController implements Initializable {
 
     public void deletebtnOnAction(ActionEvent event) throws SQLException {
         String id = (String) cmbID.getValue();
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "DELETE FROM Customer WHERE CustomerID = ?";
 
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, id);
-
-            if (pstm.executeUpdate() > 0) {
+        try {
+            boolean isDeleted = CustomerModel.delete(id);
+            if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
             }
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
         }
     }
 

@@ -5,15 +5,14 @@ import dto.Bill;
 import dto.Item;
 import util.CrudUtil;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class BillModel {
 
-    public static List<Bill> getAll() throws SQLException {
+    public static List<Bill> getAll() throws SQLException, ClassNotFoundException {
         List<Bill> data = new ArrayList<>();
 
         String sql = "SELECT * FROM Bill";
@@ -34,7 +33,7 @@ public class BillModel {
         return data;
     }
 
-    public static List<String> loadBillID() throws SQLException {
+    public static List<String> loadBillID() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
         ResultSet resultSet = con.createStatement().executeQuery("SELECT BillID FROM Bill");
 
@@ -46,7 +45,7 @@ public class BillModel {
         return data;
     }
 
-    public static String getNextBillId() throws SQLException {
+    public static String getNextBillId() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT BillID FROM Bill ORDER BY BillID DESC LIMIT 1";
@@ -67,5 +66,24 @@ public class BillModel {
             return "B000" + id;
         }
         return "B0001";
+    }
+
+    public static boolean save(Bill bill) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO Bill(BillID, CustomerID, Date, Time, Amount, Contact, email, Description) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        return CrudUtil.execute(
+                sql,
+                bill.getBillID(),
+                bill.getCustomerID(),
+                bill.getDate(),
+                bill.getTime(),
+                bill.getAmount(),
+                bill.getContact(),
+                bill.getEmail(),
+                bill.getDescription());
+    }
+
+    public static boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("DELETE FROM Bill WHERE BillID = ?",id);
     }
 }

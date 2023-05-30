@@ -13,6 +13,7 @@
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="dashboardPane" prefHeight="525.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.EmployeeUpdateFormController">
@@ -237,5 +238,6 @@
          </font>
       </Label>
       <TextField fx:id="txtSalary" layoutX="271.0" layoutY="392.0" />
+      <Circle fx:id="circle" fill="WHITE" layoutX="639.0" layoutY="219.0" radius="123.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

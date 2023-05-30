@@ -1,5 +1,6 @@
 package Controllers;
 
+import dto.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,31 +9,34 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.CustomerModel;
 import model.PetModel;
 
-import java.io.IOException;
+import javax.swing.*;
+import javax.swing.text.Element;
+import javax.swing.text.html.ImageView;
+import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+import java.io.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.AttributedCharacterIterator;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class PetRegistrationFormController implements Initializable {
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
     @FXML
     private AnchorPane dashboardPane;
 
@@ -46,6 +50,8 @@ public class PetRegistrationFormController implements Initializable {
     @FXML
     private TextField txtAge;
 
+    @FXML
+    private TextField txtImage;
 
     @FXML
     private TextField txtAddress;
@@ -66,7 +72,22 @@ public class PetRegistrationFormController implements Initializable {
     private ComboBox cmbGender;
 
     @FXML
+    private Label lblImg;
+
+    @FXML
     private ComboBox cmbCustomerID;
+
+    private FileChooser fileChooser;
+
+    private File file;
+
+    private Desktop desktop=Desktop.getDesktop();
+
+    private FileInputStream inp;
+
+    private FileInputStream fsp;
+
+    private Circle circle;
 
 
     @Override
@@ -103,7 +124,7 @@ public class PetRegistrationFormController implements Initializable {
                 obList.add(code);
             }
             cmbCustomerID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -169,48 +190,52 @@ public class PetRegistrationFormController implements Initializable {
         try {
             String id = PetModel.getNextPetId();
             lblID.setText(id);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
     }
 
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
         String PetID=lblID.getText();
         String Name=txtName.getText();
         String CustomerID= (String) cmbCustomerID.getValue();
         String Type= (String) cmbSpecies.getValue();
         String Breed=txtBreed.getText();
         String Gender= (String) cmbGender.getValue();
-        LocalDate DOB=date.getValue();
+        String DOB= String.valueOf(LocalDate.parse(String.valueOf(date.getValue())));
         int age=Integer.parseInt(txtAge.getText());
         String address=txtAddress.getText();
         String contact=txtContact.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO Pet(PetID,Name,CustomerID,Type ,Breed,Gender,DOB,age,address,contact )" +
-                    "VALUES(?, ?, ?, ?,?,?,?,?,?,?)";
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1,PetID);
-            pstm.setString(2, Name);
-            pstm.setString(3, CustomerID);
-            pstm.setString(4, Type);
-            pstm.setString(5,Breed);
-            pstm.setString(6,Gender);
-            pstm.setDate(7, java.sql.Date.valueOf(DOB));
-            pstm.setInt(8,age);
-            pstm.setString(9,address);
-            pstm.setString(10,contact);
+        Pet pet=new Pet(PetID,Name,CustomerID,Type,Breed,Gender,DOB,age,address,contact);
 
+        PetModel.save(pet,inp,file);
 
-            int affectedRows = pstm.executeUpdate();
-            if (affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
-                        .show();
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetRegisterForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
+
+    }
+
+    public void btnAddOnAction(ActionEvent event) throws FileNotFoundException {
+
+        fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files","*.png","*.jpg","*.gif","*.")
+        );
+        fileChooser.setTitle("Choose File");
+        file = fileChooser.showOpenDialog(null);
+        inp=new FileInputStream(file);
+        if (file != null){
+            try {
+                desktop.open(file);
+                txtImage.setText(file.getAbsolutePath());
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
         }
-
     }
 }

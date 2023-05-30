@@ -30,14 +30,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class InhouseUpdateFormController implements Initializable {
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
     public AnchorPane dashboardPane;
 
     @FXML
@@ -82,7 +74,7 @@ public class InhouseUpdateFormController implements Initializable {
                 obList.add(code);
             }
             cmbInhouseID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -97,7 +89,7 @@ public class InhouseUpdateFormController implements Initializable {
                 obList.add(code);
             }
             cmbPetID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -176,7 +168,7 @@ public class InhouseUpdateFormController implements Initializable {
             loadPetID();
 
             // txtQty.requestFocus();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -193,7 +185,7 @@ public class InhouseUpdateFormController implements Initializable {
         lblContact.setText(inhouse.getContact());
     }
 
-    public void btnUpdateOnAction(ActionEvent event) throws SQLException {
+    public void btnUpdateOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
         String InhouseID=txtID.getText();
         String PetID= (String) cmbPetID.getValue();
         String CustomerID=lblCustID.getText();
@@ -203,26 +195,14 @@ public class InhouseUpdateFormController implements Initializable {
         String Description=txtDescription.getText();
         String Contact=lblContact.getText();
 
+        Inhouse inhouse = new Inhouse(InhouseID,PetID,CustomerID,AdmittedDate,Time,DischargeDate,Description,Contact);
+        InhouseModel.update(inhouse);
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "UPDATE Inhouse SET PetID = ?,  CustomerID = ?, AdmittedDate = ?, Time = ?, DischargeDate = ?, Description = ?, Contact = ? WHERE InhouseID = ?" ;
-
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, PetID);
-            pstm.setString(2, CustomerID);
-            pstm.setString(3, AdmittedDate);
-            pstm.setString(4,Time);
-            pstm.setString(5,DischargeDate);
-            pstm.setString(6,Description);
-            pstm.setString(7,Contact);
-            pstm.setString(8,InhouseID);
-
-            boolean isUpdated = pstm.executeUpdate() > 0;
-            if (isUpdated) {
-                new Alert(Alert.AlertType.CONFIRMATION, "yes! updated!!").show();
-            }
-
-        }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/InhouseUpdateForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 }

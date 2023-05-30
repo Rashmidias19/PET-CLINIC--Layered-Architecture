@@ -2,6 +2,8 @@ package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import dto.Employee;
+import dto.Inhouse;
+import dto.OperationSchedule;
 import dto.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,10 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.EmployeeModel;
-import model.OperationScheduleModel;
-import model.PetModel;
+import model.*;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -33,14 +32,6 @@ import java.util.ResourceBundle;
 
 public class OperationAddFormController implements Initializable{
     public AnchorPane dashboardPane;
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
 
     @FXML
     private Label lblID;
@@ -140,7 +131,7 @@ public class OperationAddFormController implements Initializable{
         try {
             String id = OperationScheduleModel.getNextOpId();
             lblID.setText(id);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -151,38 +142,32 @@ public class OperationAddFormController implements Initializable{
         generateNextOpId();
         loadPetID();
     }
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
         String OperationID=lblID.getText();
         String PetID= (String) cmbPetID.getValue();
         String CustomerID=lblCustomerID.getText();
-        LocalDate Date= date.getValue();
+        String Date= String.valueOf(date.getValue());
         String Time= time.getText();
         String Description=txtDescription.getText();
         String Hours= txtHours.getText();
         String Contact=lblContact.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO OperationSchedule(OperationID,PetID,CustomerID,Date,Time,Description,Hours,Contact)" +
-                    "VALUES(?, ?, ?, ?,?,?,?,?)";
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1,OperationID);
-            pstm.setString(2,PetID);
-            pstm.setString(3,CustomerID);
-            pstm.setDate(4, java.sql.Date.valueOf(Date));
-            pstm.setTime(5, java.sql.Time.valueOf(Time));
-            pstm.setString(6,Description);
-            pstm.setString(7,Hours);
-            pstm.setString(8,Contact);
+        OperationSchedule operationSchedule = new OperationSchedule(OperationID,PetID,CustomerID,Date,Time,Description,Hours,Contact);
 
-
-            int affectedRows = pstm.executeUpdate();
-            if (affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
-                        .show();
+        try {
+            boolean isSaved = OperationScheduleModel.save(operationSchedule);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
             }
-
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
         }
+
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/OperationAddForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
     }
 
     private void loadPetID() {
@@ -194,7 +179,7 @@ public class OperationAddFormController implements Initializable{
                 obList.add(code);
             }
             cmbPetID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -208,7 +193,7 @@ public class OperationAddFormController implements Initializable{
             fillPetFields(pet);;
 
             // txtQty.requestFocus();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

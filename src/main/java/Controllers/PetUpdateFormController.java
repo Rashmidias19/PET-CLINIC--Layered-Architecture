@@ -14,31 +14,25 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.CustomerModel;
 import model.ItemModel;
 import model.PetModel;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.io.*;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class PetUpdateFormController implements Initializable {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
 
     public AnchorPane dashboardPane;
 
@@ -75,8 +69,9 @@ public class PetUpdateFormController implements Initializable {
     @FXML
     private JFXComboBox cmbCustID;
 
-   // @FXML
-  //  private
+   @FXML
+    private Circle circle;
+    private Connection conn;
 
 
     @Override
@@ -93,7 +88,7 @@ public class PetUpdateFormController implements Initializable {
                 obList.add(code);
             }
             cmbPetID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -108,7 +103,7 @@ public class PetUpdateFormController implements Initializable {
                 obList.add(code);
             }
             cmbCustID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -188,7 +183,7 @@ public class PetUpdateFormController implements Initializable {
         stage.centerOnScreen();
         stage.show();
     }
-    public void searchbtnOnAction(ActionEvent event) {
+    public void searchbtnOnAction(ActionEvent event) throws FileNotFoundException {
         String PetID= (String) cmbPetID.getValue();
         try {
             Pet pet = PetModel.searchById(PetID);
@@ -196,16 +191,28 @@ public class PetUpdateFormController implements Initializable {
             loadCustID();
             loadTypes();
             loadGender();
+            loadImage(pet);
 
             // txtQty.requestFocus();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
 
     }
 
-    private void fillPetFields(Pet pet) {
+    private void loadImage(Pet pet) throws FileNotFoundException, SQLException {
+        InputStream is=null;
+        if(pet.getPicture()==null){
+            is=new FileInputStream("F:\\OOP Final\\petClinic\\src\\main\\resources\\img\\images.png");
+        }else{
+            is=pet.getPicture().getBinaryStream();
+        }
+        Image image=new Image(is);
+        circle.setFill(new ImagePattern(image));
+    }
+
+        private void fillPetFields(Pet pet) {
         txtID.setText(pet.getPetID());
         txtName.setText(pet.getName());
         cmbCustID.setPromptText(pet.getCustomerID());
@@ -216,42 +223,37 @@ public class PetUpdateFormController implements Initializable {
         txtAge.setText(String.valueOf(pet.getAge()));
         txtAddress.setText(pet.getAddress());
         txtContact.setText(pet.getContact());
+
     }
 
 
-    public void btnUpdateOnAction(ActionEvent event) throws SQLException {
+    public void btnUpdateOnAction(ActionEvent event) throws SQLException, IOException {
         String PetID=txtID.getText();
         String Name=txtName.getText();
         String CustomerID= (String) cmbCustID.getValue();
         String Type= (String) cmbSpecies.getValue();
         String Breed=txtBreed.getText();
         String Gender= (String) cmbGender.getValue();
-        String DOB= String.valueOf(date.getValue());
+        String DOB= String.valueOf(LocalDate.parse(String.valueOf(date.getValue())));
         int age=Integer.parseInt(txtAge.getText());
         String address=txtAddress.getText();
         String contact=txtContact.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "UPDATE Pet SET Name = ?, CustomerID = ?, Type = ?, Breed = ?, Gender = ?, DOB = ?, age = ?, address = ?, contact = ? WHERE PetID = ?" ;
+        Pet pet=new Pet(PetID,Name,CustomerID,Type,Breed,Gender,DOB,age,address,contact);
 
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, Name);
-            pstm.setString(2, CustomerID);
-            pstm.setString(3, Type);
-            pstm.setString(4,Breed);
-            pstm.setString(5,Gender);
-            pstm.setString(6,DOB);
-            pstm.setInt(7,age);
-            pstm.setString(8,address);
-            pstm.setString(9,contact);
-            pstm.setString(10,PetID);
-
-            boolean isUpdated = pstm.executeUpdate() > 0;
-            if (isUpdated) {
-                new Alert(Alert.AlertType.CONFIRMATION, "yes! updated!!").show();
+        try {
+            boolean isSaved = PetModel.update(pet);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Pet Updated!").show();
             }
-
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetUpdateForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 

@@ -3,6 +3,7 @@ package model;
 import db.DBConnection;
 import dto.Customer;
 import dto.User;
+import javafx.scene.control.Alert;
 import util.CrudUtil;
 
 import java.sql.*;
@@ -11,15 +12,8 @@ import java.util.List;
 import java.util.Properties;
 
 public class UserModel {
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
 
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
-    public static List<String> loadUserID() throws SQLException {
+    public static List<String> loadUserID() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
         ResultSet resultSet = con.createStatement().executeQuery("SELECT UserID FROM User");
 
@@ -31,7 +25,7 @@ public class UserModel {
         return data;
     }
 
-    public static List<User> getAll() throws SQLException {
+    public static List<User> getAll() throws SQLException, ClassNotFoundException {
         List<User> data = new ArrayList<>();
 
         String sql = "SELECT * FROM User";
@@ -48,7 +42,7 @@ public class UserModel {
         return data;
     }
 
-    public static User searchById(String userID) throws SQLException {
+    public static User searchById(String userID) throws SQLException, ClassNotFoundException {
         PreparedStatement pstm = DBConnection.getInstance().getConnection()
                 .prepareStatement("SELECT * FROM User WHERE UserID =?");
         pstm.setString(1, userID);
@@ -65,7 +59,7 @@ public class UserModel {
         }
         return null;
     }
-    public static String getNextUserId() throws SQLException {
+    public static String getNextUserId() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT UserID FROM user ORDER BY UserID DESC LIMIT 1";
@@ -86,5 +80,36 @@ public class UserModel {
             return "U000" + id;
         }
         return "U0001";
+    }
+
+    public static boolean save(User user) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO User(UserID,UserName,password,email)" +
+                            "VALUES(?, ?, ?, ?)";
+        return CrudUtil.execute(
+                sql,
+                user.getUserID(),
+                user.getUserName(),
+                user.getPassword(),
+                user.getEmail());
+    }
+
+    public static boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("DELETE FROM User WHERE UserID = ?",id);
+    }
+
+    public static void update(User user) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE User SET UserName = ?,  Password = ?, email = ? WHERE UserID = ?" ;
+
+        PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);
+            pstm.setString(1, user.getUserName());
+            pstm.setString(2, user.getPassword());
+            pstm.setString(3, user.getEmail());
+            pstm.setString(4,user.getEmail());
+
+
+        boolean isUpdated = pstm.executeUpdate() > 0;
+        if (isUpdated) {
+            new Alert(Alert.AlertType.CONFIRMATION, "yes! updated!!").show();
+        }
     }
 }

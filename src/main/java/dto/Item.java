@@ -20,7 +20,7 @@ public class Item {
     private double Price;
     private String Name;
 
-    public Item(String string, double anInt) {
+    public Item(String itemID, String name, String man_Date, String exp_Date, String supplier_name, String type, String supplier_contact, String string, int quantity, double anInt) {
 
         this.Name=string;
         this.Price=anInt;

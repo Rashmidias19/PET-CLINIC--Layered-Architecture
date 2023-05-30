@@ -1,6 +1,8 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dto.Bill;
+import dto.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,14 +27,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class CustomerRegisterFormController implements Initializable {
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
     @FXML
     private AnchorPane dashboardPane;
 
@@ -159,14 +153,14 @@ public class CustomerRegisterFormController implements Initializable {
         try {
             String id = CustomerModel.getNextCustomerId();
             lblID.setText(id);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
     }
 
     @FXML
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
 
         if(txtEmail.getText().matches("^(?:[^.\\s])\\S*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")) {
             if(Integer.parseInt(txtAge.getText())>17 && Integer.parseInt(txtAge.getText())<100 ){
@@ -174,37 +168,24 @@ public class CustomerRegisterFormController implements Initializable {
                  String CustTitle= (String) cmbTitle.getValue();
                  String CustName=txtName.getText();
                  String NIC=txtNIC.getText();
-                 LocalDate DOB=date.getValue();
+                 String DOB= String.valueOf(date.getValue());
                  int age=Integer.parseInt(txtAge.getText());
                  String Gender=(String)cmbGender.getValue();
                  String contact=txtContact.getText();
                  String email = txtEmail.getText();
                  String address=txtAddress.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email, address)" +
-                    "VALUES(?, ?, ?, ?,?,?,?,?,?,?)";
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1,CustomerID);
-            pstm.setString(2, CustTitle);
-            pstm.setString(3, CustName);
-            pstm.setString(4, NIC);
-            pstm.setDate(5, java.sql.Date.valueOf(DOB));
-            pstm.setInt(6,age);
-            pstm.setString(7,Gender);
-            pstm.setString(8,contact);
-            pstm.setString(9,email);
-            pstm.setString(10,address);
 
+                Customer customer = new Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email,address);
 
-            int affectedRows = pstm.executeUpdate();
-            if (affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
-                        .show();
-            }
-
-        }
+                try {
+                    boolean isSaved = CustomerModel.save(customer);
+                    if (isSaved) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Customer saved!").show();
+                    }
+                } catch (SQLException | ClassNotFoundException e) {
+                    new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+                }
         }else {
                 new Alert(Alert.AlertType.ERROR, "Please enter a valid age between 18-100").show();
             }
@@ -212,6 +193,11 @@ public class CustomerRegisterFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Please enter a valid email").show();
 
         }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerRegisterForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 

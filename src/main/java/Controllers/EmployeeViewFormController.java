@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lombok.SneakyThrows;
 import model.EmployeeModel;
 import model.PetModel;
 
@@ -28,14 +29,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class EmployeeViewFormController implements Initializable {
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
     public TableView<EmployeeTM> tblEmployee;
 
     @FXML
@@ -76,6 +69,7 @@ public class EmployeeViewFormController implements Initializable {
 
 
 
+    @SneakyThrows
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
@@ -96,7 +90,7 @@ public class EmployeeViewFormController implements Initializable {
 
     }
 
-    private void getAll() {
+    private void getAll() throws ClassNotFoundException {
         try {
             ObservableList<EmployeeTM> obList = FXCollections.observableArrayList();
             List<Employee> employeeList = EmployeeModel.getAll();

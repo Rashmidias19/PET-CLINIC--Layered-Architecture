@@ -24,15 +24,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class BillDeleteFormController implements Initializable {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
     @FXML
     private AnchorPane dashboardPane;
 
@@ -53,7 +44,7 @@ public class BillDeleteFormController implements Initializable {
                 obList.add(code);
             }
             cmbID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -63,15 +54,14 @@ public class BillDeleteFormController implements Initializable {
 
     public void deletebtnOnAction(ActionEvent event) throws SQLException {
         String id = (String) cmbID.getValue();
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "DELETE FROM Bill WHERE BillID = ?";
 
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, id);
-
-            if (pstm.executeUpdate() > 0) {
+        try {
+            boolean isDeleted = BillModel.delete(id);
+            if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
             }
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
         }
     }
 

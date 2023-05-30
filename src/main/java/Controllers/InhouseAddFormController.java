@@ -2,6 +2,7 @@ package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import dto.Customer;
+import dto.Inhouse;
 import dto.Item;
 import dto.Pet;
 import dto.tm.CartTM;
@@ -29,13 +30,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class InhouseAddFormController implements Initializable {
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
 
     @FXML
     private AnchorPane dashboardPane;
@@ -152,7 +146,7 @@ public class InhouseAddFormController implements Initializable {
                 obList.add(code);
             }
             cmbPetID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -163,44 +157,37 @@ public class InhouseAddFormController implements Initializable {
         try {
             String id = InhouseModel.getNextInId();
             lblID.setText(id);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
     }
 
-    public void savebtnOnAction(ActionEvent event) throws SQLException {
+    public void savebtnOnAction(ActionEvent event) throws SQLException, IOException {
         String InhouseID=lblID.getText();
         String PetID= (String) cmbPetID.getValue();
         String CustomerID= lblCustomerID.getText();
-        LocalDate AdmittedDate=AdDate.getValue();
+        String AdmittedDate= String.valueOf(AdDate.getValue());
         String Time= time.getText();
-        LocalDate DischargeDate=DisDate.getValue();
+        String DischargeDate= String.valueOf(DisDate.getValue());
         String contact=lblContact.getText();
         String Description=txtDescription.getText();
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "INSERT INTO Inhouse(InhouseID,PetID,CustomerID,AdmittedDate,Time,DischargeDate,Description,contact)" +
-                    "VALUES(?, ?, ?, ?,?,?,?,?)";
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1,InhouseID);
-            pstm.setString(2, PetID);
-            pstm.setString(3, CustomerID);
-            pstm.setDate(4, java.sql.Date.valueOf(AdmittedDate));
-            pstm.setString(5,Time);
-            pstm.setDate(6, Date.valueOf(DischargeDate));
-            pstm.setString(7,Description);
-            pstm.setString(8,contact);
+        Inhouse inhouse = new Inhouse(InhouseID,PetID,CustomerID,AdmittedDate,Time,DischargeDate,Description,contact);
 
-            int affectedRows = pstm.executeUpdate();
-            if (affectedRows > 0) {
-                new Alert(Alert.AlertType.CONFIRMATION,
-                        "huree!! customer added :)")
-                        .show();
+        try {
+            boolean isSaved = InhouseModel.save(inhouse);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Customer saved!").show();
             }
-
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
         }
-
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/InhouseAddForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 
@@ -212,7 +199,7 @@ public class InhouseAddFormController implements Initializable {
             fillPetFields(pet);
 
             // txtQty.requestFocus();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }

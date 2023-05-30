@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class EmpSchedModel {
-    public static boolean save(String schedID, String empID) throws SQLException {
+    public static boolean save(String schedID, String empID) throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
             String sql = "INSERT INTO EmpSched(ScheduleID,EmployeeID)" +
                     "VALUES(?, ?)";

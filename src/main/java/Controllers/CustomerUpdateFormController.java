@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CustomerModel;
+import model.EmployeeModel;
 import model.PetModel;
 
 import java.io.IOException;
@@ -28,15 +29,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class CustomerUpdateFormController implements Initializable {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/VETCLOUD";
-    private static final Properties props = new Properties();
-
-    static {
-        props.setProperty("user", "root");
-        props.setProperty("password", "1234");
-    }
-
     public AnchorPane dashboardPane;
 
     @FXML
@@ -89,7 +81,7 @@ public class CustomerUpdateFormController implements Initializable {
                 obList.add(code);
             }
             cmbCustID.setItems(obList);
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -180,7 +172,7 @@ public class CustomerUpdateFormController implements Initializable {
             loadGender();
 
             // txtQty.requestFocus();
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();
         }
@@ -200,7 +192,7 @@ public class CustomerUpdateFormController implements Initializable {
 
     }
 
-    public void btnUpdateOnAction(ActionEvent event) throws SQLException {
+    public void btnUpdateOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
         String CustomerID=txtID.getText();
         String CustTitle= (String) cmbTitle.getValue();
         String CustName=txtName.getText();
@@ -213,27 +205,14 @@ public class CustomerUpdateFormController implements Initializable {
         String address=txtAddress.getText();
 
 
-        try (Connection con = DriverManager.getConnection(URL, props)) {
-            String sql = "UPDATE Customer SET CustTitle = ?,  CustName = ?, NIC = ?, DOB = ?, age = ?, Gender = ?, contact = ?, email = ?, address = ? WHERE CustomerID = ?" ;
+        Customer customer = new Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email,address);
+        CustomerModel.update(customer);
 
-            PreparedStatement pstm = con.prepareStatement(sql);
-            pstm.setString(1, CustTitle);
-            pstm.setString(2, CustName);
-            pstm.setString(3, NIC);
-            pstm.setString(4,DOB);
-            pstm.setInt(5,age);
-            pstm.setString(6,Gender);
-            pstm.setString(7,contact);
-            pstm.setString(8,email);
-            pstm.setString(9,address);
-            pstm.setString(10,CustomerID);
-
-            boolean isUpdated = pstm.executeUpdate() > 0;
-            if (isUpdated) {
-                new Alert(Alert.AlertType.CONFIRMATION, "yes! updated!!").show();
-            }
-
-        }
+        Stage stage = (Stage) dashboardPane.getScene().getWindow();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerUpdateForm.fxml"))));
+        stage.setTitle("VETCLOUD");
+        stage.centerOnScreen();
+        stage.show();
 
     }
 }

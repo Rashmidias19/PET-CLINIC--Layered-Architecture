@@ -9,9 +9,11 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class EmployeeScheduleModel {
-    public static List<EmployeeSchedule> getAll() throws SQLException {
+
+    public static List<EmployeeSchedule> getAll() throws SQLException, ClassNotFoundException {
         List<EmployeeSchedule> data = new ArrayList<>();
 
         String sql = "SELECT * FROM EmployeeSchedule";
@@ -32,7 +34,7 @@ public class EmployeeScheduleModel {
         }
         return data;
     }
-    public static String getNextSchedId() throws SQLException {
+    public static String getNextSchedId() throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
 
         String sql = "SELECT ScheduleID FROM employeeschedule ORDER BY ScheduleID DESC LIMIT 1";
@@ -71,7 +73,7 @@ public class EmployeeScheduleModel {
                 }
 
             return false;
-        } catch (SQLException er) {
+        } catch (SQLException | ClassNotFoundException er) {
             con.rollback();
             return false;
         } finally {
@@ -81,7 +83,7 @@ public class EmployeeScheduleModel {
 
     }
 
-    private static boolean save(String schedID, String empID, String name, LocalDate date, String time, String workTime, String shift, String ot) throws SQLException {
+    private static boolean save(String schedID, String empID, String name, LocalDate date, String time, String workTime, String shift, String ot) throws SQLException, ClassNotFoundException {
         Connection con = DBConnection.getInstance().getConnection();
             String sql = "INSERT INTO EmployeeSchedule(ScheduleID,EmployeeID,Name,Date,Time,WorkTime,Shift,OT)" +
                     "VALUES(?, ?, ?, ?,?,?,?,?)";

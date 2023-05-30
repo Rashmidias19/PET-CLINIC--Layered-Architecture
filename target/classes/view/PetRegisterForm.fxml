@@ -229,5 +229,11 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Button fx:id="btnAdd" layoutX="208.0" layoutY="456.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="31.0" prefWidth="94.0" text="Add Image">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtImage" layoutX="313.0" layoutY="459.0" prefHeight="25.0" prefWidth="329.0" promptText="Path of selected image" />
    </children>
 </AnchorPane>
