@@ -1,8 +1,8 @@
 package Controllers;
 
-import dto.OperationSchedule;
+import dao.VaccinationDAO;
+import dao.impl.VaccinationDAOImpl;
 import dto.VaccinationSchedule;
-import dto.tm.OperationScheduleTM;
 import dto.tm.VaccinationTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,13 +17,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.OperationScheduleModel;
-import model.VaccinationScheduleModel;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class VaccineScheduleFormController implements Initializable {
@@ -52,8 +49,7 @@ public class VaccineScheduleFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-
-
+    VaccinationDAO vaccinationDAO =new VaccinationDAOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -74,7 +70,7 @@ public class VaccineScheduleFormController implements Initializable {
     private void getAll() {
         try {
             ObservableList<VaccinationTM> obList = FXCollections.observableArrayList();
-            List<VaccinationSchedule> vaccinationScheduleList = VaccinationScheduleModel.getAll();
+            List<VaccinationSchedule> vaccinationScheduleList = vaccinationDAO.getAll();
 
             for (VaccinationSchedule vaccinationSchedule : vaccinationScheduleList) {
                 obList.add(new VaccinationTM(

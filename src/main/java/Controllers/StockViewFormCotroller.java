@@ -1,8 +1,8 @@
 package Controllers;
 
-import dto.Employee;
+import dao.ItemDAO;
+import dao.impl.ItemDAOImpl;
 import dto.Item;
-import dto.tm.EmployeeTM;
 import dto.tm.ItemTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,13 +17,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.EmployeeModel;
-import model.ItemModel;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class StockViewFormCotroller implements Initializable {
@@ -62,7 +60,7 @@ public class StockViewFormCotroller implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-
+    ItemDAO itemDAO =new ItemDAOImpl();
 
 
     @Override
@@ -88,7 +86,7 @@ public class StockViewFormCotroller implements Initializable {
     private void getAll() {
         try {
             ObservableList<ItemTM> obList = FXCollections.observableArrayList();
-            List<Item> itemList = ItemModel.getAll();
+            List<Item> itemList = itemDAO.getAll();
 
             for (Item item : itemList) {
                 obList.add(new ItemTM(

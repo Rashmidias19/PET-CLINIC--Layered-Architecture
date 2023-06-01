@@ -1,6 +1,8 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.BillDAO;
+import dao.impl.BillDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,16 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.BillModel;
-import model.CustomerModel;
+
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class BillDeleteFormController implements Initializable {
@@ -30,6 +27,8 @@ public class BillDeleteFormController implements Initializable {
     @FXML
     private JFXComboBox cmbID;
 
+    BillDAO billDAO =new BillDAOImpl();
+
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
         loadBillID();
@@ -38,7 +37,7 @@ public class BillDeleteFormController implements Initializable {
     private void loadBillID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = BillModel.loadBillID();
+            List<String> codes = billDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -56,7 +55,7 @@ public class BillDeleteFormController implements Initializable {
         String id = (String) cmbID.getValue();
 
         try {
-            boolean isDeleted = BillModel.delete(id);
+            boolean isDeleted = billDAO.delete(id);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
             }

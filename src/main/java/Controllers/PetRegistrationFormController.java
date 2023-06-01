@@ -1,5 +1,7 @@
 package Controllers;
 
+import dao.PetDAO;
+import dao.impl.PetDAOImpl;
 import dto.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,25 +17,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.PetModel;
 
-import javax.swing.*;
-import javax.swing.text.Element;
-import javax.swing.text.html.ImageView;
 import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 import java.io.*;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.AttributedCharacterIterator;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class PetRegistrationFormController implements Initializable {
@@ -88,7 +77,7 @@ public class PetRegistrationFormController implements Initializable {
     private FileInputStream fsp;
 
     private Circle circle;
-
+    PetDAO petDAO =new PetDAOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -118,7 +107,7 @@ public class PetRegistrationFormController implements Initializable {
     private void loadCustID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = CustomerModel.loadCustomerID();
+            List<String> codes = petDAO.loadCustomerID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -188,7 +177,7 @@ public class PetRegistrationFormController implements Initializable {
     }
     private void generateNextPetId() {
         try {
-            String id = PetModel.getNextPetId();
+            String id = petDAO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -208,9 +197,14 @@ public class PetRegistrationFormController implements Initializable {
         String address=txtAddress.getText();
         String contact=txtContact.getText();
 
-        Pet pet=new Pet(PetID,Name,CustomerID,Type,Breed,Gender,DOB,age,address,contact);
-
-        PetModel.save(pet,inp,file);
+        try {
+            boolean isSaved = petDAO.save(new Pet(PetID,Name,CustomerID,Type,Breed,Gender,DOB,age,address,contact),inp,file);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Pet Saved!").show();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+        }
 
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/PetRegisterForm.fxml"))));

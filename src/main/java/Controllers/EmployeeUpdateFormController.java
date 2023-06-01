@@ -1,8 +1,10 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import dto.Customer;
+import dao.EmployeeDAO;
+import dao.impl.EmployeeDAOImpl;
 import dto.Employee;
+import dto.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,20 +20,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.EmployeeModel;
-import model.UserModel;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class EmployeeUpdateFormController implements Initializable {
@@ -75,7 +70,7 @@ public class EmployeeUpdateFormController implements Initializable {
 
     @FXML
     private Circle circle;
-
+    EmployeeDAO employeeDAO =new EmployeeDAOImpl();
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
         loadEmployeeID();
@@ -84,7 +79,7 @@ public class EmployeeUpdateFormController implements Initializable {
     private void loadEmployeeID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = EmployeeModel.loadEmployeeID();
+            List<String> codes = employeeDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -99,7 +94,7 @@ public class EmployeeUpdateFormController implements Initializable {
     private void loadUserID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = UserModel.loadUserID();
+            List<String> codes = employeeDAO.loadUserID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -190,7 +185,7 @@ public class EmployeeUpdateFormController implements Initializable {
     public void searchbtnOnAction(ActionEvent event) {
         String EmployeeID= (String) cmbEmployeeID.getValue();
         try {
-            Employee employee = EmployeeModel.searchById(EmployeeID);
+            Employee employee = employeeDAO.searchById(EmployeeID);
             fillEmployeeFields(employee);
             loadUserID();
             loadGender();
@@ -206,7 +201,7 @@ public class EmployeeUpdateFormController implements Initializable {
     private void loadImage(Employee employee) throws FileNotFoundException, SQLException {
         InputStream is=null;
         if(employee.getPicture()==null){
-            is=new FileInputStream("F:\\OOP Final\\petClinic\\src\\main\\resources\\img\\images.png");
+            is=new FileInputStream("E:\\PetVet\\Clinic\\src\\main\\resources\\img\\images.png");
         }else{
             is=employee.getPicture().getBinaryStream();
         }
@@ -242,9 +237,14 @@ public class EmployeeUpdateFormController implements Initializable {
         String contact=txtContact.getText();
         String email=txtEmail.getText();
 
-        Employee employee = new Employee(EmployeeID,Name,UserID,DOB,NIC,Age,gender,address,salary,contact,email);
-        EmployeeModel.update(employee);
-
+        try {
+            boolean isUpdate = employeeDAO.update(new Employee(EmployeeID,Name,UserID,DOB,NIC,Age,gender,address,salary,contact,email));
+            if (isUpdate) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+        }
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/EmployeeUpdateForm.fxml"))));
         stage.setTitle("VETCLOUD");

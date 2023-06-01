@@ -1,7 +1,7 @@
 package Controllers;
 
-import com.jfoenix.controls.JFXComboBox;
-import dto.Bill;
+import dao.CustomerDAO;
+import dao.impl.CustomerDAOImpl;
 import dto.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,17 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.BillModel;
-import model.CustomerModel;
 
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class CustomerRegisterFormController implements Initializable {
@@ -63,7 +57,7 @@ public class CustomerRegisterFormController implements Initializable {
 
     @FXML
     private ComboBox cmbGender;
-
+    CustomerDAO customerDAO =new CustomerDAOImpl();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -151,7 +145,7 @@ public class CustomerRegisterFormController implements Initializable {
 
     private void generateNextCustomerId() {
         try {
-            String id = CustomerModel.getNextCustomerId();
+            String id = customerDAO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -176,10 +170,8 @@ public class CustomerRegisterFormController implements Initializable {
                  String address=txtAddress.getText();
 
 
-                Customer customer = new Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email,address);
-
                 try {
-                    boolean isSaved = CustomerModel.save(customer);
+                    boolean isSaved = customerDAO.save(new Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email,address));
                     if (isSaved) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Customer saved!").show();
                     }

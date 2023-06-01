@@ -1,9 +1,9 @@
 package Controllers;
 
+import dao.EmployeeDAO;
+import dao.impl.EmployeeDAOImpl;
 import dto.Employee;
-import dto.Pet;
 import dto.tm.EmployeeTM;
-import dto.tm.PetTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,14 +18,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
-import model.EmployeeModel;
-import model.PetModel;
+
 
 import java.io.IOException;
-import java.io.InterruptedIOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class EmployeeViewFormController implements Initializable {
@@ -66,7 +63,7 @@ public class EmployeeViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-
+    EmployeeDAO employeeDAO =new EmployeeDAOImpl();
 
 
     @SneakyThrows
@@ -93,7 +90,7 @@ public class EmployeeViewFormController implements Initializable {
     private void getAll() throws ClassNotFoundException {
         try {
             ObservableList<EmployeeTM> obList = FXCollections.observableArrayList();
-            List<Employee> employeeList = EmployeeModel.getAll();
+            List<Employee> employeeList = employeeDAO.getAll();
 
             for (Employee employee : employeeList) {
                 obList.add(new EmployeeTM(

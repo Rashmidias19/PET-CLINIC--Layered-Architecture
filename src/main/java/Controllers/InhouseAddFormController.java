@@ -1,11 +1,10 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import dto.Customer;
+import dao.InhouseDAO;
+import dao.impl.InhouseDAOImpl;
 import dto.Inhouse;
-import dto.Item;
 import dto.Pet;
-import dto.tm.CartTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,17 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.InhouseModel;
-import model.ItemModel;
-import model.PetModel;
+
 
 import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class InhouseAddFormController implements Initializable {
@@ -61,7 +54,7 @@ public class InhouseAddFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbPetID;
-
+    InhouseDAO inhouseDAO =new InhouseDAOImpl();
 
 
 
@@ -140,7 +133,7 @@ public class InhouseAddFormController implements Initializable {
     private void loadPetID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = PetModel.loadPetID();
+            List<String> codes = inhouseDAO.loadPetID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -155,7 +148,7 @@ public class InhouseAddFormController implements Initializable {
 
     private void generateNextInId() {
         try {
-            String id = InhouseModel.getNextInId();
+            String id = inhouseDAO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -173,10 +166,8 @@ public class InhouseAddFormController implements Initializable {
         String contact=lblContact.getText();
         String Description=txtDescription.getText();
 
-        Inhouse inhouse = new Inhouse(InhouseID,PetID,CustomerID,AdmittedDate,Time,DischargeDate,Description,contact);
-
         try {
-            boolean isSaved = InhouseModel.save(inhouse);
+            boolean isSaved = inhouseDAO.save(new Inhouse(InhouseID,PetID,CustomerID,AdmittedDate,Time,DischargeDate,Description,contact));
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Customer saved!").show();
             }
@@ -195,7 +186,7 @@ public class InhouseAddFormController implements Initializable {
     public void cmbPetIDOnAction(ActionEvent event) {
         String ID = (String) cmbPetID.getValue();
         try {
-            Pet pet = PetModel.searchById(ID);
+            Pet pet = inhouseDAO.searchPetById(ID);
             fillPetFields(pet);
 
             // txtQty.requestFocus();

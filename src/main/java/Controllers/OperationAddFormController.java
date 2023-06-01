@@ -1,8 +1,8 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import dto.Employee;
-import dto.Inhouse;
+import dao.OperationDAO;
+import dao.impl.OperationDAOImpl;
 import dto.OperationSchedule;
 import dto.Pet;
 import javafx.collections.FXCollections;
@@ -18,16 +18,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.*;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class OperationAddFormController implements Initializable{
@@ -62,6 +56,7 @@ public class OperationAddFormController implements Initializable{
 
     @FXML
     private TextField txtHours;
+    OperationDAO operationDAO =new OperationDAOImpl();
 
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
@@ -129,7 +124,8 @@ public class OperationAddFormController implements Initializable{
 
     private void generateNextOpId() {
         try {
-            String id = OperationScheduleModel.getNextOpId();
+            OperationDAO operationDAO =new OperationDAOImpl();
+            String id = operationDAO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -152,10 +148,8 @@ public class OperationAddFormController implements Initializable{
         String Hours= txtHours.getText();
         String Contact=lblContact.getText();
 
-        OperationSchedule operationSchedule = new OperationSchedule(OperationID,PetID,CustomerID,Date,Time,Description,Hours,Contact);
-
         try {
-            boolean isSaved = OperationScheduleModel.save(operationSchedule);
+            boolean isSaved = operationDAO.save(new OperationSchedule(OperationID,PetID,CustomerID,Date,Time,Description,Hours,Contact));
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
             }
@@ -173,7 +167,7 @@ public class OperationAddFormController implements Initializable{
     private void loadPetID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = PetModel.loadPetID();
+            List<String> codes = operationDAO.loadPetID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -189,7 +183,7 @@ public class OperationAddFormController implements Initializable{
     public void cmbPetIDOnAction(ActionEvent event) {
         String ID = (String) cmbPetID.getValue();
         try {
-            Pet pet = PetModel.searchById(ID);
+            Pet pet = operationDAO.searchPetById(ID);
             fillPetFields(pet);;
 
             // txtQty.requestFocus();

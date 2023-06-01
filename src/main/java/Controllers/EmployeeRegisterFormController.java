@@ -1,8 +1,9 @@
 package Controllers;
 
-import dto.Customer;
+import dao.EmployeeDAO;
+import dao.impl.EmployeeDAOImpl;
 import dto.Employee;
-import dto.Pet;
+import dto.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,20 +17,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.EmployeeModel;
-import model.PetModel;
-import model.UserModel;
 
 import java.awt.*;
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class EmployeeRegisterFormController implements Initializable {
@@ -78,7 +71,7 @@ public class EmployeeRegisterFormController implements Initializable {
     private File file;
 
     private Desktop desktop=Desktop.getDesktop();
-
+    EmployeeDAO employeeDAO =new EmployeeDAOImpl();
     private FileInputStream inp;
 
     @Override
@@ -162,7 +155,7 @@ public class EmployeeRegisterFormController implements Initializable {
     private void loadUserID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = UserModel.loadUserID();
+            List<String> codes = employeeDAO.loadUserID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -177,7 +170,7 @@ public class EmployeeRegisterFormController implements Initializable {
 
     private void generateNextEmpId() {
         try {
-            String id = EmployeeModel.getNextEmpId();
+            String id = employeeDAO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -202,33 +195,14 @@ public class EmployeeRegisterFormController implements Initializable {
                 String contact = txtContact.getText();
                 String email = txtEmail.getText();
 
-
-//                try (Connection con = DriverManager.getConnection(URL, props)) {
-//                    String sql = "INSERT INTO Employee(EmployeeID,Name,UserID,DOB,NIC,Age,Gender,address,Salary,contact,email,picture)" +
-//                            "VALUES(?, ?, ?, ?,?,?,?,?,?,?,?,?)";
-//                    PreparedStatement pstm = con.prepareStatement(sql);
-//                    pstm.setString(1, EmployeeID);
-//                    pstm.setString(2, Name);
-//                    pstm.setString(3, UserID);
-//                    pstm.setDate(4, java.sql.Date.valueOf(DOB));
-//                    pstm.setString(5, NIC);
-//                    pstm.setInt(6, Age);
-//                    pstm.setString(7, Gender);
-//                    pstm.setString(8, address);
-//                    pstm.setString(9, Salary);
-//                    pstm.setString(10, contact);
-//                    pstm.setString(11, email);
-//                    inp=new FileInputStream(file);
-//                    pstm.setBinaryStream(12,(InputStream) inp,(int)file.length());
-//
-//                    int affectedRows = pstm.executeUpdate();
-//                    if (affectedRows > 0) {
-//                        new Alert(Alert.AlertType.CONFIRMATION,
-//                                "Employee added :)")
-//                                .show();
-//                    }
-                Employee employee = new Employee(EmployeeID,Name,UserID,DOB,NIC,Age,Gender,address,Salary,contact,email);
-                EmployeeModel.save(employee,inp,file);
+                try {
+                    boolean isSaved = employeeDAO.save(new Employee(EmployeeID,Name,UserID,DOB,NIC,Age,Gender,address,Salary,contact,email),inp,file);
+                    if (isSaved) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Employee saved!").show();
+                    }
+                } catch (SQLException | ClassNotFoundException e) {
+                    new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+                }
 
                 }else{
                     new Alert(Alert.AlertType.ERROR, "Please enter a valid age between 20-70").show();

@@ -1,7 +1,8 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import dto.Item;
+import dao.PetDAO;
+import dao.impl.PetDAOImpl;
 import dto.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,24 +13,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.ItemModel;
-import model.PetModel;
+
 
 import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class PetUpdateFormController implements Initializable {
@@ -72,7 +67,7 @@ public class PetUpdateFormController implements Initializable {
    @FXML
     private Circle circle;
     private Connection conn;
-
+    PetDAO petDAO =new PetDAOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -82,7 +77,7 @@ public class PetUpdateFormController implements Initializable {
     private void loadPetID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = PetModel.loadPetID();
+            List<String> codes = petDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -97,7 +92,7 @@ public class PetUpdateFormController implements Initializable {
     private void loadCustID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = CustomerModel.loadCustomerID();
+            List<String> codes = petDAO.loadCustomerID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -186,7 +181,7 @@ public class PetUpdateFormController implements Initializable {
     public void searchbtnOnAction(ActionEvent event) throws FileNotFoundException {
         String PetID= (String) cmbPetID.getValue();
         try {
-            Pet pet = PetModel.searchById(PetID);
+            Pet pet = petDAO.searchById(PetID);
             fillPetFields(pet);
             loadCustID();
             loadTypes();
@@ -204,7 +199,8 @@ public class PetUpdateFormController implements Initializable {
     private void loadImage(Pet pet) throws FileNotFoundException, SQLException {
         InputStream is=null;
         if(pet.getPicture()==null){
-            is=new FileInputStream("F:\\OOP Final\\petClinic\\src\\main\\resources\\img\\images.png");
+            is=new FileInputStream("E:\\PetVet\\Clinic\\src\\main\\resources\\img\\images.png");
+
         }else{
             is=pet.getPicture().getBinaryStream();
         }
@@ -239,10 +235,8 @@ public class PetUpdateFormController implements Initializable {
         String address=txtAddress.getText();
         String contact=txtContact.getText();
 
-        Pet pet=new Pet(PetID,Name,CustomerID,Type,Breed,Gender,DOB,age,address,contact);
-
         try {
-            boolean isSaved = PetModel.update(pet);
+            boolean isSaved = petDAO.update(new Pet(PetID,Name,CustomerID,Type,Breed,Gender,DOB,age,address,contact));
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Pet Updated!").show();
             }

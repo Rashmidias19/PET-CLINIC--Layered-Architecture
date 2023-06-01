@@ -1,8 +1,8 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import dto.Customer;
-import dto.Item;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
 import dto.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,17 +15,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.ItemModel;
-import model.UserModel;
+
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class UserUpdateFormController implements Initializable {
@@ -45,6 +39,7 @@ public class UserUpdateFormController implements Initializable {
 
     @FXML
     private TextField txtEmail;
+    UserDAO userDAO =new UserDAOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -54,7 +49,7 @@ public class UserUpdateFormController implements Initializable {
     private void loadUserID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = UserModel.loadUserID();
+           List<String> codes = userDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -133,7 +128,7 @@ public class UserUpdateFormController implements Initializable {
     public void searchbtnOnAction(ActionEvent event) {
         String UserID= (String) cmbUserID.getValue();
         try {
-            User user = UserModel.searchById(UserID);
+            User user = userDAO.searchById(UserID);
             fillUserFields(user);
 
             // txtQty.requestFocus();
@@ -156,9 +151,16 @@ public class UserUpdateFormController implements Initializable {
         String Password=txtPassword.getText();
         String email=txtEmail.getText();
 
+        userDAO.update(new User(UserID,UserName,Password,email));
 
-        User user = new User(UserID,UserName,Password,email);
-        UserModel.update(user);
+        try {
+            boolean isUpdated = userDAO.update( new User(UserID,UserName,Password,email));
+            if (isUpdated) {
+                new Alert(Alert.AlertType.CONFIRMATION, "User saved!").show();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+        }
 
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/UserUpdateForm.fxml"))));

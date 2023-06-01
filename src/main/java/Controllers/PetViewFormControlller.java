@@ -1,8 +1,8 @@
 package Controllers;
 
-import dto.Customer;
+import dao.PetDAO;
+import dao.impl.PetDAOImpl;
 import dto.Pet;
-import dto.tm.CustomerTM;
 import dto.tm.PetTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,13 +17,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.PetModel;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class PetViewFormControlller implements Initializable {
@@ -61,7 +59,7 @@ public class PetViewFormControlller implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-
+    PetDAO petDAO =new PetDAOImpl();
 
 
     @Override
@@ -86,7 +84,7 @@ public class PetViewFormControlller implements Initializable {
     private void getAll() {
         try {
             ObservableList<PetTM> obList = FXCollections.observableArrayList();
-            List<Pet> petList = PetModel.getAll();
+            List<Pet> petList = petDAO.getAll();
 
             for (Pet pet : petList) {
                 obList.add(new PetTM(

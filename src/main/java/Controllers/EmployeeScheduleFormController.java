@@ -1,9 +1,9 @@
 package Controllers;
 
+import dao.EmployeeScheduleDAO;
+import dao.impl.EmployeeScheduleDAOImpl;
 import dto.EmployeeSchedule;
-import dto.Inhouse;
 import dto.tm.EmployeeScheduleTM;
-import dto.tm.InhouseTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,13 +17,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.EmployeeScheduleModel;
-import model.InhouseModel;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Properties;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EmployeeScheduleFormController implements Initializable {
@@ -56,7 +53,7 @@ public class EmployeeScheduleFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-
+    EmployeeScheduleDAO employeeScheduleDAO =new EmployeeScheduleDAOImpl();
 
 
     @Override
@@ -79,7 +76,7 @@ public class EmployeeScheduleFormController implements Initializable {
     private void getAll() {
         try {
             ObservableList<EmployeeScheduleTM> obList = FXCollections.observableArrayList();
-            List<EmployeeSchedule> employeeScheduleList = EmployeeScheduleModel.getAll();
+            ArrayList<EmployeeSchedule> employeeScheduleList = employeeScheduleDAO.getAll();
 
             for (EmployeeSchedule employeeSchedule : employeeScheduleList) {
                 obList.add(new EmployeeScheduleTM(

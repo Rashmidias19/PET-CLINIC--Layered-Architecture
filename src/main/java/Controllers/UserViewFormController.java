@@ -1,7 +1,8 @@
 package Controllers;
 
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
 import dto.User;
-import dto.tm.UserTM;
 import dto.tm.UserTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,16 +14,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.UserModel;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class UserViewFormController implements Initializable {
@@ -42,8 +41,7 @@ public class UserViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-
-
+    UserDAO userDAO =new UserDAOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -61,7 +59,7 @@ public class UserViewFormController implements Initializable {
     private void getAll() {
         try {
             ObservableList<UserTM> obList = FXCollections.observableArrayList();
-            List<User> userList = UserModel.getAll();
+            List<User> userList = userDAO.getAll();
 
             for (User user : userList) {
                 obList.add(new UserTM(

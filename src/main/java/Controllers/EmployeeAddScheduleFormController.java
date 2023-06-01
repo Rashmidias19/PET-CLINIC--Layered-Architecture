@@ -1,8 +1,10 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import dto.Customer;
+import dao.EmployeeScheduleDAO;
+import dao.impl.EmployeeScheduleDAOImpl;
 import dto.Employee;
+import dto.EmployeeSchedule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,20 +15,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.EmployeeModel;
-import model.EmployeeScheduleModel;
-import model.PetModel;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class EmployeeAddScheduleFormController implements Initializable {
@@ -56,7 +48,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
 
     @FXML
     private TextField Ot;
-
+    EmployeeScheduleDAO employeeScheduleDAO =new EmployeeScheduleDAOImpl();
 
 
 
@@ -70,7 +62,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
 
     private void generateNextEmpSchedId() {
         try {
-            String id = EmployeeScheduleModel.getNextSchedId();
+            String id = employeeScheduleDAO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -145,7 +137,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
     private void loadEmployeeID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = EmployeeModel.loadEmployeeID();
+            List<String> codes = employeeScheduleDAO.loadEmployeeID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -172,8 +164,8 @@ public class EmployeeAddScheduleFormController implements Initializable {
     public void cmbIDOnAction(ActionEvent event) {
         String ID = (String) cmbEmployeeID.getValue();
         try {
-            Employee employee = EmployeeModel.searchById(ID);
-            fillEmployeeFields(employee);;
+            Employee employee = employeeScheduleDAO.searchByEmployeeId(ID);
+            fillEmployeeFields(employee);
 
             // txtQty.requestFocus();
         } catch (SQLException | ClassNotFoundException e) {
@@ -186,7 +178,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
         String ScheduleID=lblID.getText();
         String EmployeeID= (String) cmbEmployeeID.getValue();
         String Name=lblName.getText();
-        LocalDate Date= date.getValue();
+        String Date= String.valueOf(date.getValue());
         String Time= time.getText();
         String WorkTime=worktime.getText();
         String Shift= (String) cmbShift.getValue();
@@ -194,7 +186,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
 
         boolean isAdd = false;
         try {
-            isAdd = EmployeeScheduleModel.addSchedule(ScheduleID, EmployeeID,Name,Date,Time,WorkTime,Shift,OT);
+            isAdd = employeeScheduleDAO.addSchedule(new EmployeeSchedule(ScheduleID, EmployeeID,Name,Date,Time,WorkTime,Shift,OT));
             if(isAdd) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Schedule added").show();
             } else {

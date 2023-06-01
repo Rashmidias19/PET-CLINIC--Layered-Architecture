@@ -1,8 +1,8 @@
 package Controllers;
 
-import dto.EmployeeSchedule;
+import dao.OperationDAO;
+import dao.impl.OperationDAOImpl;
 import dto.OperationSchedule;
-import dto.tm.EmployeeScheduleTM;
 import dto.tm.OperationScheduleTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,13 +17,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.EmployeeScheduleModel;
-import model.OperationScheduleModel;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class OperationScheduleFormController implements Initializable {
@@ -56,7 +54,7 @@ public class OperationScheduleFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-
+    OperationDAO operationDAO =new OperationDAOImpl();
 
 
     @Override
@@ -79,7 +77,7 @@ public class OperationScheduleFormController implements Initializable {
     private void getAll() {
         try {
             ObservableList<OperationScheduleTM> obList = FXCollections.observableArrayList();
-            List<OperationSchedule> operationScheduleList = OperationScheduleModel.getAll();
+            List<OperationSchedule> operationScheduleList = operationDAO.getAll();
 
             for (OperationSchedule operationSchedule : operationScheduleList) {
                 obList.add(new OperationScheduleTM(

@@ -1,5 +1,7 @@
 package Controllers;
 
+import dao.ItemDAO;
+import dao.impl.ItemDAOImpl;
 import dto.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,8 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.ItemModel;
-import model.OperationScheduleModel;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -51,7 +52,7 @@ public class SupplieRegisterFormController implements Initializable {
 
     @FXML
     private TextField txtPrice;
-
+    ItemDAO itemDAO =new ItemDAOImpl();
 
 
     @Override
@@ -132,7 +133,7 @@ public class SupplieRegisterFormController implements Initializable {
 
     private void generateNextItemId() {
         try {
-            String id = ItemModel.getNextItemId();
+            String id = itemDAO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -152,10 +153,8 @@ public class SupplieRegisterFormController implements Initializable {
         int Quantity= Integer.parseInt(txtQuantity.getText());
         Double Price= Double.valueOf(txtPrice.getText());
 
-        Item item = new Item(ItemID,Name,Man_Date,Exp_Date,Supplier_name,Type,Supplier_contact,Description,Quantity,Price);
-
         try {
-            boolean isSaved =ItemModel.save(item);
+            boolean isSaved = itemDAO.save(new Item(ItemID,Name,Man_Date,Exp_Date,Supplier_name,Type,Supplier_contact,Description,Quantity,Price));
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
             }

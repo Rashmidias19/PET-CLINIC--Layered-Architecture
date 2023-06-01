@@ -1,6 +1,7 @@
 package Controllers;
 
-import db.DBConnection;
+import dao.BillDAO;
+import dao.impl.BillDAOImpl;
 import dto.Bill;
 import dto.Customer;
 import dto.Item;
@@ -11,22 +12,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.BillModel;
-import model.CustomerModel;
-import model.ItemModel;
 
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class BillAddFormController implements Initializable {
@@ -87,7 +84,7 @@ public class BillAddFormController implements Initializable {
 
     private ObservableList<CartTM> obList = FXCollections.observableArrayList();
 
-
+    BillDAO billDAO =new BillDAOImpl();
 
 
     @Override
@@ -193,7 +190,7 @@ public class BillAddFormController implements Initializable {
     private void loadCustID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = CustomerModel.loadCustomerID();
+            ArrayList<String> codes = billDAO.loadCustomerID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -209,7 +206,7 @@ public class BillAddFormController implements Initializable {
     private void loadItemID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = ItemModel.loadItemID();
+            List<String> codes = billDAO.loadItemID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -224,7 +221,7 @@ public class BillAddFormController implements Initializable {
 
     private void generateNextBillId() {
         try {
-            String id = BillModel.getNextBillId();
+            String id = billDAO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -243,10 +240,8 @@ public class BillAddFormController implements Initializable {
         String email=lblEmail.getText();
         String Description=txtDescription.getText();
 
-        Bill bill = new Bill(BillID,CustomerID,Date,Time,Amount,contact,email,Description);
-
         try {
-            boolean isSaved = BillModel.save(bill);
+            boolean isSaved = billDAO.save(new Bill(BillID,CustomerID,Date,Time,Amount,contact,email,Description));
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Bill saved!").show();
             }
@@ -303,7 +298,8 @@ public class BillAddFormController implements Initializable {
     public void cmbItemOnAction(ActionEvent event) {
         String ID = (String) cmbItemID.getValue();
         try {
-            Item item = ItemModel.searchById(ID);
+            BillDAO billDAO =new BillDAOImpl();
+            Item item = billDAO.searchByItemId(ID);
             fillItemFields(item);
 
            // txtQty.requestFocus();
@@ -321,7 +317,8 @@ public class BillAddFormController implements Initializable {
     public void cmbCustomerOnAction(ActionEvent event) {
         String ID = (String) cmbCustomID.getValue();
         try {
-             Customer customer = CustomerModel.searchById(ID);
+             BillDAO billDAO =new BillDAOImpl();
+             Customer customer = billDAO.searchByCustomerId(ID);
              fillCustomerFields(customer);
 
             // txtQty.requestFocus();

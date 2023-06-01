@@ -1,8 +1,8 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import dto.Employee;
-import dto.Item;
+import dao.VaccinationDAO;
+import dao.impl.VaccinationDAOImpl;
 import dto.Pet;
 import dto.VaccinationSchedule;
 import javafx.collections.FXCollections;
@@ -18,16 +18,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.*;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 
@@ -54,6 +48,8 @@ public class VaccinationAddFormController implements Initializable {
 
     @FXML
     private Label lblContact;
+    VaccinationDAO vaccinationDAO =new VaccinationDAOImpl();
+
 
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
@@ -128,7 +124,7 @@ public class VaccinationAddFormController implements Initializable {
     private void loadPet_ID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = PetModel.loadPetID();
+            List<String> codes = vaccinationDAO.loadPetID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -143,7 +139,7 @@ public class VaccinationAddFormController implements Initializable {
     public void cmbIDOnAction(ActionEvent actionEvent) throws IOException {
         String ID = (String) cmbPet_ID.getValue();
         try {
-            Pet pet = PetModel.searchById(ID);
+            Pet pet = vaccinationDAO.searchPetById(ID);
             FillPetFields(pet);
 
             // txtQty.requestFocus();
@@ -160,7 +156,7 @@ public class VaccinationAddFormController implements Initializable {
 
     private void generateNextVaccId() {
         try {
-            String id = VaccinationScheduleModel.getNextVaccId();
+            String id = vaccinationDAO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -178,11 +174,8 @@ public class VaccinationAddFormController implements Initializable {
         String Description = textDescription.getText();
         String Contact = lblContact.getText();
 
-
-        VaccinationSchedule vaccinationSchedule = new VaccinationSchedule(Vaccination_ID,Pet_ID,Customer_ID,Date,Time,Description,Contact);
-
         try {
-            boolean isSaved = VaccinationScheduleModel.save(vaccinationSchedule);
+            boolean isSaved = vaccinationDAO.save(new VaccinationSchedule(Vaccination_ID,Pet_ID,Customer_ID,Date,Time,Description,Contact));
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
             }

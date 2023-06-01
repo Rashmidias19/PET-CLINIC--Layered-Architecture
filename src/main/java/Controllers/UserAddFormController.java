@@ -1,6 +1,7 @@
 package Controllers;
 
-import dto.Item;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
 import dto.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,18 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.ItemModel;
-import model.UserModel;
+
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class UserAddFormController implements Initializable {
@@ -43,6 +37,7 @@ public class UserAddFormController implements Initializable {
 
     @FXML
     private TextField txtEmail;
+    UserDAO userDAO =new UserDAOImpl();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -115,7 +110,7 @@ public class UserAddFormController implements Initializable {
 
     private void generateNextUserId() {
         try {
-            String id = UserModel.getNextUserId();
+            String id = userDAO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -134,10 +129,8 @@ public class UserAddFormController implements Initializable {
                 String password = txtPassword.getText();
                 String email = txtEmail.getText();
 
-                User user = new User(UserID,UserName,password,email);
-
                 try {
-                    boolean isSaved = UserModel.save(user);
+                    boolean isSaved = userDAO.save( new User(UserID,UserName,password,email));
                     if (isSaved) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
                     }

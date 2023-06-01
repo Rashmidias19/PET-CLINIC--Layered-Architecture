@@ -1,9 +1,9 @@
 package Controllers;
 
+import dao.CustomerDAO;
+import dao.impl.CustomerDAOImpl;
 import dto.Customer;
-import dto.User;
 import dto.tm.CustomerTM;
-import dto.tm.UserTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,13 +17,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.UserModel;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class CustomerViewFormController implements Initializable {
@@ -61,7 +58,7 @@ public class CustomerViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-
+    CustomerDAO customerDAO =new CustomerDAOImpl();
 
 
     @Override
@@ -85,7 +82,7 @@ public class CustomerViewFormController implements Initializable {
     private void getAll() {
         try {
             ObservableList<CustomerTM> obList = FXCollections.observableArrayList();
-            List<Customer> customerList = CustomerModel.getAll();
+            List<Customer> customerList = customerDAO.getAll();
 
             for (Customer customer : customerList) {
                 obList.add(new CustomerTM(

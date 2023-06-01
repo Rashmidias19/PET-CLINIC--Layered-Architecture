@@ -21,7 +21,4 @@ public class Customer {
     private String email;
     private String address;
 
-
-    public Customer(String string, String string1) {
-    }
 }

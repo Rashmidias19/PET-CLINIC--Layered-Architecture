@@ -1,11 +1,9 @@
 package Controllers;
 
+import dao.BillDAO;
+import dao.impl.BillDAOImpl;
 import dto.Bill;
-import dto.Item;
 import dto.tm.BillTM;
-import dto.tm.ItemTM;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,13 +15,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.BillModel;
-import model.ItemModel;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class BillViewFormController implements Initializable {
@@ -59,7 +54,7 @@ public class BillViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-
+    BillDAO billDAO =new BillDAOImpl();
 
 
     @Override
@@ -82,22 +77,13 @@ public class BillViewFormController implements Initializable {
 
     private void getAll() {
         try {
-            ObservableList<BillTM> obList = FXCollections.observableArrayList();
-            List<Bill> billList = BillModel.getAll();
+            //ObservableList<BillTM> obList = FXCollections.observableArrayList();
+            List<Bill> billList = billDAO.getAll();
 
             for (Bill bill : billList) {
-                obList.add(new BillTM(
-                        bill.getBillID(),
-                        bill.getCustomerID(),
-                        bill.getDate(),
-                        bill.getTime(),
-                        bill.getAmount(),
-                        bill.getContact(),
-                        bill.getEmail(),
-                        bill.getDescription()
-                ));
+                tblBill.getItems().add(new BillTM(bill.getBillID(), bill.getCustomerID(), bill.getDate(), bill.getTime(), bill.getAmount(), bill.getContact(), bill.getEmail(), bill.getDescription()));
             }
-            tblBill.setItems(obList);
+           // tblBill.setItems(obList);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SQL Error!").show();

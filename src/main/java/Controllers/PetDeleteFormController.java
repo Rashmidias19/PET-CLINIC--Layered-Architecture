@@ -1,6 +1,8 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.PetDAO;
+import dao.impl.PetDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,17 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.ItemModel;
-import model.PetModel;
+
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class PetDeleteFormController implements Initializable {
@@ -31,7 +27,7 @@ public class PetDeleteFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbID;
-
+    PetDAO petDAO =new PetDAOImpl();
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
         loadPetID();
@@ -40,7 +36,7 @@ public class PetDeleteFormController implements Initializable {
     private void loadPetID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = PetModel.loadPetID();
+            List<String> codes = petDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -56,7 +52,14 @@ public class PetDeleteFormController implements Initializable {
 
     public void deletebtnOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String id = (String) cmbID.getValue();
-        PetModel.delete(id);
+        try {
+            boolean isDeleted = petDAO.delete(id);
+            if (isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+        }
     }
 
     public void petbtnOnAction(ActionEvent event) throws IOException {

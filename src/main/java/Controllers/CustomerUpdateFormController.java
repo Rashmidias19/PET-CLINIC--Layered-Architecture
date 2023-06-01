@@ -1,8 +1,10 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.CustomerDAO;
+import dao.impl.CustomerDAOImpl;
 import dto.Customer;
-import dto.Pet;
+import dto.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,17 +17,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.EmployeeModel;
-import model.PetModel;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class CustomerUpdateFormController implements Initializable {
@@ -63,7 +58,7 @@ public class CustomerUpdateFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbGender;
-
+    CustomerDAO customerDAO =new CustomerDAOImpl();
 
 
 
@@ -75,7 +70,7 @@ public class CustomerUpdateFormController implements Initializable {
     private void loadCustID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = CustomerModel.loadCustomerID();
+            List<String> codes = customerDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -165,7 +160,7 @@ public class CustomerUpdateFormController implements Initializable {
     public void searchbtnOnAction(ActionEvent event) {
         String CustID= (String) cmbCustID.getValue();
         try {
-            Customer customer = CustomerModel.searchById(CustID);
+            Customer customer = customerDAO.searchById(CustID);
             fillCustFields(customer);
             loadCustID();
             loadTitles();
@@ -204,9 +199,14 @@ public class CustomerUpdateFormController implements Initializable {
         String email=txtEmail.getText();
         String address=txtAddress.getText();
 
-
-        Customer customer = new Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email,address);
-        CustomerModel.update(customer);
+        try {
+            boolean isUpdated = customerDAO.update(new Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email,address) );
+            if (isUpdated) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Customer saved!").show();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
+        }
 
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/CustomerUpdateForm.fxml"))));

@@ -1,8 +1,8 @@
 package Controllers;
 
-import dto.Bill;
+import dao.InhouseDAO;
+import dao.impl.InhouseDAOImpl;
 import dto.Inhouse;
-import dto.tm.BillTM;
 import dto.tm.InhouseTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,13 +17,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.BillModel;
-import model.InhouseModel;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class InhouseViewFormController implements Initializable {
@@ -56,7 +54,7 @@ public class InhouseViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-
+    InhouseDAO inhouseDAO =new InhouseDAOImpl();
 
 
     @Override
@@ -79,7 +77,7 @@ public class InhouseViewFormController implements Initializable {
     private void getAll() {
         try {
             ObservableList<InhouseTM> obList = FXCollections.observableArrayList();
-            List<Inhouse> inhouseList = InhouseModel.getAll();
+            List<Inhouse> inhouseList = inhouseDAO.getAll();
 
             for (Inhouse inhouse : inhouseList) {
                 obList.add(new InhouseTM(

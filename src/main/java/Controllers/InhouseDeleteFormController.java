@@ -1,6 +1,8 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.InhouseDAO;
+import dao.impl.InhouseDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,17 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.EmployeeModel;
-import model.InhouseModel;
+
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class InhouseDeleteFormController implements Initializable {
@@ -30,7 +26,7 @@ public class InhouseDeleteFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbID;
-
+    InhouseDAO inhouseDAO =new InhouseDAOImpl();
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
         loadInhouseID();
@@ -39,7 +35,7 @@ public class InhouseDeleteFormController implements Initializable {
     private void loadInhouseID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = InhouseModel.loadInhouseID();
+            List<String> codes = inhouseDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -57,7 +53,7 @@ public class InhouseDeleteFormController implements Initializable {
         String id = (String) cmbID.getValue();
 
         try {
-            boolean isDeleted = InhouseModel.delete(id);
+            boolean isDeleted = inhouseDAO.delete(id);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
             }

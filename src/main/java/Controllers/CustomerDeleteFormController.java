@@ -1,6 +1,8 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.CustomerDAO;
+import dao.impl.CustomerDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,16 +13,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.BillModel;
-import model.CustomerModel;
-
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class CustomerDeleteFormController implements Initializable {
@@ -30,6 +25,7 @@ public class CustomerDeleteFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbID;
+    CustomerDAO customerDAO =new CustomerDAOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -39,7 +35,7 @@ public class CustomerDeleteFormController implements Initializable {
     private void loadCustID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = CustomerModel.loadCustomerID();
+            List<String> codes =  customerDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -57,7 +53,7 @@ public class CustomerDeleteFormController implements Initializable {
         String id = (String) cmbID.getValue();
 
         try {
-            boolean isDeleted = CustomerModel.delete(id);
+            boolean isDeleted = customerDAO.delete(id);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
             }

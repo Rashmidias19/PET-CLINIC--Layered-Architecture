@@ -1,6 +1,8 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.EmployeeDAO;
+import dao.impl.EmployeeDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,16 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.CustomerModel;
-import model.EmployeeModel;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class EmployeeDeleteFormController implements Initializable {
@@ -29,7 +25,7 @@ public class EmployeeDeleteFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbID;
-
+    EmployeeDAO employeeDAO=new EmployeeDAOImpl();
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
         loadEmployeeID();
@@ -38,7 +34,7 @@ public class EmployeeDeleteFormController implements Initializable {
     private void loadEmployeeID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = EmployeeModel.loadEmployeeID();
+            List<String> codes = employeeDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -56,7 +52,7 @@ public class EmployeeDeleteFormController implements Initializable {
         String id = (String) cmbID.getValue();
 
         try {
-            boolean isDeleted = EmployeeModel.delete(id);
+            boolean isDeleted = employeeDAO.delete(id);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
             }
