@@ -123,46 +123,16 @@ public class EmployeeScheduleDAOImpl implements EmployeeScheduleDAO {
     }
 
     @Override
-    public boolean save(EmployeeSchedule dto) throws SQLException {
-        Connection con = null;
-        try {
-            con = DBConnection.getInstance().getConnection();
-            con.setAutoCommit(false);
-            boolean isSaved =saveSchedule(dto);
-            if(isSaved) {
-                boolean isUpdated = saveEmpSched(dto);
-                if(isUpdated) {
-                    con.commit();
-                    return true;
-                }
-            }
-
-            return false;
-        } catch (SQLException | ClassNotFoundException er) {
-            con.rollback();
-            return false;
-        } finally {
-            System.out.println("finally");
-            con.setAutoCommit(true);
-        }
-
-    }
-
-    @Override
     public boolean saveWithPicture(EmployeeSchedule dto, FileInputStream is, File fl) throws SQLException, ClassNotFoundException, FileNotFoundException {
         return false;
     }
 
     @Override
-    public boolean saveSchedule(EmployeeSchedule dto) throws SQLException, ClassNotFoundException {
+    public boolean save(EmployeeSchedule dto) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("INSERT INTO EmployeeSchedule(ScheduleID,EmployeeID,Name,Date,Time,WorkTime,Shift,OT) VALUES(?, ?, ?, ?,?,?,?,?)"
         + dto.getScheduleID(),dto.getEmployeeID(),dto.getName(),dto.getDate(),dto.getTime(),dto.getWorkTime(),dto.getShift(),dto.getOT());
 
 
     }
 
-    @Override
-    public boolean saveEmpSched(EmployeeSchedule dto) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("INSERT INTO EmpSched(ScheduleID,EmployeeID) VALUES(?, ?)",dto.getScheduleID(),dto.getEmployeeID());
-    }
 }

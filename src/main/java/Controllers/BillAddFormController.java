@@ -1,7 +1,10 @@
 package Controllers;
 
+import bo.BillBOImpl;
 import dao.BillDAO;
 import dao.CrudDAO;
+import dao.CustomerDAO;
+import dao.ItemDAO;
 import dao.impl.BillDAOImpl;
 import dao.impl.CustomerDAOImpl;
 import dao.impl.EmployeeDAOImpl;
@@ -91,11 +94,7 @@ public class BillAddFormController implements Initializable {
 
     private ObservableList<CartTM> obList = FXCollections.observableArrayList();
 
-    CrudDAO<Bill,String,FileInputStream, File> billDAO =new BillDAOImpl();
-    CrudDAO<Customer,String,FileInputStream, File> customerDAO =new CustomerDAOImpl();
-    CrudDAO<Item,String,FileInputStream, File> itemDAO =new ItemDAOImpl();
-
-
+    BillBOImpl billBO=new BillBOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -200,7 +199,7 @@ public class BillAddFormController implements Initializable {
     private void loadCustID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = customerDAO.loadID();
+            List<String> codes = billBO.loadCustomerID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -216,7 +215,7 @@ public class BillAddFormController implements Initializable {
     private void loadItemID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = itemDAO.loadID();
+            List<String> codes = billBO.loadItemID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -231,7 +230,7 @@ public class BillAddFormController implements Initializable {
 
     private void generateNextBillId() {
         try {
-            String id = billDAO.getNextId();
+            String id = billBO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -252,7 +251,7 @@ public class BillAddFormController implements Initializable {
 
 
         try {
-            boolean isSaved = billDAO.save(new Bill(BillID,CustomerID,Date,Time,Amount,contact,email,Description));
+            boolean isSaved = billBO.save(new Bill(BillID,CustomerID,Date,Time,Amount,contact,email,Description));
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Bill saved!").show();
             }

@@ -1,5 +1,6 @@
 package Controllers;
 
+import bo.BillBOImpl;
 import dao.BillDAO;
 import dao.CrudDAO;
 import dao.impl.BillDAOImpl;
@@ -57,8 +58,7 @@ public class BillViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    CrudDAO<Bill,String, FileInputStream, File> billDAO =new BillDAOImpl();
-
+    BillBOImpl billBO=new BillBOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -81,7 +81,7 @@ public class BillViewFormController implements Initializable {
     private void getAll() {
         try {
             //ObservableList<BillTM> obList = FXCollections.observableArrayList();
-            List<Bill> billList = billDAO.getAll();
+            List<Bill> billList = billBO.getAll();
 
             for (Bill bill : billList) {
                 tblBill.getItems().add(new BillTM(bill.getBillID(), bill.getCustomerID(), bill.getDate(), bill.getTime(), bill.getAmount(), bill.getContact(), bill.getEmail(), bill.getDescription()));

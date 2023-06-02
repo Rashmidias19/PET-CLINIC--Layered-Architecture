@@ -1,5 +1,6 @@
 package Controllers;
 
+import bo.BillBOImpl;
 import com.jfoenix.controls.JFXComboBox;
 import dao.BillDAO;
 import dao.CrudDAO;
@@ -31,7 +32,7 @@ public class BillDeleteFormController implements Initializable {
     @FXML
     private JFXComboBox cmbID;
 
-    CrudDAO<Bill,String, FileInputStream, File> billDAO =new BillDAOImpl();
+    BillBOImpl billBO=new BillBOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -41,7 +42,7 @@ public class BillDeleteFormController implements Initializable {
     private void loadBillID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = billDAO.loadID();
+            List<String> codes = billBO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -59,7 +60,7 @@ public class BillDeleteFormController implements Initializable {
         String id = (String) cmbID.getValue();
 
         try {
-            boolean isDeleted = billDAO.delete(id);
+            boolean isDeleted = billBO.delete(id);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
             }

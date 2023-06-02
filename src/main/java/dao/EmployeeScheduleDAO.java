@@ -26,9 +26,6 @@ public interface EmployeeScheduleDAO extends CrudDAO<EmployeeSchedule,String,Fil
     List<String> loadEmployeeID() throws SQLException, ClassNotFoundException;
 
     @Override
-    boolean save(EmployeeSchedule dto) throws SQLException;
+    boolean save(EmployeeSchedule dto) throws SQLException, ClassNotFoundException;
 
-    boolean saveSchedule(EmployeeSchedule dto) throws SQLException, ClassNotFoundException;
-
-    boolean saveEmpSched(EmployeeSchedule dto) throws SQLException, ClassNotFoundException;
 }

@@ -2,7 +2,10 @@ package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import dao.CrudDAO;
+import dao.EmpSchedDAO;
+import dao.EmployeeDAO;
 import dao.EmployeeScheduleDAO;
+import dao.impl.EmpSchedDAOImpl;
 import dao.impl.EmployeeDAOImpl;
 import dao.impl.EmployeeScheduleDAOImpl;
 import dto.Employee;
@@ -52,9 +55,9 @@ public class EmployeeAddScheduleFormController implements Initializable {
 
     @FXML
     private TextField Ot;
-    CrudDAO<EmployeeSchedule,String, FileInputStream, File> employeeScheduleDAO =new EmployeeScheduleDAOImpl();
-    CrudDAO<Employee,String,FileInputStream, File> employeeDAO =new EmployeeDAOImpl();
-
+    CrudDAO<EmployeeSchedule,String, FileInputStream, File> employeeScheduleDAO=new EmployeeScheduleDAOImpl();
+    CrudDAO<Employee,String, FileInputStream, File> employeeDAO=new EmployeeDAOImpl();
+    CrudDAO<EmployeeSchedule,String, FileInputStream, File> empSchedDAO=new EmpSchedDAOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -190,6 +193,7 @@ public class EmployeeAddScheduleFormController implements Initializable {
 
         boolean isAdd = false;
         try {
+            //gdfgfdhfgh
             isAdd = employeeScheduleDAO.save(new EmployeeSchedule(ScheduleID, EmployeeID,Name,Date,Time,WorkTime,Shift,OT));
             if(isAdd) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Schedule added").show();
