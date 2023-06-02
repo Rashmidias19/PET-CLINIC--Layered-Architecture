@@ -6,6 +6,9 @@ import dto.Pet;
 import dto.VaccinationSchedule;
 import dao.impl.util.CrudUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -114,6 +117,11 @@ public class VaccinationDAOImpl implements VaccinationDAO {
                 vaccinationSchedule.getTime(),
                 vaccinationSchedule.getDescription(),
                 vaccinationSchedule.getContact());
+    }
+
+    @Override
+    public boolean saveWithPicture(VaccinationSchedule dto, FileInputStream is, File fl) throws SQLException, ClassNotFoundException, FileNotFoundException {
+        return false;
     }
 
     @Override

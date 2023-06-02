@@ -1,5 +1,6 @@
 package Controllers;
 
+import dao.CrudDAO;
 import dao.InhouseDAO;
 import dao.impl.InhouseDAOImpl;
 import dto.Inhouse;
@@ -19,6 +20,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -54,7 +57,8 @@ public class InhouseViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    InhouseDAO inhouseDAO =new InhouseDAOImpl();
+    CrudDAO<Inhouse,String, FileInputStream, File> inhouseDAO =new InhouseDAOImpl();
+
 
 
     @Override

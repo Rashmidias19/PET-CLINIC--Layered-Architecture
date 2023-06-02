@@ -1,9 +1,14 @@
 package Controllers;
 
 import dao.BillDAO;
+import dao.CrudDAO;
 import dao.impl.BillDAOImpl;
+import dao.impl.CustomerDAOImpl;
+import dao.impl.EmployeeDAOImpl;
+import dao.impl.ItemDAOImpl;
 import dto.Bill;
 import dto.Customer;
+import dto.Employee;
 import dto.Item;
 import dto.tm.CartTM;
 import javafx.collections.FXCollections;
@@ -18,6 +23,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
@@ -84,7 +91,10 @@ public class BillAddFormController implements Initializable {
 
     private ObservableList<CartTM> obList = FXCollections.observableArrayList();
 
-    BillDAO billDAO =new BillDAOImpl();
+    CrudDAO<Bill,String,FileInputStream, File> billDAO =new BillDAOImpl();
+    CrudDAO<Customer,String,FileInputStream, File> customerDAO =new CustomerDAOImpl();
+    CrudDAO<Item,String,FileInputStream, File> itemDAO =new ItemDAOImpl();
+
 
 
     @Override
@@ -190,7 +200,7 @@ public class BillAddFormController implements Initializable {
     private void loadCustID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            ArrayList<String> codes = billDAO.loadCustomerID();
+            List<String> codes = customerDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -206,7 +216,7 @@ public class BillAddFormController implements Initializable {
     private void loadItemID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = billDAO.loadItemID();
+            List<String> codes = itemDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -239,6 +249,7 @@ public class BillAddFormController implements Initializable {
         String contact=lblContact.getText();
         String email=lblEmail.getText();
         String Description=txtDescription.getText();
+
 
         try {
             boolean isSaved = billDAO.save(new Bill(BillID,CustomerID,Date,Time,Amount,contact,email,Description));

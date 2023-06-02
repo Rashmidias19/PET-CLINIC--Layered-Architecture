@@ -7,6 +7,9 @@ import dto.Customer;
 import dto.Item;
 import dao.impl.util.CrudUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -117,6 +120,11 @@ public class BillDAOImpl implements BillDAO {
                 bill.getContact(),
                 bill.getEmail(),
                 bill.getDescription());
+    }
+
+    @Override
+    public boolean saveWithPicture(Bill dto, FileInputStream is, File fl) throws SQLException, ClassNotFoundException, FileNotFoundException {
+        return false;
     }
 
     @Override

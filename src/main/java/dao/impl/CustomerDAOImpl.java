@@ -6,6 +6,9 @@ import dto.Customer;
 import javafx.scene.control.Alert;
 import dao.impl.util.CrudUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -68,7 +71,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 
     @Override
-    public boolean save(Customer customer) throws SQLException, ClassNotFoundException {
+    public boolean save(Customer customer) throws SQLException, FileNotFoundException, ClassNotFoundException {
         String sql = "INSERT INTO Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email, address)" +
                 "VALUES(?, ?, ?, ?,?,?,?,?,?,?)";
         return CrudUtil.execute(
@@ -83,6 +86,11 @@ public class CustomerDAOImpl implements CustomerDAO {
                 customer.getContact(),
                 customer.getEmail(),
                 customer.getAddress());
+    }
+
+    @Override
+    public boolean saveWithPicture(Customer dto, FileInputStream is, File fl) throws SQLException, ClassNotFoundException, FileNotFoundException {
+        return false;
     }
 
     @Override

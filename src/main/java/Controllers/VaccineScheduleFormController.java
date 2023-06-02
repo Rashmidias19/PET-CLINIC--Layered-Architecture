@@ -1,5 +1,6 @@
 package Controllers;
 
+import dao.CrudDAO;
 import dao.VaccinationDAO;
 import dao.impl.VaccinationDAOImpl;
 import dto.VaccinationSchedule;
@@ -18,6 +19,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -49,7 +52,8 @@ public class VaccineScheduleFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    VaccinationDAO vaccinationDAO =new VaccinationDAOImpl();
+    CrudDAO<VaccinationSchedule,String, FileInputStream, File> vaccinationDAO =new VaccinationDAOImpl();
+
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {

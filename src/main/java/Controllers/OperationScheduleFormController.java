@@ -1,5 +1,6 @@
 package Controllers;
 
+import dao.CrudDAO;
 import dao.OperationDAO;
 import dao.impl.OperationDAOImpl;
 import dto.OperationSchedule;
@@ -19,6 +20,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -54,7 +57,9 @@ public class OperationScheduleFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    OperationDAO operationDAO =new OperationDAOImpl();
+
+    CrudDAO<OperationSchedule,String, FileInputStream, File> operationDAO =new OperationDAOImpl();
+
 
 
     @Override

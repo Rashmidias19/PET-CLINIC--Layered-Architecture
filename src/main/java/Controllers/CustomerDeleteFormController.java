@@ -1,8 +1,10 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.CrudDAO;
 import dao.CustomerDAO;
 import dao.impl.CustomerDAOImpl;
+import dto.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +15,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -25,7 +30,7 @@ public class CustomerDeleteFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbID;
-    CustomerDAO customerDAO =new CustomerDAOImpl();
+    CrudDAO<Customer,String, FileInputStream, File> customerDAO =new CustomerDAOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {

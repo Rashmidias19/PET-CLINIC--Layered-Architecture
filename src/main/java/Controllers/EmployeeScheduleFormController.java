@@ -1,5 +1,6 @@
 package Controllers;
 
+import dao.CrudDAO;
 import dao.EmployeeScheduleDAO;
 import dao.impl.EmployeeScheduleDAOImpl;
 import dto.EmployeeSchedule;
@@ -18,9 +19,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class EmployeeScheduleFormController implements Initializable {
@@ -53,7 +57,7 @@ public class EmployeeScheduleFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    EmployeeScheduleDAO employeeScheduleDAO =new EmployeeScheduleDAOImpl();
+    CrudDAO<EmployeeSchedule,String, FileInputStream, File> employeeScheduleDAO =new EmployeeScheduleDAOImpl();
 
 
     @Override
@@ -76,7 +80,7 @@ public class EmployeeScheduleFormController implements Initializable {
     private void getAll() {
         try {
             ObservableList<EmployeeScheduleTM> obList = FXCollections.observableArrayList();
-            ArrayList<EmployeeSchedule> employeeScheduleList = employeeScheduleDAO.getAll();
+            List<EmployeeSchedule> employeeScheduleList = employeeScheduleDAO.getAll();
 
             for (EmployeeSchedule employeeSchedule : employeeScheduleList) {
                 obList.add(new EmployeeScheduleTM(

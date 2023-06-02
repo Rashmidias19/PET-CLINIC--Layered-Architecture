@@ -44,9 +44,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public boolean save(Employee dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Employee dto) throws SQLException, ClassNotFoundException, FileNotFoundException {
         return false;
     }
+
 
     @Override
     public String splitId(String currentId) {
@@ -95,7 +96,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public boolean save(Employee employee, FileInputStream inp, File file) throws SQLException, FileNotFoundException, ClassNotFoundException {
+    public boolean saveWithPicture(Employee employee, FileInputStream inp, File file) throws SQLException, FileNotFoundException, ClassNotFoundException {
         String sql = "INSERT INTO Employee(EmployeeID,Name,UserID,DOB,NIC,Age,Gender,address,Salary,contact,email,picture)" +
                 "VALUES(?, ?, ?, ?,?,?,?,?,?,?,?,?)";
         PreparedStatement pstm= DBConnection.getInstance().getConnection().prepareStatement(sql);

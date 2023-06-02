@@ -1,8 +1,11 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.CrudDAO;
 import dao.PetDAO;
+import dao.impl.CustomerDAOImpl;
 import dao.impl.PetDAOImpl;
+import dto.Customer;
 import dto.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -67,7 +70,9 @@ public class PetUpdateFormController implements Initializable {
    @FXML
     private Circle circle;
     private Connection conn;
-    PetDAO petDAO =new PetDAOImpl();
+    CrudDAO<Pet,String, FileInputStream, File> petDAO =new PetDAOImpl();
+    CrudDAO<Customer,String, FileInputStream, File> customerDAO =new CustomerDAOImpl();
+
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -92,7 +97,7 @@ public class PetUpdateFormController implements Initializable {
     private void loadCustID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = petDAO.loadCustomerID();
+            List<String> codes = customerDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);

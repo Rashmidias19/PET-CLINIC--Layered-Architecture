@@ -1,6 +1,7 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.CrudDAO;
 import dao.ItemDAO;
 import dao.impl.ItemDAOImpl;
 import dto.Item;
@@ -19,6 +20,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -59,7 +62,7 @@ public class SupplieUpdateFormCotroller implements Initializable {
 
     @FXML
     private JFXComboBox cmbItemID;
-    ItemDAO itemDAO =new ItemDAOImpl();
+    CrudDAO<Item,String, FileInputStream, File> itemDAO =new ItemDAOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {

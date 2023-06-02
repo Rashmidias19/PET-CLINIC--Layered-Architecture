@@ -2,10 +2,12 @@ package dao;
 
 import dto.Item;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface ItemDAO extends CrudDAO<Item,String> {
+public interface ItemDAO extends CrudDAO<Item,String,FileInputStream,File> {
 
     @Override
     List<String> loadID() throws SQLException, ClassNotFoundException;

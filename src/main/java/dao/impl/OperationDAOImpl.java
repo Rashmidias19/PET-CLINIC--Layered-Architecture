@@ -6,6 +6,9 @@ import dto.OperationSchedule;
 import dto.Pet;
 import dao.impl.util.CrudUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,6 +44,11 @@ public class OperationDAOImpl implements OperationDAO {
                 operationSchedule.getDescription(),
                 operationSchedule.getHours(),
                 operationSchedule.getContact());
+    }
+
+    @Override
+    public boolean saveWithPicture(OperationSchedule dto, FileInputStream is, File fl) throws SQLException, ClassNotFoundException, FileNotFoundException {
+        return false;
     }
 
     @Override

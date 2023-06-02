@@ -15,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.List;
@@ -42,12 +44,12 @@ public class DashboardFormController implements Initializable {
     private Label lblItem;
 
     private Connection con;
-    UserDAO userDAO =new UserDAOImpl();
-    CustomerDAO customerDAO =new CustomerDAOImpl();
-    PetDAO petDAO =new PetDAOImpl();
-    EmployeeDAO employeeDAO =new EmployeeDAOImpl();
-    ItemDAO itemDAO =new ItemDAOImpl();
-    InhouseDAO inhouseDAO =new InhouseDAOImpl();
+    CrudDAO<User,String, FileInputStream, File> userDAO =new UserDAOImpl();
+    CrudDAO<Customer,String,FileInputStream, File> customerDAO =new CustomerDAOImpl();
+    CrudDAO<Pet,String,FileInputStream, File> petDAO =new PetDAOImpl();
+    CrudDAO<Employee,String,FileInputStream, File> employeeDAO =new EmployeeDAOImpl();
+    CrudDAO<Item,String,FileInputStream, File> itemDAO =new ItemDAOImpl();
+    CrudDAO<Inhouse,String,FileInputStream, File> inhouseDAO =new InhouseDAOImpl();
     @SneakyThrows
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {

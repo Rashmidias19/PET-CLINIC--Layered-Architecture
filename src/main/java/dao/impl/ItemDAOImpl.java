@@ -6,6 +6,9 @@ import dto.Item;
 import javafx.scene.control.Alert;
 import dao.impl.util.CrudUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -117,6 +120,11 @@ public class ItemDAOImpl implements ItemDAO {
                 item.getDescription(),
                 item.getQuantity(),
                 item.getPrice());
+    }
+
+    @Override
+    public boolean saveWithPicture(Item dto, FileInputStream is, File fl) throws SQLException, ClassNotFoundException, FileNotFoundException {
+        return false;
     }
 
     @Override

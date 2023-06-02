@@ -3,10 +3,12 @@ package dao;
 import dto.OperationSchedule;
 import dto.Pet;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface OperationDAO extends CrudDAO<OperationSchedule,String> {
+public interface OperationDAO extends CrudDAO<OperationSchedule,String,FileInputStream,File> {
 
     @Override
     String getNextId() throws SQLException, ClassNotFoundException;

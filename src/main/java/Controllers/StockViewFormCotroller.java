@@ -1,8 +1,11 @@
 package Controllers;
 
+import dao.CrudDAO;
 import dao.ItemDAO;
 import dao.impl.ItemDAOImpl;
+import dao.impl.PetDAOImpl;
 import dto.Item;
+import dto.Pet;
 import dto.tm.ItemTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +22,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -60,7 +65,7 @@ public class StockViewFormCotroller implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    ItemDAO itemDAO =new ItemDAOImpl();
+    CrudDAO<Item,String, FileInputStream, File> itemDAO =new ItemDAOImpl();
 
 
     @Override

@@ -5,6 +5,9 @@ import db.DBConnection;
 import dto.User;
 import dao.impl.util.CrudUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,6 +48,11 @@ public class UserDAOImpl implements UserDAO {
                 user.getUserName(),
                 user.getPassword(),
                 user.getEmail());
+    }
+
+    @Override
+    public boolean saveWithPicture(User dto, FileInputStream is, File fl) throws SQLException, ClassNotFoundException, FileNotFoundException {
+        return false;
     }
 
     @Override

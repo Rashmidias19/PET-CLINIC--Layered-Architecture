@@ -1,5 +1,6 @@
 package Controllers;
 
+import dao.CrudDAO;
 import dao.EmployeeDAO;
 import dao.impl.EmployeeDAOImpl;
 import dto.Employee;
@@ -20,6 +21,8 @@ import javafx.stage.Stage;
 import lombok.SneakyThrows;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -63,7 +66,7 @@ public class EmployeeViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    EmployeeDAO employeeDAO =new EmployeeDAOImpl();
+    CrudDAO<Employee,String, FileInputStream, File> employeeDAO =new EmployeeDAOImpl();
 
 
     @SneakyThrows

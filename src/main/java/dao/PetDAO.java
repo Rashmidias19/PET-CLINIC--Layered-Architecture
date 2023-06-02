@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface PetDAO extends CrudDAO<Pet,String> {
+public interface PetDAO extends CrudDAO<Pet,String,FileInputStream, File > {
 
     @Override
     List<String> loadID() throws SQLException, ClassNotFoundException;
@@ -19,7 +19,8 @@ public interface PetDAO extends CrudDAO<Pet,String> {
     @Override
     Pet searchById(String ID) throws SQLException, ClassNotFoundException;
 
-    boolean save(Pet pet, FileInputStream inp, File file) throws SQLException, FileNotFoundException, ClassNotFoundException;
+    @Override
+    boolean saveWithPicture(Pet pet, FileInputStream inp, File file) throws SQLException, FileNotFoundException, ClassNotFoundException;
 
     @Override
     boolean update(Pet pet) throws SQLException, ClassNotFoundException;

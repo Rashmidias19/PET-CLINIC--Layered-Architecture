@@ -1,8 +1,10 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.CrudDAO;
 import dao.InhouseDAO;
 import dao.impl.InhouseDAOImpl;
+import dto.Inhouse;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +17,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -26,7 +30,8 @@ public class InhouseDeleteFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbID;
-    InhouseDAO inhouseDAO =new InhouseDAOImpl();
+    CrudDAO<Inhouse,String, FileInputStream, File> inhouseDAO =new InhouseDAOImpl();
+
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
         loadInhouseID();

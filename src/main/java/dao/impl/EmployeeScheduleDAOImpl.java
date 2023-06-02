@@ -6,6 +6,9 @@ import dto.Employee;
 import dto.EmployeeSchedule;
 import dao.impl.util.CrudUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,10 +62,6 @@ public class EmployeeScheduleDAOImpl implements EmployeeScheduleDAO {
         }
     }
 
-    @Override
-    public boolean save(EmployeeSchedule dto) throws SQLException, ClassNotFoundException {
-        return false;
-    }
 
     @Override
     public EmployeeSchedule searchById(String ID) throws SQLException, ClassNotFoundException {
@@ -124,7 +123,7 @@ public class EmployeeScheduleDAOImpl implements EmployeeScheduleDAO {
     }
 
     @Override
-    public boolean addSchedule(EmployeeSchedule dto) throws SQLException {
+    public boolean save(EmployeeSchedule dto) throws SQLException {
         Connection con = null;
         try {
             con = DBConnection.getInstance().getConnection();
@@ -147,6 +146,11 @@ public class EmployeeScheduleDAOImpl implements EmployeeScheduleDAO {
             con.setAutoCommit(true);
         }
 
+    }
+
+    @Override
+    public boolean saveWithPicture(EmployeeSchedule dto, FileInputStream is, File fl) throws SQLException, ClassNotFoundException, FileNotFoundException {
+        return false;
     }
 
     @Override

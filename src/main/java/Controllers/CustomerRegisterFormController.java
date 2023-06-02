@@ -1,5 +1,6 @@
 package Controllers;
 
+import dao.CrudDAO;
 import dao.CustomerDAO;
 import dao.impl.CustomerDAOImpl;
 import dto.Customer;
@@ -15,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -57,7 +60,7 @@ public class CustomerRegisterFormController implements Initializable {
 
     @FXML
     private ComboBox cmbGender;
-    CustomerDAO customerDAO =new CustomerDAOImpl();
+    CrudDAO<Customer,String, FileInputStream, File> customerDAO =new CustomerDAOImpl();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

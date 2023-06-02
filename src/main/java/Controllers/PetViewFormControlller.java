@@ -1,7 +1,10 @@
 package Controllers;
 
+import dao.CrudDAO;
 import dao.PetDAO;
+import dao.impl.CustomerDAOImpl;
 import dao.impl.PetDAOImpl;
+import dto.Customer;
 import dto.Pet;
 import dto.tm.PetTM;
 import javafx.collections.FXCollections;
@@ -19,6 +22,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -59,8 +64,8 @@ public class PetViewFormControlller implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    PetDAO petDAO =new PetDAOImpl();
 
+    CrudDAO<Pet,String, FileInputStream, File> petDAO =new PetDAOImpl();
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {

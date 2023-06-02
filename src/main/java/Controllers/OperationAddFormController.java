@@ -1,8 +1,12 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.CrudDAO;
 import dao.OperationDAO;
+import dao.impl.ItemDAOImpl;
 import dao.impl.OperationDAOImpl;
+import dao.impl.PetDAOImpl;
+import dto.Item;
 import dto.OperationSchedule;
 import dto.Pet;
 import javafx.collections.FXCollections;
@@ -19,6 +23,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -56,7 +62,10 @@ public class OperationAddFormController implements Initializable{
 
     @FXML
     private TextField txtHours;
-    OperationDAO operationDAO =new OperationDAOImpl();
+    CrudDAO<OperationSchedule,String, FileInputStream, File> operationDAO =new OperationDAOImpl();
+    CrudDAO<Pet,String, FileInputStream, File> petDAO =new PetDAOImpl();
+
+
 
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
@@ -167,7 +176,7 @@ public class OperationAddFormController implements Initializable{
     private void loadPetID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = operationDAO.loadPetID();
+            List<String> codes = petDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -183,7 +192,7 @@ public class OperationAddFormController implements Initializable{
     public void cmbPetIDOnAction(ActionEvent event) {
         String ID = (String) cmbPetID.getValue();
         try {
-            Pet pet = operationDAO.searchPetById(ID);
+            Pet pet = petDAO.searchById(ID);
             fillPetFields(pet);;
 
             // txtQty.requestFocus();

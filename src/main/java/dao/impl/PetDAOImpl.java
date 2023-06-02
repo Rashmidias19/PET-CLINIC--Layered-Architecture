@@ -41,9 +41,10 @@ public class PetDAOImpl implements PetDAO {
     }
 
     @Override
-    public boolean save(Pet dto) throws SQLException, ClassNotFoundException {
+    public boolean save(Pet dto) throws SQLException, ClassNotFoundException, FileNotFoundException {
         return false;
     }
+
 
     @Override
     public Pet searchById(String ID) throws SQLException, ClassNotFoundException {
@@ -71,7 +72,7 @@ public class PetDAOImpl implements PetDAO {
     }
 
     @Override
-    public boolean save(Pet pet, FileInputStream inp, File file) throws SQLException, FileNotFoundException, ClassNotFoundException {
+    public boolean saveWithPicture(Pet pet, FileInputStream inp, File file) throws SQLException, FileNotFoundException, ClassNotFoundException {
         String sql = "INSERT INTO Pet(PetID,Name,CustomerID,Type ,Breed,Gender,DOB,age,address,contact,picture )" +
                 "VALUES(?, ?, ?, ?,?,?,?,?,?,?,?)";
         PreparedStatement pstm = DBConnection.getInstance().getConnection().prepareStatement(sql);

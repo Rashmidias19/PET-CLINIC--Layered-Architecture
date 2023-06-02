@@ -1,5 +1,6 @@
 package Controllers;
 
+import dao.CrudDAO;
 import dao.ItemDAO;
 import dao.impl.ItemDAOImpl;
 import dto.Item;
@@ -15,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -52,7 +55,8 @@ public class SupplieRegisterFormController implements Initializable {
 
     @FXML
     private TextField txtPrice;
-    ItemDAO itemDAO =new ItemDAOImpl();
+
+    CrudDAO<Item,String, FileInputStream, File> itemDAO =new ItemDAOImpl();
 
 
     @Override

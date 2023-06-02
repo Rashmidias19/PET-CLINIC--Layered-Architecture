@@ -1,7 +1,10 @@
 package Controllers;
 
+import dao.CrudDAO;
 import dao.UserDAO;
+import dao.impl.ItemDAOImpl;
 import dao.impl.UserDAOImpl;
+import dto.Item;
 import dto.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +18,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -37,7 +42,7 @@ public class UserAddFormController implements Initializable {
 
     @FXML
     private TextField txtEmail;
-    UserDAO userDAO =new UserDAOImpl();
+    CrudDAO<User,String, FileInputStream, File> userDAO =new UserDAOImpl();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

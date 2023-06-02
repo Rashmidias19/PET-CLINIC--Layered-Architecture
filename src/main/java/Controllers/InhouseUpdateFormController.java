@@ -1,10 +1,13 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.CrudDAO;
 import dao.InhouseDAO;
 import dao.impl.InhouseDAOImpl;
+import dao.impl.PetDAOImpl;
 import dto.Employee;
 import dto.Inhouse;
+import dto.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +23,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -54,7 +59,10 @@ public class InhouseUpdateFormController implements Initializable {
 
     @FXML
     private DatePicker DisDate;
-    InhouseDAO inhouseDAO =new InhouseDAOImpl();
+    CrudDAO<Inhouse,String, FileInputStream, File> inhouseDAO =new InhouseDAOImpl();
+    CrudDAO<Pet,String, FileInputStream, File> petDAO =new PetDAOImpl();
+
+
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -79,7 +87,7 @@ public class InhouseUpdateFormController implements Initializable {
     private void loadPetID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = inhouseDAO.loadPetID();
+            List<String> codes = petDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);

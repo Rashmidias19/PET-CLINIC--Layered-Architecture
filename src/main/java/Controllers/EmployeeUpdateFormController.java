@@ -1,8 +1,10 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.CrudDAO;
 import dao.EmployeeDAO;
 import dao.impl.EmployeeDAOImpl;
+import dao.impl.UserDAOImpl;
 import dto.Employee;
 import dto.User;
 import javafx.collections.FXCollections;
@@ -21,10 +23,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -70,7 +69,8 @@ public class EmployeeUpdateFormController implements Initializable {
 
     @FXML
     private Circle circle;
-    EmployeeDAO employeeDAO =new EmployeeDAOImpl();
+    CrudDAO<Employee,String,FileInputStream, File> employeeDAO =new EmployeeDAOImpl();
+    CrudDAO<User,String,FileInputStream, File> userDAO =new UserDAOImpl();
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
         loadEmployeeID();
@@ -94,7 +94,7 @@ public class EmployeeUpdateFormController implements Initializable {
     private void loadUserID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = employeeDAO.loadUserID();
+            List<String> codes = userDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);

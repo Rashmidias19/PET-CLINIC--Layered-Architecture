@@ -3,10 +3,12 @@ package dao;
 import dto.Inhouse;
 import dto.Pet;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface InhouseDAO extends CrudDAO<Inhouse,String> {
+public interface InhouseDAO extends CrudDAO<Inhouse,String,FileInputStream,File> {
     List<String> loadPetID() throws SQLException, ClassNotFoundException;
 
     @Override

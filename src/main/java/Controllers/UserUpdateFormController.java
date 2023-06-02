@@ -1,6 +1,7 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.CrudDAO;
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import dto.User;
@@ -17,6 +18,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -39,7 +42,8 @@ public class UserUpdateFormController implements Initializable {
 
     @FXML
     private TextField txtEmail;
-    UserDAO userDAO =new UserDAOImpl();
+    CrudDAO<User,String, FileInputStream, File> userDAO =new UserDAOImpl();
+
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {

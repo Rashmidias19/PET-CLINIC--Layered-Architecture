@@ -2,10 +2,11 @@ package dao;
 
 import dto.Customer;
 
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface CrudDAO<T,ID> {
+public interface CrudDAO<T,ID,K,P> {
 
     ID splitId(ID currentId);
 
@@ -17,7 +18,9 @@ public interface CrudDAO<T,ID> {
 
     ID getNextId() throws SQLException, ClassNotFoundException;
 
-    boolean save(T dto) throws SQLException, ClassNotFoundException;
+    boolean save(T dto) throws SQLException, ClassNotFoundException, FileNotFoundException;
+
+    boolean saveWithPicture(T dto,K is,P fl) throws SQLException, ClassNotFoundException, FileNotFoundException;
 
     T searchById(ID ID) throws SQLException, ClassNotFoundException;
 

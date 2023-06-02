@@ -1,6 +1,7 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.CrudDAO;
 import dao.CustomerDAO;
 import dao.impl.CustomerDAOImpl;
 import dto.Customer;
@@ -18,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -58,7 +61,7 @@ public class CustomerUpdateFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbGender;
-    CustomerDAO customerDAO =new CustomerDAOImpl();
+    CrudDAO<Customer,String, FileInputStream, File> customerDAO =new CustomerDAOImpl();
 
 
 

@@ -1,9 +1,13 @@
 package Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import dao.CrudDAO;
 import dao.VaccinationDAO;
+import dao.impl.PetDAOImpl;
+import dao.impl.UserDAOImpl;
 import dao.impl.VaccinationDAOImpl;
 import dto.Pet;
+import dto.User;
 import dto.VaccinationSchedule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +23,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -48,7 +54,9 @@ public class VaccinationAddFormController implements Initializable {
 
     @FXML
     private Label lblContact;
-    VaccinationDAO vaccinationDAO =new VaccinationDAOImpl();
+    CrudDAO<VaccinationSchedule,String, FileInputStream, File> vaccinationDAO =new VaccinationDAOImpl();
+    CrudDAO<Pet,String, FileInputStream, File> petDAO =new PetDAOImpl();
+
 
 
     public void petbtnOnAction(ActionEvent event) throws IOException {
@@ -124,7 +132,7 @@ public class VaccinationAddFormController implements Initializable {
     private void loadPet_ID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = vaccinationDAO.loadPetID();
+            List<String> codes = petDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -139,7 +147,7 @@ public class VaccinationAddFormController implements Initializable {
     public void cmbIDOnAction(ActionEvent actionEvent) throws IOException {
         String ID = (String) cmbPet_ID.getValue();
         try {
-            Pet pet = vaccinationDAO.searchPetById(ID);
+            Pet pet = petDAO.searchById(ID);
             FillPetFields(pet);
 
             // txtQty.requestFocus();

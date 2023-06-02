@@ -3,12 +3,14 @@ package dao;
 import dto.Employee;
 import dto.EmployeeSchedule;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface EmployeeScheduleDAO extends CrudDAO<EmployeeSchedule,String> {
+public interface EmployeeScheduleDAO extends CrudDAO<EmployeeSchedule,String,FileInputStream,File> {
 
     @Override
     ArrayList<EmployeeSchedule> getAll() throws SQLException, ClassNotFoundException;
@@ -23,7 +25,8 @@ public interface EmployeeScheduleDAO extends CrudDAO<EmployeeSchedule,String> {
 
     List<String> loadEmployeeID() throws SQLException, ClassNotFoundException;
 
-    boolean addSchedule(EmployeeSchedule dto) throws SQLException;
+    @Override
+    boolean save(EmployeeSchedule dto) throws SQLException;
 
     boolean saveSchedule(EmployeeSchedule dto) throws SQLException, ClassNotFoundException;
 

@@ -1,6 +1,7 @@
 package Controllers;
 
 import dao.BillDAO;
+import dao.CrudDAO;
 import dao.impl.BillDAOImpl;
 import dto.Bill;
 import dto.tm.BillTM;
@@ -16,6 +17,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -54,7 +57,7 @@ public class BillViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    BillDAO billDAO =new BillDAOImpl();
+    CrudDAO<Bill,String, FileInputStream, File> billDAO =new BillDAOImpl();
 
 
     @Override

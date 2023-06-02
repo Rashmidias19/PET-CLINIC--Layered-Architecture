@@ -1,7 +1,10 @@
 package Controllers;
 
+import dao.CrudDAO;
 import dao.PetDAO;
+import dao.impl.CustomerDAOImpl;
 import dao.impl.PetDAOImpl;
+import dto.Customer;
 import dto.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,7 +80,10 @@ public class PetRegistrationFormController implements Initializable {
     private FileInputStream fsp;
 
     private Circle circle;
-    PetDAO petDAO =new PetDAOImpl();
+
+    CrudDAO<Pet,String, FileInputStream, File> petDAO =new PetDAOImpl();
+    CrudDAO<Customer,String, FileInputStream, File> customerDAO =new CustomerDAOImpl();
+
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -107,7 +113,7 @@ public class PetRegistrationFormController implements Initializable {
     private void loadCustID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = petDAO.loadCustomerID();
+            List<String> codes = customerDAO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -198,7 +204,7 @@ public class PetRegistrationFormController implements Initializable {
         String contact=txtContact.getText();
 
         try {
-            boolean isSaved = petDAO.save(new Pet(PetID,Name,CustomerID,Type,Breed,Gender,DOB,age,address,contact),inp,file);
+            boolean isSaved = petDAO.saveWithPicture(new Pet(PetID,Name,CustomerID,Type,Breed,Gender,DOB,age,address,contact),inp,file);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Pet Saved!").show();
             }

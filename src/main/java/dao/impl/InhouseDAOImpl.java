@@ -7,6 +7,9 @@ import dto.Pet;
 import javafx.scene.control.Alert;
 import dao.impl.util.CrudUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -105,6 +108,11 @@ public class InhouseDAOImpl implements InhouseDAO {
     }
 
     @Override
+    public boolean saveWithPicture(Inhouse dto, FileInputStream is, File fl) throws SQLException, ClassNotFoundException, FileNotFoundException {
+        return false;
+    }
+
+    @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("DELETE FROM Inhouse WHERE InhouseID = ?",id);
     }
@@ -163,5 +171,6 @@ public class InhouseDAOImpl implements InhouseDAO {
             return "IH00-001";
         }
     }
+
 
 }
