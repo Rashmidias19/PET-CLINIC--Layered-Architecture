@@ -1,10 +1,8 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.PetDAO;
-import dao.impl.CustomerDAOImpl;
-import dao.impl.PetDAOImpl;
-import dto.Customer;
+import bo.BOFactory;
+import bo.PetBO;
+import bo.impl.PetBOImpl;
 import dto.Pet;
 import dto.tm.PetTM;
 import javafx.collections.FXCollections;
@@ -22,8 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -64,8 +60,7 @@ public class PetViewFormControlller implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-
-    CrudDAO<Pet,String, FileInputStream, File> petDAO =new PetDAOImpl();
+    PetBO petBO= BOFactory.getBO(BOFactory.BOTypes.PET);
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -89,7 +84,7 @@ public class PetViewFormControlller implements Initializable {
     private void getAll() {
         try {
             ObservableList<PetTM> obList = FXCollections.observableArrayList();
-            List<Pet> petList = petDAO.getAll();
+            List<Pet> petList = petBO.getAll();
 
             for (Pet pet : petList) {
                 obList.add(new PetTM(

@@ -1,12 +1,9 @@
 package Controllers;
 
+import bo.BOFactory;
+import bo.ItemBO;
+import bo.impl.ItemBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dao.CrudDAO;
-import dao.ItemDAO;
-import dao.impl.InhouseDAOImpl;
-import dao.impl.ItemDAOImpl;
-import dto.Inhouse;
-import dto.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,8 +15,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,8 +26,7 @@ public class ItemDeleteFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbID;
-    CrudDAO<Item,String, FileInputStream, File> itemDAO =new ItemDAOImpl();
-
+    ItemBO itemBO= BOFactory.getBO(BOFactory.BOTypes.ITEM);
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -42,7 +36,7 @@ public class ItemDeleteFormController implements Initializable {
     private void loadItemID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = itemDAO.loadID();
+            List<String> codes = itemBO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -60,7 +54,7 @@ public class ItemDeleteFormController implements Initializable {
         String id = (String) cmbID.getValue();
 
         try {
-            boolean isDeleted = itemDAO.delete(id);
+            boolean isDeleted = itemBO.delete(id);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
             }

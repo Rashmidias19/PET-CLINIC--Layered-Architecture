@@ -1,12 +1,11 @@
 package Controllers;
 
+import bo.BOFactory;
+import bo.OperationBO;
+import bo.impl.OperationBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dao.CrudDAO;
 import dao.OperationDAO;
-import dao.impl.ItemDAOImpl;
 import dao.impl.OperationDAOImpl;
-import dao.impl.PetDAOImpl;
-import dto.Item;
 import dto.OperationSchedule;
 import dto.Pet;
 import javafx.collections.FXCollections;
@@ -23,8 +22,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -62,10 +59,7 @@ public class OperationAddFormController implements Initializable{
 
     @FXML
     private TextField txtHours;
-    CrudDAO<OperationSchedule,String, FileInputStream, File> operationDAO =new OperationDAOImpl();
-    CrudDAO<Pet,String, FileInputStream, File> petDAO =new PetDAOImpl();
-
-
+    OperationBO operationBO= BOFactory.getBO(BOFactory.BOTypes.OPERATION);
 
     public void petbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
@@ -158,7 +152,7 @@ public class OperationAddFormController implements Initializable{
         String Contact=lblContact.getText();
 
         try {
-            boolean isSaved = operationDAO.save(new OperationSchedule(OperationID,PetID,CustomerID,Date,Time,Description,Hours,Contact));
+            boolean isSaved = operationBO.save(new OperationSchedule(OperationID,PetID,CustomerID,Date,Time,Description,Hours,Contact));
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
             }
@@ -176,7 +170,7 @@ public class OperationAddFormController implements Initializable{
     private void loadPetID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = petDAO.loadID();
+            List<String> codes = operationBO.loadPetID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -192,7 +186,7 @@ public class OperationAddFormController implements Initializable{
     public void cmbPetIDOnAction(ActionEvent event) {
         String ID = (String) cmbPetID.getValue();
         try {
-            Pet pet = petDAO.searchById(ID);
+            Pet pet = operationBO.searchPetById(ID);
             fillPetFields(pet);;
 
             // txtQty.requestFocus();

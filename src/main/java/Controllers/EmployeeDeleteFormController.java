@@ -1,10 +1,9 @@
 package Controllers;
 
+import bo.BOFactory;
+import bo.EmployeeBO;
+import bo.impl.EmployeeBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dao.CrudDAO;
-import dao.EmployeeDAO;
-import dao.impl.EmployeeDAOImpl;
-import dto.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,8 +15,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -29,7 +26,8 @@ public class EmployeeDeleteFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbID;
-    CrudDAO<Employee,String, FileInputStream, File> employeeDAO=new EmployeeDAOImpl();
+    EmployeeBO employeeBO= BOFactory.getBO(BOFactory.BOTypes.EMPLOYEE);
+
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
         loadEmployeeID();
@@ -38,7 +36,7 @@ public class EmployeeDeleteFormController implements Initializable {
     private void loadEmployeeID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = employeeDAO.loadID();
+            List<String> codes = employeeBO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -56,7 +54,7 @@ public class EmployeeDeleteFormController implements Initializable {
         String id = (String) cmbID.getValue();
 
         try {
-            boolean isDeleted = employeeDAO.delete(id);
+            boolean isDeleted = employeeBO.delete(id);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
             }

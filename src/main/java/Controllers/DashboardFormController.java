@@ -1,8 +1,8 @@
 package Controllers;
 
 
-import dao.*;
-import dao.impl.*;
+import bo.*;
+import bo.impl.*;
 import dto.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,8 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.List;
@@ -44,12 +42,12 @@ public class DashboardFormController implements Initializable {
     private Label lblItem;
 
     private Connection con;
-    CrudDAO<User,String, FileInputStream, File> userDAO =new UserDAOImpl();
-    CrudDAO<Customer,String,FileInputStream, File> customerDAO =new CustomerDAOImpl();
-    CrudDAO<Pet,String,FileInputStream, File> petDAO =new PetDAOImpl();
-    CrudDAO<Employee,String,FileInputStream, File> employeeDAO =new EmployeeDAOImpl();
-    CrudDAO<Item,String,FileInputStream, File> itemDAO =new ItemDAOImpl();
-    CrudDAO<Inhouse,String,FileInputStream, File> inhouseDAO =new InhouseDAOImpl();
+    UserBO userBO=BOFactory.getBO(BOFactory.BOTypes.USER);
+    CustomerBO customerBO=BOFactory.getBO(BOFactory.BOTypes.CUSTOMER);
+    PetBO petBO=BOFactory.getBO(BOFactory.BOTypes.PET);
+    EmployeeBO employeeBO=BOFactory.getBO(BOFactory.BOTypes.EMPLOYEE);
+    ItemBO itemBO=BOFactory.getBO(BOFactory.BOTypes.ITEM);
+    InhouseBO inhouseBO=BOFactory.getBO(BOFactory.BOTypes.INHOUSE);
     @SneakyThrows
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -60,12 +58,12 @@ public class DashboardFormController implements Initializable {
 
     private void loadValues() throws SQLException{
        try{
-           List<User> userList= userDAO.getAll();
-           List<Customer> customerList= customerDAO.getAll();
-           List<Pet> petList= petDAO.getAll();
-           List<Employee> employeeList= employeeDAO.getAll();
-           List<Item> itemList= itemDAO.getAll();
-           List<Inhouse> inhouseList= inhouseDAO.getAll();
+           List<User> userList= userBO.getAll();
+           List<Customer> customerList= customerBO.getAll();
+           List<Pet> petList= petBO.getAll();
+           List<Employee> employeeList= employeeBO.getAll();
+           List<Item> itemList= itemBO.getAll();
+           List<Inhouse> inhouseList= inhouseBO.getAll();
            lblUsers.setText(String.valueOf(userList.size()));
            lblCustomers.setText(String.valueOf(customerList.size()));
            lblPet.setText(String.valueOf(petList.size()));

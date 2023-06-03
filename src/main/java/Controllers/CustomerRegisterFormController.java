@@ -1,8 +1,8 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.CustomerDAO;
-import dao.impl.CustomerDAOImpl;
+import bo.BOFactory;
+import bo.CustomerBO;
+import bo.impl.CustomerBOImpl;
 import dto.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,8 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -60,7 +58,8 @@ public class CustomerRegisterFormController implements Initializable {
 
     @FXML
     private ComboBox cmbGender;
-    CrudDAO<Customer,String, FileInputStream, File> customerDAO =new CustomerDAOImpl();
+
+    CustomerBO customerBO= BOFactory.getBO(BOFactory.BOTypes.CUSTOMER);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -148,7 +147,7 @@ public class CustomerRegisterFormController implements Initializable {
 
     private void generateNextCustomerId() {
         try {
-            String id = customerDAO.getNextId();
+            String id = customerBO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -174,7 +173,7 @@ public class CustomerRegisterFormController implements Initializable {
 
 
                 try {
-                    boolean isSaved = customerDAO.save(new Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email,address));
+                    boolean isSaved = customerBO.save(new Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email,address));
                     if (isSaved) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Customer saved!").show();
                     }

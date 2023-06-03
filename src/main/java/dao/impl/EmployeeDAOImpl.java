@@ -60,19 +60,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public List<String> loadUserID() throws SQLException, ClassNotFoundException {
-       ResultSet resultSet = CrudUtil.execute("SELECT UserID FROM User");
-
-        List<String> data = new ArrayList<>();
-
-        while (resultSet.next()) {
-            data.add(resultSet.getString(1));
-        }
-        return data;
-    }
-
-
-    @Override
     public Employee searchById(String ID) throws SQLException, ClassNotFoundException {
         ResultSet resultSet = CrudUtil.execute("SELECT * FROM Employee WHERE EmployeeID =?",ID);
 

@@ -1,10 +1,8 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.UserDAO;
-import dao.impl.ItemDAOImpl;
-import dao.impl.UserDAOImpl;
-import dto.Item;
+import bo.BOFactory;
+import bo.UserBO;
+import bo.impl.UserBOImpl;
 import dto.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,8 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -42,7 +38,7 @@ public class UserAddFormController implements Initializable {
 
     @FXML
     private TextField txtEmail;
-    CrudDAO<User,String, FileInputStream, File> userDAO =new UserDAOImpl();
+    UserBO userBO= BOFactory.getBO(BOFactory.BOTypes.USER);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -115,7 +111,7 @@ public class UserAddFormController implements Initializable {
 
     private void generateNextUserId() {
         try {
-            String id = userDAO.getNextId();
+            String id = userBO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -135,7 +131,7 @@ public class UserAddFormController implements Initializable {
                 String email = txtEmail.getText();
 
                 try {
-                    boolean isSaved = userDAO.save( new User(UserID,UserName,password,email));
+                    boolean isSaved = userBO.save( new User(UserID,UserName,password,email));
                     if (isSaved) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
                     }

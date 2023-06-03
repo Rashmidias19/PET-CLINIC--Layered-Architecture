@@ -1,13 +1,10 @@
 package Controllers;
 
+import bo.BOFactory;
+import bo.InhouseBO;
+import bo.impl.InhouseBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dao.CrudDAO;
-import dao.InhouseDAO;
-import dao.impl.InhouseDAOImpl;
-import dao.impl.PetDAOImpl;
-import dto.Employee;
 import dto.Inhouse;
-import dto.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,8 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -59,8 +54,7 @@ public class InhouseUpdateFormController implements Initializable {
 
     @FXML
     private DatePicker DisDate;
-    CrudDAO<Inhouse,String, FileInputStream, File> inhouseDAO =new InhouseDAOImpl();
-    CrudDAO<Pet,String, FileInputStream, File> petDAO =new PetDAOImpl();
+    InhouseBO inhouseBO= BOFactory.getBO(BOFactory.BOTypes.INHOUSE);
 
 
 
@@ -72,7 +66,7 @@ public class InhouseUpdateFormController implements Initializable {
     private void loadInhouseID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = inhouseDAO.loadID();
+            List<String> codes = inhouseBO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -87,7 +81,7 @@ public class InhouseUpdateFormController implements Initializable {
     private void loadPetID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = petDAO.loadID();
+            List<String> codes = inhouseBO.loadPetID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -167,7 +161,7 @@ public class InhouseUpdateFormController implements Initializable {
     public void btnSearchOnAction(ActionEvent event) {
         String InhouseID= (String) cmbInhouseID.getValue();
         try {
-            Inhouse inhouse = inhouseDAO.searchById(InhouseID);
+            Inhouse inhouse = inhouseBO.searchById(InhouseID);
             fillInhouseFields(inhouse);
             loadPetID();
 
@@ -200,7 +194,7 @@ public class InhouseUpdateFormController implements Initializable {
         String Contact=lblContact.getText();
 
         try {
-            boolean isUpdate = inhouseDAO.update(new Inhouse(InhouseID,PetID,CustomerID,AdmittedDate,Time,DischargeDate,Description,Contact));
+            boolean isUpdate = inhouseBO.update(new Inhouse(InhouseID,PetID,CustomerID,AdmittedDate,Time,DischargeDate,Description,Contact));
             if (isUpdate) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Inhouse saved!").show();
             }

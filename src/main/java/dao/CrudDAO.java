@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface CrudDAO<T,ID,K,P> {
+public interface CrudDAO<T,ID,K,P> extends SuperDAO{
 
     ID splitId(ID currentId);
 
@@ -16,7 +16,7 @@ public interface CrudDAO<T,ID,K,P> {
 
     boolean delete(ID id) throws SQLException, ClassNotFoundException;
 
-    ID getNextId() throws SQLException, ClassNotFoundException;
+    String getNextId() throws SQLException, ClassNotFoundException;
 
     boolean save(T dto) throws SQLException, ClassNotFoundException, FileNotFoundException;
 

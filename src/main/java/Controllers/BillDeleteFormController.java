@@ -1,11 +1,9 @@
 package Controllers;
 
-import bo.BillBOImpl;
+import bo.BOFactory;
+import bo.BillBO;
+import bo.impl.BillBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dao.BillDAO;
-import dao.CrudDAO;
-import dao.impl.BillDAOImpl;
-import dto.Bill;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,8 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -32,7 +28,7 @@ public class BillDeleteFormController implements Initializable {
     @FXML
     private JFXComboBox cmbID;
 
-    BillBOImpl billBO=new BillBOImpl();
+    BillBO billBO= BOFactory.getBO(BOFactory.BOTypes.BILL);
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {

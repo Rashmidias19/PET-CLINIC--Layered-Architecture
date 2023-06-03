@@ -1,12 +1,10 @@
 package Controllers;
 
+import bo.BOFactory;
+import bo.EmployeeBO;
+import bo.impl.EmployeeBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dao.CrudDAO;
-import dao.EmployeeDAO;
-import dao.impl.EmployeeDAOImpl;
-import dao.impl.UserDAOImpl;
 import dto.Employee;
-import dto.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -69,8 +67,9 @@ public class EmployeeUpdateFormController implements Initializable {
 
     @FXML
     private Circle circle;
-    CrudDAO<Employee,String,FileInputStream, File> employeeDAO =new EmployeeDAOImpl();
-    CrudDAO<User,String,FileInputStream, File> userDAO =new UserDAOImpl();
+    EmployeeBO employeeBO= BOFactory.getBO(BOFactory.BOTypes.EMPLOYEE);
+
+
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
         loadEmployeeID();
@@ -79,7 +78,7 @@ public class EmployeeUpdateFormController implements Initializable {
     private void loadEmployeeID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = employeeDAO.loadID();
+            List<String> codes = employeeBO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -94,7 +93,7 @@ public class EmployeeUpdateFormController implements Initializable {
     private void loadUserID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = userDAO.loadID();
+            List<String> codes = employeeBO.loadUserID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -185,7 +184,7 @@ public class EmployeeUpdateFormController implements Initializable {
     public void searchbtnOnAction(ActionEvent event) {
         String EmployeeID= (String) cmbEmployeeID.getValue();
         try {
-            Employee employee = employeeDAO.searchById(EmployeeID);
+            Employee employee = employeeBO.searchById(EmployeeID);
             fillEmployeeFields(employee);
             loadUserID();
             loadGender();
@@ -238,7 +237,7 @@ public class EmployeeUpdateFormController implements Initializable {
         String email=txtEmail.getText();
 
         try {
-            boolean isUpdate = employeeDAO.update(new Employee(EmployeeID,Name,UserID,DOB,NIC,Age,gender,address,salary,contact,email));
+            boolean isUpdate = employeeBO.update(new Employee(EmployeeID,Name,UserID,DOB,NIC,Age,gender,address,salary,contact,email));
             if (isUpdate) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
             }

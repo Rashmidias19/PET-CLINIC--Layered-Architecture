@@ -1,11 +1,10 @@
 package Controllers;
 
+import bo.BOFactory;
+import bo.CustomerBO;
+import bo.impl.CustomerBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dao.CrudDAO;
-import dao.CustomerDAO;
-import dao.impl.CustomerDAOImpl;
 import dto.Customer;
-import dto.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,8 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -61,9 +58,7 @@ public class CustomerUpdateFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbGender;
-    CrudDAO<Customer,String, FileInputStream, File> customerDAO =new CustomerDAOImpl();
-
-
+    CustomerBO customerBO= BOFactory.getBO(BOFactory.BOTypes.CUSTOMER);
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -73,7 +68,7 @@ public class CustomerUpdateFormController implements Initializable {
     private void loadCustID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = customerDAO.loadID();
+            List<String> codes = customerBO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -163,7 +158,7 @@ public class CustomerUpdateFormController implements Initializable {
     public void searchbtnOnAction(ActionEvent event) {
         String CustID= (String) cmbCustID.getValue();
         try {
-            Customer customer = customerDAO.searchById(CustID);
+            Customer customer = customerBO.searchById(CustID);
             fillCustFields(customer);
             loadCustID();
             loadTitles();
@@ -203,7 +198,7 @@ public class CustomerUpdateFormController implements Initializable {
         String address=txtAddress.getText();
 
         try {
-            boolean isUpdated = customerDAO.update(new Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email,address) );
+            boolean isUpdated = customerBO.update(new Customer(CustomerID,CustTitle,CustName,NIC,DOB,age,Gender,contact,email,address) );
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Customer saved!").show();
             }

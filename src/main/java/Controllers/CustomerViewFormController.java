@@ -1,8 +1,8 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.CustomerDAO;
-import dao.impl.CustomerDAOImpl;
+import bo.BOFactory;
+import bo.CustomerBO;
+import bo.impl.CustomerBOImpl;
 import dto.Customer;
 import dto.tm.CustomerTM;
 import javafx.collections.FXCollections;
@@ -19,8 +19,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -61,8 +59,7 @@ public class CustomerViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    CrudDAO<Customer,String, FileInputStream, File> customerDAO =new CustomerDAOImpl();
-
+    CustomerBO customerBO= BOFactory.getBO(BOFactory.BOTypes.CUSTOMER);
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -85,7 +82,7 @@ public class CustomerViewFormController implements Initializable {
     private void getAll() {
         try {
             ObservableList<CustomerTM> obList = FXCollections.observableArrayList();
-            List<Customer> customerList = customerDAO.getAll();
+            List<Customer> customerList = customerBO.getAll();
 
             for (Customer customer : customerList) {
                 obList.add(new CustomerTM(

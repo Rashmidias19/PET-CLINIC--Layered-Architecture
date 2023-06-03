@@ -84,43 +84,6 @@ public class EmployeeScheduleDAOImpl implements EmployeeScheduleDAO {
         return "ES0001";
     }
 
-    @Override
-    public Employee searchByEmployeeId(String ID) throws SQLException, ClassNotFoundException {
-        PreparedStatement pstm = DBConnection.getInstance().getConnection()
-                .prepareStatement("SELECT * FROM Employee WHERE EmployeeID =?");
-        pstm.setString(1, ID);
-        ResultSet resultSet = pstm.executeQuery();
-
-        if(resultSet.next()) {
-            return new Employee(
-                    resultSet.getString(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getString(5),
-                    resultSet.getInt(6),
-                    resultSet.getString(7),
-                    resultSet.getString(8),
-                    resultSet.getString(9),
-                    resultSet.getString(10),
-                    resultSet.getString(11),
-                    resultSet.getBlob(12)
-            );
-        }
-        return null;
-    }
-
-    @Override
-    public List<String> loadEmployeeID() throws SQLException, ClassNotFoundException {
-        ResultSet resultSet = CrudUtil.execute("SELECT EmployeeID FROM Employee");
-
-        List<String> data = new ArrayList<>();
-
-        while (resultSet.next()) {
-            data.add(resultSet.getString(1));
-        }
-        return data;
-    }
 
     @Override
     public boolean saveWithPicture(EmployeeSchedule dto, FileInputStream is, File fl) throws SQLException, ClassNotFoundException, FileNotFoundException {
@@ -129,8 +92,7 @@ public class EmployeeScheduleDAOImpl implements EmployeeScheduleDAO {
 
     @Override
     public boolean save(EmployeeSchedule dto) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("INSERT INTO EmployeeSchedule(ScheduleID,EmployeeID,Name,Date,Time,WorkTime,Shift,OT) VALUES(?, ?, ?, ?,?,?,?,?)"
-        + dto.getScheduleID(),dto.getEmployeeID(),dto.getName(),dto.getDate(),dto.getTime(),dto.getWorkTime(),dto.getShift(),dto.getOT());
+        return CrudUtil.execute("INSERT INTO EmployeeSchedule(ScheduleID,EmployeeID,Name,Date,Time,WorkTime,Shift,OT) VALUES(?, ?, ?, ?,?,?,?,?)",dto.getScheduleID(),dto.getEmployeeID(),dto.getName(),dto.getDate(),dto.getTime(),dto.getWorkTime(),dto.getShift(),dto.getOT());
 
 
     }

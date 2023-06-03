@@ -1,8 +1,8 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.InhouseDAO;
-import dao.impl.InhouseDAOImpl;
+import bo.BOFactory;
+import bo.InhouseBO;
+import bo.impl.InhouseBOImpl;
 import dto.Inhouse;
 import dto.tm.InhouseTM;
 import javafx.collections.FXCollections;
@@ -20,8 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -57,7 +55,7 @@ public class InhouseViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    CrudDAO<Inhouse,String, FileInputStream, File> inhouseDAO =new InhouseDAOImpl();
+    InhouseBO inhouseBO= BOFactory.getBO(BOFactory.BOTypes.INHOUSE);
 
 
 
@@ -81,7 +79,7 @@ public class InhouseViewFormController implements Initializable {
     private void getAll() {
         try {
             ObservableList<InhouseTM> obList = FXCollections.observableArrayList();
-            List<Inhouse> inhouseList = inhouseDAO.getAll();
+            List<Inhouse> inhouseList = inhouseBO.getAll();
 
             for (Inhouse inhouse : inhouseList) {
                 obList.add(new InhouseTM(

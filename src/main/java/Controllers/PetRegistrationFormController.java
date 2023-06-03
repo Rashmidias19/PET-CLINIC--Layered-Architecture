@@ -1,10 +1,8 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.PetDAO;
-import dao.impl.CustomerDAOImpl;
-import dao.impl.PetDAOImpl;
-import dto.Customer;
+import bo.BOFactory;
+import bo.PetBO;
+import bo.impl.PetBOImpl;
 import dto.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -80,9 +78,7 @@ public class PetRegistrationFormController implements Initializable {
     private FileInputStream fsp;
 
     private Circle circle;
-
-    CrudDAO<Pet,String, FileInputStream, File> petDAO =new PetDAOImpl();
-    CrudDAO<Customer,String, FileInputStream, File> customerDAO =new CustomerDAOImpl();
+    PetBO petBO= BOFactory.getBO(BOFactory.BOTypes.PET);
 
 
     @Override
@@ -113,7 +109,7 @@ public class PetRegistrationFormController implements Initializable {
     private void loadCustID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = customerDAO.loadID();
+            List<String> codes = petBO.loadCustomerID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -183,7 +179,7 @@ public class PetRegistrationFormController implements Initializable {
     }
     private void generateNextPetId() {
         try {
-            String id = petDAO.getNextId();
+            String id = petBO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -204,7 +200,7 @@ public class PetRegistrationFormController implements Initializable {
         String contact=txtContact.getText();
 
         try {
-            boolean isSaved = petDAO.saveWithPicture(new Pet(PetID,Name,CustomerID,Type,Breed,Gender,DOB,age,address,contact),inp,file);
+            boolean isSaved = petBO.saveWithPicture(new Pet(PetID,Name,CustomerID,Type,Breed,Gender,DOB,age,address,contact),inp,file);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Pet Saved!").show();
             }

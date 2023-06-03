@@ -1,10 +1,9 @@
 package Controllers;
 
+import bo.BOFactory;
+import bo.PetBO;
+import bo.impl.PetBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dao.CrudDAO;
-import dao.PetDAO;
-import dao.impl.PetDAOImpl;
-import dto.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,8 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,7 +28,7 @@ public class PetDeleteFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbID;
-    CrudDAO<Pet,String, FileInputStream, File> petDAO =new PetDAOImpl();
+   PetBO petBO= BOFactory.getBO(BOFactory.BOTypes.PET);
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -41,7 +38,7 @@ public class PetDeleteFormController implements Initializable {
     private void loadPetID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = petDAO.loadID();
+            List<String> codes = petBO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -58,7 +55,7 @@ public class PetDeleteFormController implements Initializable {
     public void deletebtnOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         String id = (String) cmbID.getValue();
         try {
-            boolean isDeleted = petDAO.delete(id);
+            boolean isDeleted = petBO.delete(id);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
             }

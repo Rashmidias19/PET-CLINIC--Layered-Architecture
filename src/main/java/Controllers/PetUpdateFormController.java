@@ -1,11 +1,9 @@
 package Controllers;
 
+import bo.BOFactory;
+import bo.PetBO;
+import bo.impl.PetBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dao.CrudDAO;
-import dao.PetDAO;
-import dao.impl.CustomerDAOImpl;
-import dao.impl.PetDAOImpl;
-import dto.Customer;
 import dto.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -70,9 +68,7 @@ public class PetUpdateFormController implements Initializable {
    @FXML
     private Circle circle;
     private Connection conn;
-    CrudDAO<Pet,String, FileInputStream, File> petDAO =new PetDAOImpl();
-    CrudDAO<Customer,String, FileInputStream, File> customerDAO =new CustomerDAOImpl();
-
+    PetBO petBO= BOFactory.getBO(BOFactory.BOTypes.PET);
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -82,7 +78,7 @@ public class PetUpdateFormController implements Initializable {
     private void loadPetID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = petDAO.loadID();
+            List<String> codes = petBO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -97,7 +93,7 @@ public class PetUpdateFormController implements Initializable {
     private void loadCustID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = customerDAO.loadID();
+            List<String> codes = petBO.loadCustomerID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -186,7 +182,7 @@ public class PetUpdateFormController implements Initializable {
     public void searchbtnOnAction(ActionEvent event) throws FileNotFoundException {
         String PetID= (String) cmbPetID.getValue();
         try {
-            Pet pet = petDAO.searchById(PetID);
+            Pet pet = petBO.searchById(PetID);
             fillPetFields(pet);
             loadCustID();
             loadTypes();
@@ -241,7 +237,7 @@ public class PetUpdateFormController implements Initializable {
         String contact=txtContact.getText();
 
         try {
-            boolean isSaved = petDAO.update(new Pet(PetID,Name,CustomerID,Type,Breed,Gender,DOB,age,address,contact));
+            boolean isSaved = petBO.update(new Pet(PetID,Name,CustomerID,Type,Breed,Gender,DOB,age,address,contact));
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Pet Updated!").show();
             }

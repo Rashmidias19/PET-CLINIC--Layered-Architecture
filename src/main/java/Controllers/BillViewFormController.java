@@ -1,9 +1,8 @@
 package Controllers;
 
-import bo.BillBOImpl;
-import dao.BillDAO;
-import dao.CrudDAO;
-import dao.impl.BillDAOImpl;
+import bo.BOFactory;
+import bo.BillBO;
+import bo.impl.BillBOImpl;
 import dto.Bill;
 import dto.tm.BillTM;
 import javafx.event.ActionEvent;
@@ -18,8 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -58,7 +55,7 @@ public class BillViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    BillBOImpl billBO=new BillBOImpl();
+    BillBO billBO= BOFactory.getBO(BOFactory.BOTypes.BILL);
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {

@@ -1,10 +1,8 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.impl.ItemDAOImpl;
-import dao.impl.UserDAOImpl;
-import dto.Item;
-import dto.User;
+import bo.BOFactory;
+import bo.UserBO;
+import bo.impl.UserBOImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -37,8 +33,7 @@ public class LoginFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    UserDAOImpl userDAOImpl=new UserDAOImpl();
-    CrudDAO<User,String, FileInputStream, File> userDAO =new UserDAOImpl();
+   UserBO userBO= BOFactory.getBO(BOFactory.BOTypes.USER);
 
     public void loginButtonOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
 
@@ -47,7 +42,7 @@ public class LoginFormController implements Initializable {
 //        } else {
 //            List<User> userList = null;
 //            try {
-//                userList = userDAOImpl.getAll();
+//                userList = userBO.getAll();
 //            } catch (SQLException e) {
 //                e.printStackTrace();
 //            }

@@ -1,8 +1,8 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.EmployeeDAO;
-import dao.impl.EmployeeDAOImpl;
+import bo.BOFactory;
+import bo.EmployeeBO;
+import bo.impl.EmployeeBOImpl;
 import dto.Employee;
 import dto.tm.EmployeeTM;
 import javafx.collections.FXCollections;
@@ -21,8 +21,6 @@ import javafx.stage.Stage;
 import lombok.SneakyThrows;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -66,7 +64,7 @@ public class EmployeeViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    CrudDAO<Employee,String, FileInputStream, File> employeeDAO =new EmployeeDAOImpl();
+    EmployeeBO employeeBO= BOFactory.getBO(BOFactory.BOTypes.EMPLOYEE);
 
 
     @SneakyThrows
@@ -93,7 +91,7 @@ public class EmployeeViewFormController implements Initializable {
     private void getAll() throws ClassNotFoundException {
         try {
             ObservableList<EmployeeTM> obList = FXCollections.observableArrayList();
-            List<Employee> employeeList = employeeDAO.getAll();
+            List<Employee> employeeList = employeeBO.getAll();
 
             for (Employee employee : employeeList) {
                 obList.add(new EmployeeTM(

@@ -1,8 +1,8 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.OperationDAO;
-import dao.impl.OperationDAOImpl;
+import bo.BOFactory;
+import bo.OperationBO;
+import bo.impl.OperationBOImpl;
 import dto.OperationSchedule;
 import dto.tm.OperationScheduleTM;
 import javafx.collections.FXCollections;
@@ -20,8 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -57,8 +55,7 @@ public class OperationScheduleFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-
-    CrudDAO<OperationSchedule,String, FileInputStream, File> operationDAO =new OperationDAOImpl();
+    OperationBO operationBO= BOFactory.getBO(BOFactory.BOTypes.OPERATION);
 
 
 
@@ -82,7 +79,7 @@ public class OperationScheduleFormController implements Initializable {
     private void getAll() {
         try {
             ObservableList<OperationScheduleTM> obList = FXCollections.observableArrayList();
-            List<OperationSchedule> operationScheduleList = operationDAO.getAll();
+            List<OperationSchedule> operationScheduleList = operationBO.getAll();
 
             for (OperationSchedule operationSchedule : operationScheduleList) {
                 obList.add(new OperationScheduleTM(

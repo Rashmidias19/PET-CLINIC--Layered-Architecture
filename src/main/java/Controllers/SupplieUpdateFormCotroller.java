@@ -1,11 +1,10 @@
 package Controllers;
 
+import bo.BOFactory;
+import bo.ItemBO;
+import bo.impl.ItemBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dao.CrudDAO;
-import dao.ItemDAO;
-import dao.impl.ItemDAOImpl;
 import dto.Item;
-import dto.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,8 +19,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -62,7 +59,7 @@ public class SupplieUpdateFormCotroller implements Initializable {
 
     @FXML
     private JFXComboBox cmbItemID;
-    CrudDAO<Item,String, FileInputStream, File> itemDAO =new ItemDAOImpl();
+    ItemBO itemBO= BOFactory.getBO(BOFactory.BOTypes.ITEM);
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -72,7 +69,7 @@ public class SupplieUpdateFormCotroller implements Initializable {
     private void loadItemID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = itemDAO.loadID();
+            List<String> codes = itemBO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -151,7 +148,7 @@ public class SupplieUpdateFormCotroller implements Initializable {
     public void searchbtnOnAction(ActionEvent event) {
         String ItemID= (String) cmbItemID.getValue();
         try {
-            Item item = itemDAO.searchById(ItemID);
+            Item item = itemBO.searchById(ItemID);
             fillItemFields(item);
             loadTypes();
             // txtQty.requestFocus();
@@ -188,12 +185,12 @@ public class SupplieUpdateFormCotroller implements Initializable {
         String Type= (String) cmbType.getValue();
         String Supplier_contact=txtContact.getText();
         String Description=txtDescription.getText();
-        String Quantity=txtQuantity.getText();
+        String Quantity= String.valueOf(Integer.parseInt(txtQuantity.getText()));
         Double Price= Double.valueOf(txtPrice.getText());
 
 
         try {
-            boolean isUpdate = itemDAO.update(new Item(ItemID,Name,Man_Date,Exp_Date,Supplier_name,Type,Supplier_contact,Description, Integer.parseInt(Quantity),Price));
+            boolean isUpdate = itemBO.update(new Item(ItemID,Man_Date,Exp_Date,Supplier_name,Type,Supplier_contact,Description, Quantity,Price,Name));
             if (isUpdate) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Item saved!").show();
             }

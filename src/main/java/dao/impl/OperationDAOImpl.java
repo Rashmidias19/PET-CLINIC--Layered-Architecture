@@ -103,36 +103,4 @@ public class OperationDAOImpl implements OperationDAO {
         return false;
     }
 
-    @Override
-    public Pet searchPetById(String ID) throws SQLException, ClassNotFoundException {
-        ResultSet resultSet = CrudUtil.execute("SELECT * FROM Pet WHERE PetID =?",ID);
-
-        if(resultSet.next()) {
-            return new Pet(
-                    resultSet.getString(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getString(5),
-                    resultSet.getString(6),
-                    resultSet.getString(7),
-                    resultSet.getInt(8),
-                    resultSet.getString(9),
-                    resultSet.getString(10)
-            );
-        }
-        return null;
-    }
-
-    @Override
-    public List<String> loadPetID() throws SQLException, ClassNotFoundException {
-        ResultSet resultSet = CrudUtil.execute("SELECT PetID FROM Pet");
-
-        List<String> data = new ArrayList<>();
-
-        while (resultSet.next()) {
-            data.add(resultSet.getString(1));
-        }
-        return data;
-    }
 }

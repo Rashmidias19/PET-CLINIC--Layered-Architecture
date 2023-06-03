@@ -17,4 +17,6 @@ public class EmployeeSchedule {
     private String WorkTime;
     private String Shift;
     private String OT;
+
+
 }

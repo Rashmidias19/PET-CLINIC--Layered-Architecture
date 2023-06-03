@@ -1,8 +1,8 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.ItemDAO;
-import dao.impl.ItemDAOImpl;
+import bo.BOFactory;
+import bo.ItemBO;
+import bo.impl.ItemBOImpl;
 import dto.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,8 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -55,8 +53,7 @@ public class SupplieRegisterFormController implements Initializable {
 
     @FXML
     private TextField txtPrice;
-
-    CrudDAO<Item,String, FileInputStream, File> itemDAO =new ItemDAOImpl();
+    ItemBO itemBO= BOFactory.getBO(BOFactory.BOTypes.ITEM);
 
 
     @Override
@@ -137,7 +134,7 @@ public class SupplieRegisterFormController implements Initializable {
 
     private void generateNextItemId() {
         try {
-            String id = itemDAO.getNextId();
+            String id = itemBO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -154,15 +151,17 @@ public class SupplieRegisterFormController implements Initializable {
         String Type= (String) cmbType.getValue();
         String Supplier_contact=txtContact.getText();
         String Description=txtDescription.getText();
-        int Quantity= Integer.parseInt(txtQuantity.getText());
+        String Quantity= String.valueOf(Integer.parseInt(txtQuantity.getText()));
         Double Price= Double.valueOf(txtPrice.getText());
 
         try {
-            boolean isSaved = itemDAO.save(new Item(ItemID,Name,Man_Date,Exp_Date,Supplier_name,Type,Supplier_contact,Description,Quantity,Price));
+            boolean isSaved = itemBO.save(new Item(ItemID,Man_Date,Exp_Date,Supplier_name,Type,Supplier_contact,Description,Quantity,Price,Name));
+            System.out.println(isSaved);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Operation saved!").show();
             }
         } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
             new Alert(Alert.AlertType.ERROR, "something went wrong!").show();
         }
         Stage stage = (Stage) dashboardPane.getScene().getWindow();

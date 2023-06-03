@@ -1,11 +1,9 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.EmployeeDAO;
-import dao.impl.EmployeeDAOImpl;
-import dao.impl.UserDAOImpl;
+import bo.BOFactory;
+import bo.EmployeeBO;
+import bo.impl.EmployeeBOImpl;
 import dto.Employee;
-import dto.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -73,8 +71,8 @@ public class EmployeeRegisterFormController implements Initializable {
     private File file;
 
     private Desktop desktop=Desktop.getDesktop();
-    CrudDAO<Employee,String,FileInputStream,File> employeeDAO =new EmployeeDAOImpl();
-    CrudDAO<User,String,FileInputStream,File> userDAO =new UserDAOImpl();
+    EmployeeBO employeeBO= BOFactory.getBO(BOFactory.BOTypes.EMPLOYEE);
+
     private FileInputStream inp;
 
     @Override
@@ -158,7 +156,7 @@ public class EmployeeRegisterFormController implements Initializable {
     private void loadUserID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = userDAO.loadID();
+            List<String> codes = employeeBO.loadUserID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -173,7 +171,7 @@ public class EmployeeRegisterFormController implements Initializable {
 
     private void generateNextEmpId() {
         try {
-            String id = employeeDAO.getNextId();
+            String id = employeeBO.getNextId();
             lblID.setText(id);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -199,7 +197,7 @@ public class EmployeeRegisterFormController implements Initializable {
                 String email = txtEmail.getText();
 
                 try {
-                    boolean isSaved = employeeDAO.saveWithPicture(new Employee(EmployeeID,Name,UserID,DOB,NIC,Age,Gender,address,Salary,contact,email),inp,file);
+                    boolean isSaved = employeeBO.saveWithPicture(new Employee(EmployeeID,Name,UserID,DOB,NIC,Age,Gender,address,Salary,contact,email),inp,file);
                     if (isSaved) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Employee saved!").show();
                     }

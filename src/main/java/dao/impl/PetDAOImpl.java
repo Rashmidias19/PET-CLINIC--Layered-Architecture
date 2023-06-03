@@ -151,18 +151,6 @@ public class PetDAOImpl implements PetDAO {
 
 
     @Override
-    public List<String> loadCustomerID() throws SQLException, ClassNotFoundException {
-       ResultSet resultSet = CrudUtil.execute("SELECT CustomerID FROM Customer");
-
-        List<String> data = new ArrayList<>();
-
-        while (resultSet.next()) {
-            data.add(resultSet.getString(1));
-        }
-        return data;
-    }
-
-    @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("DELETE FROM Pet WHERE PetID = ?",id);
     }

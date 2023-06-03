@@ -1,9 +1,9 @@
 package Controllers;
 
+import bo.BOFactory;
+import bo.UserBO;
+import bo.impl.UserBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dao.CrudDAO;
-import dao.UserDAO;
-import dao.impl.UserDAOImpl;
 import dto.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,8 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -42,7 +40,7 @@ public class UserUpdateFormController implements Initializable {
 
     @FXML
     private TextField txtEmail;
-    CrudDAO<User,String, FileInputStream, File> userDAO =new UserDAOImpl();
+    UserBO userBO= BOFactory.getBO(BOFactory.BOTypes.USER);
 
 
     @Override
@@ -53,7 +51,7 @@ public class UserUpdateFormController implements Initializable {
     private void loadUserID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-           List<String> codes = userDAO.loadID();
+           List<String> codes = userBO.loadID();
 
             for (String code : codes) {
                 obList.add(code);
@@ -132,7 +130,7 @@ public class UserUpdateFormController implements Initializable {
     public void searchbtnOnAction(ActionEvent event) {
         String UserID= (String) cmbUserID.getValue();
         try {
-            User user = userDAO.searchById(UserID);
+            User user = userBO.searchById(UserID);
             fillUserFields(user);
 
             // txtQty.requestFocus();
@@ -155,10 +153,9 @@ public class UserUpdateFormController implements Initializable {
         String Password=txtPassword.getText();
         String email=txtEmail.getText();
 
-        userDAO.update(new User(UserID,UserName,Password,email));
 
         try {
-            boolean isUpdated = userDAO.update( new User(UserID,UserName,Password,email));
+            boolean isUpdated = userBO.update( new User(UserID,UserName,Password,email));
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "User saved!").show();
             }

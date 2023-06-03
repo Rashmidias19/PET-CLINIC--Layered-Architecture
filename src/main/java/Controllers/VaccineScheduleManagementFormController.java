@@ -91,7 +91,7 @@ public class VaccineScheduleManagementFormController {
 
     public void backbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/ScheduleManagementForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/ScheduleForm.fxml"))));
         stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();

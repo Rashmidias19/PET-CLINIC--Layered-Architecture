@@ -1,8 +1,8 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.UserDAO;
-import dao.impl.UserDAOImpl;
+import bo.BOFactory;
+import bo.UserBO;
+import bo.impl.UserBOImpl;
 import dto.User;
 import dto.tm.UserTM;
 import javafx.collections.FXCollections;
@@ -20,8 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -44,7 +42,7 @@ public class UserViewFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    CrudDAO<User,String, FileInputStream, File> userDAO =new UserDAOImpl();
+    UserBO userBO= BOFactory.getBO(BOFactory.BOTypes.USER);
 
 
     @Override
@@ -63,7 +61,7 @@ public class UserViewFormController implements Initializable {
     private void getAll() {
         try {
             ObservableList<UserTM> obList = FXCollections.observableArrayList();
-            List<User> userList = userDAO.getAll();
+            List<User> userList = userBO.getAll();
 
             for (User user : userList) {
                 obList.add(new UserTM(

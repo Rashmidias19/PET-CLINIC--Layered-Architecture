@@ -1,10 +1,9 @@
 package Controllers;
 
+import bo.BOFactory;
+import bo.UserBO;
+import bo.impl.UserBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dao.CrudDAO;
-import dao.UserDAO;
-import dao.impl.UserDAOImpl;
-import dto.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,8 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -30,7 +27,7 @@ public class UserDeleteFormController implements Initializable {
 
     @FXML
     private JFXComboBox cmbID;
-    CrudDAO<User,String, FileInputStream, File> userDAO =new UserDAOImpl();
+    UserBO userBO= BOFactory.getBO(BOFactory.BOTypes.USER);
 
 
     @Override
@@ -40,7 +37,7 @@ public class UserDeleteFormController implements Initializable {
     private void loadUserID() {
         try {
             ObservableList<String> obList = FXCollections.observableArrayList();
-            List<String> codes = userDAO.loadID();
+            List<String> codes = userBO.loadID();
             for (String code : codes) {
                 obList.add(code);
             }
@@ -56,7 +53,7 @@ public class UserDeleteFormController implements Initializable {
         String id = (String) cmbID.getValue();
 
         try {
-             boolean isDeleted = userDAO.delete(id);
+             boolean isDeleted = userBO.delete(id);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "deleted!").show();
             }

@@ -1,11 +1,9 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.ItemDAO;
-import dao.impl.ItemDAOImpl;
-import dao.impl.PetDAOImpl;
+import bo.BOFactory;
+import bo.ItemBO;
+import bo.impl.ItemBOImpl;
 import dto.Item;
-import dto.Pet;
 import dto.tm.ItemTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,8 +20,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -65,8 +61,7 @@ public class StockViewFormCotroller implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    CrudDAO<Item,String, FileInputStream, File> itemDAO =new ItemDAOImpl();
-
+    ItemBO itemBO= BOFactory.getBO(BOFactory.BOTypes.ITEM);
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -91,7 +86,7 @@ public class StockViewFormCotroller implements Initializable {
     private void getAll() {
         try {
             ObservableList<ItemTM> obList = FXCollections.observableArrayList();
-            List<Item> itemList = itemDAO.getAll();
+            List<Item> itemList = itemBO.getAll();
 
             for (Item item : itemList) {
                 obList.add(new ItemTM(

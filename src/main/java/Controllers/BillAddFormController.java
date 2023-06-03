@@ -1,17 +1,10 @@
 package Controllers;
 
-import bo.BillBOImpl;
-import dao.BillDAO;
-import dao.CrudDAO;
-import dao.CustomerDAO;
-import dao.ItemDAO;
-import dao.impl.BillDAOImpl;
-import dao.impl.CustomerDAOImpl;
-import dao.impl.EmployeeDAOImpl;
-import dao.impl.ItemDAOImpl;
+import bo.BOFactory;
+import bo.BillBO;
+import bo.impl.BillBOImpl;
 import dto.Bill;
 import dto.Customer;
-import dto.Employee;
 import dto.Item;
 import dto.tm.CartTM;
 import javafx.collections.FXCollections;
@@ -26,13 +19,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -94,7 +84,7 @@ public class BillAddFormController implements Initializable {
 
     private ObservableList<CartTM> obList = FXCollections.observableArrayList();
 
-    BillBOImpl billBO=new BillBOImpl();
+    BillBO billBO= BOFactory.getBO(BOFactory.BOTypes.BILL);
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -308,8 +298,7 @@ public class BillAddFormController implements Initializable {
     public void cmbItemOnAction(ActionEvent event) {
         String ID = (String) cmbItemID.getValue();
         try {
-            BillDAO billDAO =new BillDAOImpl();
-            Item item = billDAO.searchByItemId(ID);
+            Item item = billBO.searchByItemId(ID);
             fillItemFields(item);
 
            // txtQty.requestFocus();
@@ -327,8 +316,7 @@ public class BillAddFormController implements Initializable {
     public void cmbCustomerOnAction(ActionEvent event) {
         String ID = (String) cmbCustomID.getValue();
         try {
-             BillDAO billDAO =new BillDAOImpl();
-             Customer customer = billDAO.searchByCustomerId(ID);
+             Customer customer = billBO.searchByCustomerId(ID);
              fillCustomerFields(customer);
 
             // txtQty.requestFocus();

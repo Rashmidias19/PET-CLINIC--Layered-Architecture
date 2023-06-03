@@ -18,17 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InhouseDAOImpl implements InhouseDAO {
-    @Override
-    public List<String> loadPetID() throws SQLException, ClassNotFoundException {
-       ResultSet resultSet = CrudUtil.execute("SELECT PetID FROM Pet");
 
-        List<String> data = new ArrayList<>();
-
-        while (resultSet.next()) {
-            data.add(resultSet.getString(1));
-        }
-        return data;
-    }
     @Override
     public String splitId(String currentId) {
         if(currentId != null) {
@@ -137,29 +127,7 @@ public class InhouseDAOImpl implements InhouseDAO {
         }
         return isUpdated;
     }
-    @Override
-    public Pet searchPetById(String ID) throws SQLException, ClassNotFoundException {
-        PreparedStatement pstm = DBConnection.getInstance().getConnection()
-                .prepareStatement("SELECT * FROM Pet WHERE PetID =?");
-        pstm.setString(1, ID);
-        ResultSet resultSet = pstm.executeQuery();
 
-        if(resultSet.next()) {
-            return new Pet(
-                    resultSet.getString(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getString(5),
-                    resultSet.getString(6),
-                    resultSet.getString(7),
-                    resultSet.getInt(8),
-                    resultSet.getString(9),
-                    resultSet.getString(10)
-            );
-        }
-        return null;
-    }
     @Override
     public String getNextId() throws SQLException, ClassNotFoundException {
        ResultSet rst = CrudUtil.execute("SELECT InhouseID FROM Inhouse ORDER BY InhouseID DESC LIMIT 1");

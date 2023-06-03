@@ -58,32 +58,6 @@ public class BillDAOImpl implements BillDAO {
     }
 
     @Override
-    public ArrayList<String> loadCustomerID() throws SQLException, ClassNotFoundException {
-        ResultSet resultSet = CrudUtil.execute("SELECT CustomerID FROM Customer");
-
-        ArrayList<String> data = new ArrayList<>();
-
-        while (resultSet.next()) {
-            data.add(resultSet.getString(1));
-
-        }
-        return data;
-
-    }
-
-    @Override
-    public List<String> loadItemID() throws SQLException, ClassNotFoundException {
-        ResultSet resultSet = CrudUtil.execute("SELECT ItemID FROM Item");
-
-        List<String> data = new ArrayList<>();
-
-        while (resultSet.next()) {
-            data.add(resultSet.getString(1));
-        }
-        return data;
-    }
-
-    @Override
     public String getNextId() throws SQLException, ClassNotFoundException {
        ResultSet rst = CrudUtil.execute("SELECT BillID FROM Bill ORDER BY BillID DESC LIMIT 1");
         if (rst.next()) {
@@ -93,6 +67,7 @@ public class BillDAOImpl implements BillDAO {
         } else {
             return "B00-001";
         }
+
     }
 
     @Override
@@ -137,54 +112,5 @@ public class BillDAOImpl implements BillDAO {
         return false;
     }
 
-    @Override
-    public Item searchByItemId(String ID) throws SQLException, ClassNotFoundException {
-        PreparedStatement pstm = DBConnection.getInstance().getConnection()
-                .prepareStatement("SELECT * FROM Item WHERE ItemID =?");
-        pstm.setString(1, ID);
-        ResultSet resultSet = pstm.executeQuery();
-
-        if(resultSet.next()) {
-            return new Item(
-
-                    resultSet.getString(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getString(5),
-                    resultSet.getString(6),
-                    resultSet.getString(7),
-                    resultSet.getString(8),
-                    resultSet.getDouble(9),
-                    resultSet.getString(10)
-            );
-        }
-        return null;
-    }
-
-    @Override
-    public Customer searchByCustomerId(String ID) throws SQLException, ClassNotFoundException {
-        PreparedStatement pstm = DBConnection.getInstance().getConnection()
-                .prepareStatement("SELECT * FROM Customer WHERE CustomerID =?");
-        pstm.setString(1, ID);
-        ResultSet resultSet = pstm.executeQuery();
-
-        if(resultSet.next()) {
-            return new Customer(
-                    resultSet.getString(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getString(5),
-                    resultSet.getInt(6),
-                    resultSet.getString(7),
-                    resultSet.getString(8),
-                    resultSet.getString(9),
-                    resultSet.getString(10)
-
-            );
-        }
-        return null;
-    }
 
 }

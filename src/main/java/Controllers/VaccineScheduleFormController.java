@@ -1,8 +1,8 @@
 package Controllers;
 
-import dao.CrudDAO;
-import dao.VaccinationDAO;
-import dao.impl.VaccinationDAOImpl;
+import bo.BOFactory;
+import bo.VaccinationBO;
+import bo.impl.VaccinationBOImpl;
 import dto.VaccinationSchedule;
 import dto.tm.VaccinationTM;
 import javafx.collections.FXCollections;
@@ -19,8 +19,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -52,8 +50,7 @@ public class VaccineScheduleFormController implements Initializable {
 
     @FXML
     private AnchorPane dashboardPane;
-    CrudDAO<VaccinationSchedule,String, FileInputStream, File> vaccinationDAO =new VaccinationDAOImpl();
-
+    VaccinationBO vaccinationBO= BOFactory.getBO(BOFactory.BOTypes.VACCINATION);
 
     @Override
     public void initialize(java.net.URL url, ResourceBundle resourceBundle) {
@@ -74,7 +71,7 @@ public class VaccineScheduleFormController implements Initializable {
     private void getAll() {
         try {
             ObservableList<VaccinationTM> obList = FXCollections.observableArrayList();
-            List<VaccinationSchedule> vaccinationScheduleList = vaccinationDAO.getAll();
+            List<VaccinationSchedule> vaccinationScheduleList = vaccinationBO.getAll();
 
             for (VaccinationSchedule vaccinationSchedule : vaccinationScheduleList) {
                 obList.add(new VaccinationTM(
@@ -96,7 +93,7 @@ public class VaccineScheduleFormController implements Initializable {
     }
     public void backbtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) dashboardPane.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/ScheduleManagementForm.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/VaccineScheduleManagementForm.fxml"))));
         stage.setTitle("VETCLOUD");
         stage.centerOnScreen();
         stage.show();
