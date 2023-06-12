@@ -1,7 +1,7 @@
 package bo;
 
-import dto.Inhouse;
-import dto.Pet;
+import entity.Inhouse;
+import entity.Pet;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;

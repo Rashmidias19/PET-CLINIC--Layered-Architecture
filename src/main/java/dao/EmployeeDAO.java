@@ -1,12 +1,9 @@
 package dao;
 
-import dto.Employee;
+import entity.Employee;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
-import java.util.List;
 
 public interface EmployeeDAO extends CrudDAO<Employee,String,FileInputStream,File> {
 

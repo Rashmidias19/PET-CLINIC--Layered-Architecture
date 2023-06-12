@@ -2,8 +2,7 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.InhouseBO;
-import bo.impl.InhouseBOImpl;
-import dto.Inhouse;
+import entity.Inhouse;
 import dto.tm.InhouseTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

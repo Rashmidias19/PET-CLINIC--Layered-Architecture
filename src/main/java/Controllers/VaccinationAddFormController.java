@@ -2,10 +2,9 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.VaccinationBO;
-import bo.impl.VaccinationBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dto.Pet;
-import dto.VaccinationSchedule;
+import entity.Pet;
+import entity.VaccinationSchedule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

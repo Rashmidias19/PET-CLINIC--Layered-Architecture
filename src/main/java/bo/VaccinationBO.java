@@ -1,7 +1,7 @@
 package bo;
 
-import dto.Pet;
-import dto.VaccinationSchedule;
+import entity.Pet;
+import entity.VaccinationSchedule;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;

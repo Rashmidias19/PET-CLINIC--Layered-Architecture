@@ -1,6 +1,6 @@
 package bo;
 
-import dto.Employee;
+import entity.Employee;
 
 import java.io.File;
 import java.io.FileInputStream;

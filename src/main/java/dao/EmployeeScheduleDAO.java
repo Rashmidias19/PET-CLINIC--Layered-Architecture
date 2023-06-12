@@ -1,14 +1,9 @@
 package dao;
 
-import dto.Employee;
-import dto.EmployeeSchedule;
+import entity.EmployeeSchedule;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public interface EmployeeScheduleDAO extends CrudDAO<EmployeeSchedule,String,FileInputStream,File> {
 //

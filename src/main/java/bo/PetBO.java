@@ -1,6 +1,6 @@
 package bo;
 
-import dto.Pet;
+import entity.Pet;
 
 import java.io.File;
 import java.io.FileInputStream;

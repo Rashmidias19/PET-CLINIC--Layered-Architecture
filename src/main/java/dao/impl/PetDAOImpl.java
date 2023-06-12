@@ -2,8 +2,7 @@ package dao.impl;
 
 import dao.PetDAO;
 import db.DBConnection;
-import dto.Pet;
-import javafx.scene.control.Alert;
+import entity.Pet;
 import dao.impl.util.CrudUtil;
 
 import java.io.File;

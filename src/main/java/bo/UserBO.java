@@ -1,6 +1,6 @@
 package bo;
 
-import dto.User;
+import entity.User;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;

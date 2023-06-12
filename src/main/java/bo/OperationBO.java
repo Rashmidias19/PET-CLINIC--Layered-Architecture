@@ -1,7 +1,7 @@
 package bo;
 
-import dto.OperationSchedule;
-import dto.Pet;
+import entity.OperationSchedule;
+import entity.Pet;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;

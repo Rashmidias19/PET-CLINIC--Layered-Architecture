@@ -3,9 +3,7 @@ package bo.impl;
 import bo.UserBO;
 import dao.DAOFactory;
 import dao.UserDAO;
-import dao.impl.UserDAOImpl;
-import dto.Pet;
-import dto.User;
+import entity.User;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;

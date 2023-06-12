@@ -1,12 +1,9 @@
 package dao;
 
-import dto.Pet;
-import dto.VaccinationSchedule;
+import entity.VaccinationSchedule;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.sql.SQLException;
-import java.util.List;
 
 public interface VaccinationDAO extends CrudDAO<VaccinationSchedule,String,FileInputStream, File> {
 //

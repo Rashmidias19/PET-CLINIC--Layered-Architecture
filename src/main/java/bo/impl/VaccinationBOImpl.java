@@ -4,11 +4,8 @@ import bo.VaccinationBO;
 import dao.DAOFactory;
 import dao.PetDAO;
 import dao.VaccinationDAO;
-import dao.impl.PetDAOImpl;
-import dao.impl.VaccinationDAOImpl;
-import dto.Pet;
-import dto.User;
-import dto.VaccinationSchedule;
+import entity.Pet;
+import entity.VaccinationSchedule;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;

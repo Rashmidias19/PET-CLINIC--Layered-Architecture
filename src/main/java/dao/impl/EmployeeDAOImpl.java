@@ -2,7 +2,7 @@ package dao.impl;
 
 import dao.EmployeeDAO;
 import db.DBConnection;
-import dto.Employee;
+import entity.Employee;
 import javafx.scene.control.Alert;
 import dao.impl.util.CrudUtil;
 
@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

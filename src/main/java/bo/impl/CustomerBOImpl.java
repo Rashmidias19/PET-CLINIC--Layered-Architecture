@@ -3,9 +3,7 @@ package bo.impl;
 import bo.CustomerBO;
 import dao.CustomerDAO;
 import dao.DAOFactory;
-import dao.impl.CustomerDAOImpl;
-import dto.Bill;
-import dto.Customer;
+import entity.Customer;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;

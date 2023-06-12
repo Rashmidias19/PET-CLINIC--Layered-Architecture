@@ -2,9 +2,8 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.InhouseBO;
-import bo.impl.InhouseBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dto.Inhouse;
+import entity.Inhouse;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

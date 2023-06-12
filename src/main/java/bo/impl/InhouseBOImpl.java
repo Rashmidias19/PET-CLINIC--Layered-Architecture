@@ -4,10 +4,8 @@ import bo.InhouseBO;
 import dao.DAOFactory;
 import dao.InhouseDAO;
 import dao.PetDAO;
-import dao.impl.InhouseDAOImpl;
-import dao.impl.PetDAOImpl;
-import dto.Inhouse;
-import dto.Pet;
+import entity.Inhouse;
+import entity.Pet;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;

@@ -2,8 +2,7 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.UserBO;
-import bo.impl.UserBOImpl;
-import dto.User;
+import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

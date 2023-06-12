@@ -1,14 +1,9 @@
 package dao;
 
-import dto.Bill;
-import dto.Customer;
-import dto.Item;
+import entity.Bill;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public interface BillDAO extends CrudDAO<Bill,String,FileInputStream,File> {
 //

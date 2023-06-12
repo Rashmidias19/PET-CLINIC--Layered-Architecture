@@ -2,8 +2,7 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.ItemBO;
-import bo.impl.ItemBOImpl;
-import dto.Item;
+import entity.Item;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

@@ -1,11 +1,9 @@
 package dao;
 
-import dto.Item;
+import entity.Item;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.sql.SQLException;
-import java.util.List;
 
 public interface ItemDAO extends CrudDAO<Item,String,FileInputStream,File> {
 //

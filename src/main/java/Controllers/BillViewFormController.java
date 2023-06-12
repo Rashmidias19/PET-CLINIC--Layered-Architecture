@@ -2,8 +2,7 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.BillBO;
-import bo.impl.BillBOImpl;
-import dto.Bill;
+import entity.Bill;
 import dto.tm.BillTM;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

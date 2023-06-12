@@ -2,7 +2,7 @@ package dao.impl;
 
 import dao.UserDAO;
 import db.DBConnection;
-import dto.User;
+import entity.User;
 import dao.impl.util.CrudUtil;
 
 import java.io.File;

@@ -1,12 +1,9 @@
 package dao;
 
-import dto.Pet;
+import entity.Pet;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
-import java.util.List;
 
 public interface PetDAO extends CrudDAO<Pet,String,FileInputStream, File > {
 //

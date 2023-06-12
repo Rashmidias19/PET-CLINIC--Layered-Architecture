@@ -1,17 +1,12 @@
 package dao.impl;
 
 import dao.BillDAO;
-import db.DBConnection;
-import dto.Bill;
-import dto.Customer;
-import dto.Item;
+import entity.Bill;
 import dao.impl.util.CrudUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -4,10 +4,7 @@ import bo.EmployeeBO;
 import dao.DAOFactory;
 import dao.EmployeeDAO;
 import dao.UserDAO;
-import dao.impl.EmployeeDAOImpl;
-import dao.impl.UserDAOImpl;
-import dto.Customer;
-import dto.Employee;
+import entity.Employee;
 
 import java.io.File;
 import java.io.FileInputStream;

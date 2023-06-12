@@ -1,16 +1,11 @@
 package bo.impl;
 
 import bo.OperationBO;
-import dao.CustomerDAO;
 import dao.DAOFactory;
 import dao.OperationDAO;
 import dao.PetDAO;
-import dao.impl.CustomerDAOImpl;
-import dao.impl.OperationDAOImpl;
-import dao.impl.PetDAOImpl;
-import dto.Item;
-import dto.OperationSchedule;
-import dto.Pet;
+import entity.OperationSchedule;
+import entity.Pet;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;

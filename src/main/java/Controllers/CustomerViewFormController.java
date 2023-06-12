@@ -2,8 +2,7 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.CustomerBO;
-import bo.impl.CustomerBOImpl;
-import dto.Customer;
+import entity.Customer;
 import dto.tm.CustomerTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

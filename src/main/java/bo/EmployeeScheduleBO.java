@@ -1,7 +1,7 @@
 package bo;
 
-import dto.Employee;
-import dto.EmployeeSchedule;
+import entity.Employee;
+import entity.EmployeeSchedule;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

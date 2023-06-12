@@ -1,12 +1,9 @@
 package dao;
 
-import dto.Customer;
+import entity.Customer;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.sql.SQLException;
-import java.util.List;
 
 public interface CustomerDAO extends CrudDAO<Customer,String,FileInputStream,File> {
 //

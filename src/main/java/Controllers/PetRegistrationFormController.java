@@ -2,8 +2,7 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.PetBO;
-import bo.impl.PetBOImpl;
-import dto.Pet;
+import entity.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

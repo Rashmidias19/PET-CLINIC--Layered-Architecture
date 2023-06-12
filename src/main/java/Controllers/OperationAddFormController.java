@@ -2,12 +2,11 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.OperationBO;
-import bo.impl.OperationBOImpl;
 import com.jfoenix.controls.JFXComboBox;
 import dao.OperationDAO;
 import dao.impl.OperationDAOImpl;
-import dto.OperationSchedule;
-import dto.Pet;
+import entity.OperationSchedule;
+import entity.Pet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

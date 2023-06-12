@@ -2,14 +2,13 @@ package dao.impl;
 
 import dao.ItemDAO;
 import db.DBConnection;
-import dto.Item;
+import entity.Item;
 import javafx.scene.control.Alert;
 import dao.impl.util.CrudUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

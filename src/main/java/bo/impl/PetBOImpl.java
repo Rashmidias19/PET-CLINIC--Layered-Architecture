@@ -4,10 +4,7 @@ import bo.PetBO;
 import dao.CustomerDAO;
 import dao.DAOFactory;
 import dao.PetDAO;
-import dao.impl.CustomerDAOImpl;
-import dao.impl.PetDAOImpl;
-import dto.Item;
-import dto.Pet;
+import entity.Pet;
 
 import java.io.File;
 import java.io.FileInputStream;

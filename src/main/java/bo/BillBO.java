@@ -1,8 +1,8 @@
 package bo;
 
-import dto.Bill;
-import dto.Customer;
-import dto.Item;
+import entity.Bill;
+import entity.Customer;
+import entity.Item;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;

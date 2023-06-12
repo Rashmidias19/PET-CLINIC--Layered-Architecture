@@ -2,10 +2,9 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.EmployeeScheduleBO;
-import bo.impl.EmployeeScheduleBOImpl;
 import com.jfoenix.controls.JFXComboBox;
-import dto.Employee;
-import dto.EmployeeSchedule;
+import entity.Employee;
+import entity.EmployeeSchedule;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

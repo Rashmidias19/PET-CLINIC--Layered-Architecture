@@ -2,8 +2,7 @@ package Controllers;
 
 
 import bo.*;
-import bo.impl.*;
-import dto.*;
+import entity.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

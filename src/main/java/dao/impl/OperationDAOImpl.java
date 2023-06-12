@@ -1,16 +1,12 @@
 package dao.impl;
 
 import dao.OperationDAO;
-import db.DBConnection;
-import dto.OperationSchedule;
-import dto.Pet;
+import entity.OperationSchedule;
 import dao.impl.util.CrudUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

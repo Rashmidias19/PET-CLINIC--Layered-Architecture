@@ -1,11 +1,9 @@
 package dao;
 
-import dto.User;
+import entity.User;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.sql.SQLException;
-import java.util.List;
 
 public interface UserDAO extends CrudDAO<User,String,FileInputStream, File> {
 //    @Override

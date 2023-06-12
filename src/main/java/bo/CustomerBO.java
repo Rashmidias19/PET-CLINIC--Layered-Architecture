@@ -1,6 +1,6 @@
 package bo;
 
-import dto.Customer;
+import entity.Customer;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;

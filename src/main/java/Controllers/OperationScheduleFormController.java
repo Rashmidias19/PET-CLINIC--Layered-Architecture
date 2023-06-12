@@ -2,8 +2,7 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.OperationBO;
-import bo.impl.OperationBOImpl;
-import dto.OperationSchedule;
+import entity.OperationSchedule;
 import dto.tm.OperationScheduleTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

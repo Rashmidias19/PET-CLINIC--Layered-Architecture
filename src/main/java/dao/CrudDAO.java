@@ -1,7 +1,5 @@
 package dao;
 
-import dto.Customer;
-
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;

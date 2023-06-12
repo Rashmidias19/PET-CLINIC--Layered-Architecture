@@ -2,8 +2,7 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.EmployeeScheduleBO;
-import bo.impl.EmployeeScheduleBOImpl;
-import dto.EmployeeSchedule;
+import entity.EmployeeSchedule;
 import dto.tm.EmployeeScheduleTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

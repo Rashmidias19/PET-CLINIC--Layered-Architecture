@@ -1,19 +1,14 @@
 package dao.impl;
 
 import dao.EmployeeScheduleDAO;
-import db.DBConnection;
-import dto.Employee;
-import dto.EmployeeSchedule;
+import entity.EmployeeSchedule;
 import dao.impl.util.CrudUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

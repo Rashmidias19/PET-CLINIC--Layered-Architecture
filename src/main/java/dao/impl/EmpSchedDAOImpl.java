@@ -2,7 +2,7 @@ package dao.impl;
 
 import dao.EmpSchedDAO;
 import dao.impl.util.CrudUtil;
-import dto.EmployeeSchedule;
+import entity.EmployeeSchedule;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -2,8 +2,7 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.VaccinationBO;
-import bo.impl.VaccinationBOImpl;
-import dto.VaccinationSchedule;
+import entity.VaccinationSchedule;
 import dto.tm.VaccinationTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

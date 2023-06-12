@@ -2,10 +2,9 @@ package Controllers;
 
 import bo.BOFactory;
 import bo.BillBO;
-import bo.impl.BillBOImpl;
-import dto.Bill;
-import dto.Customer;
-import dto.Item;
+import entity.Bill;
+import entity.Customer;
+import entity.Item;
 import dto.tm.CartTM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -2,14 +2,12 @@ package dao.impl;
 
 import dao.CustomerDAO;
 import db.DBConnection;
-import dto.Customer;
-import javafx.scene.control.Alert;
+import entity.Customer;
 import dao.impl.util.CrudUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
